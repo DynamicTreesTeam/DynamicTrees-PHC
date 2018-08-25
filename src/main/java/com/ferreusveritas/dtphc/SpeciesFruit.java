@@ -8,7 +8,6 @@ import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.network.MapSignal;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
-import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenFruit;
 import com.ferreusveritas.dynamictrees.systems.nodemappers.NodeFindEnds;
 import com.ferreusveritas.dynamictrees.trees.Species;
@@ -57,7 +56,7 @@ public class SpeciesFruit extends Species {
 		generateSeed();
 		
 		ResourceLocation fruitBlockResloc = new ResourceLocation(ModConstants.PHC_MODID, "pam" + fruitName);
-		fruitBlockState = Block.REGISTRY.getObject(new ResourceLocation(ModConstants.PHC_MODID, "pam" + fruitName)).getDefaultState();
+		fruitBlockState = Block.REGISTRY.getObject(fruitBlockResloc).getDefaultState();
 		fruitGen = new FeatureGenFruit(this, ModBlocks.blockFruit.getDefaultState()).setRayDistance(4);
 		
 		setDynamicSapling(ModBlocks.blockDynamicSaplingSpecies.getDefaultState());
@@ -87,14 +86,11 @@ public class SpeciesFruit extends Species {
 		return true;
 	}
 	
-	
 	@Override
 	public void addJoCodes() {
 		//Just use the codes from oak trees for now
 		Species oak = TreeRegistry.findSpeciesSloppy("oak");
 		joCodeStore.addCodesFromFile(this, "assets/" + oak.getRegistryName().getResourceDomain() + "/trees/"+ oak.getRegistryName().getResourcePath() + ".txt");
 	}
-	
-	
 	
 }
