@@ -17,9 +17,9 @@ public class ModTrees {
 
 	public static Map<String, Species> phcSpecies = new HashMap<>();
 	
-	public static void preInit() {
+	public static void init() {
 		processPHCFruitTrees(FruitRegistry.registeringFruits, false);
-		processPHCFruitTrees(FruitRegistry.registeringLogFruits, true);
+		//processPHCFruitTrees(FruitRegistry.registeringLogFruits, true);
 	}
 	
 	private static void processPHCFruitTrees(Map<String, SaplingType> fruits, boolean isLogFruit) {
@@ -31,9 +31,9 @@ public class ModTrees {
 			
 			switch(saplingType) {
 				default:
-				case TEMPERATE: familyName = "oak"; break;
-				case COLD: familyName = "spruce"; break;
-				case WARM: familyName = "jungle"; break;
+				case TEMPERATE:	familyName = "oak"; break;
+				case COLD: 		familyName = "spruce"; break;
+				case WARM: 		familyName = "jungle"; break;
 			}
 			
 			TreeFamily treeFamily = TreeRegistry.findSpeciesSloppy(familyName).getFamily();
@@ -42,9 +42,9 @@ public class ModTrees {
 				ResourceLocation resLoc = new ResourceLocation(ModConstants.MODID, fruitName);
 				ILeavesProperties leavesProperties = treeFamily.getCommonSpecies().getLeavesProperties();
 				Species species = isLogFruit ?
-						makeLogFruitTreeSpecies(resLoc, treeFamily, leavesProperties, fruitName) :
-						makeFruitTreeSpecies(resLoc, treeFamily, leavesProperties, fruitName);
-
+						makeLogFruitTreeSpecies(resLoc, treeFamily, leavesProperties, fruitName, saplingType) :
+						makeFruitTreeSpecies(resLoc, treeFamily, leavesProperties, fruitName, saplingType);
+				
 				phcSpecies.put(fruitName, species);
 				Species.REGISTRY.register(species);
 			}
@@ -52,12 +52,11 @@ public class ModTrees {
 		
 	}
 	
-	private static Species makeFruitTreeSpecies(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName) {
-		//TODO: Pam's Fruit Tree Specific Code Goes Here
-		return new Species(name, treeFamily, leavesProperties);
+	private static Species makeFruitTreeSpecies(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName, SaplingType saplingType) {
+		return new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType);
 	}
 	
-	private static Species makeLogFruitTreeSpecies(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName) {
+	private static Species makeLogFruitTreeSpecies(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName, SaplingType saplingType) {
 		//TODO: Pam's Log Fruit Tree Specific Code Goes Here
 		return new Species(name, treeFamily, leavesProperties);
 	}

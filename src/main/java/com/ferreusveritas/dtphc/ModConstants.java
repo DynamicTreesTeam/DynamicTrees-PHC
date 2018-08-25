@@ -12,7 +12,9 @@ public class ModConstants {
 	public static final String BEFORE = "before:";
 	public static final String NEXT = ";";
 	
-	public static final String PHC_LATEST = com.pam.harvestcraft.Reference.MODID + "@[" + com.pam.harvestcraft.Reference.VERSION + ",)";
+	public static final String PHC_MODID = com.pam.harvestcraft.Reference.MODID;
+	
+	public static final String PHC_LATEST = PHC_MODID + "@[" + com.pam.harvestcraft.Reference.VERSION + ",)";
 	
 	public static final String DEPENDENCIES
 		= AFTER + com.ferreusveritas.dynamictrees.ModConstants.DYNAMICTREES_LATEST

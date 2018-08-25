@@ -1,7 +1,5 @@
 package com.ferreusveritas.dtphc;
 
-import com.ferreusveritas.dynamictrees.ModConstants;
-
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -15,11 +13,11 @@ public class DynamicTreesPHC {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		preparePHC();
-		ModTrees.preInit();
 	}
 	
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
+		ModTrees.init();
 		new BiomeDataBasePopulator().populate();
 	}
 	
