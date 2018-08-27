@@ -40,7 +40,7 @@ public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 			}
 		}
 		
-		float harvestCraftOccurance = 0.5f;
+		float harvestCraftOccurance = 0.02f;
 		
 		for(Entry<Biome, RandomSpeciesSelector> entry : biomeMap.entrySet()) {
 			dbase.setSpeciesSelector(entry.getKey(), (pos, dirt, random) -> {
