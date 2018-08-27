@@ -2,7 +2,7 @@ package com.ferreusveritas.dtphc;
 
 public class ModConstants {
 	
-	public static final String MODID = "dynamictrees-phc";
+	public static final String MODID = "dynamictreesphc";
 	public static final String NAME = "Dynamic Trees PHC";
 	public static final String VERSIONDEV = "1.12.2-9.9.9z";
 	public static final String VERSIONAUTO = "@VERSION@";
@@ -17,9 +17,9 @@ public class ModConstants {
 	public static final String PHC_LATEST = PHC_MODID + "@[" + com.pam.harvestcraft.Reference.VERSION + ",)";
 	
 	public static final String DEPENDENCIES
-		= AFTER + com.ferreusveritas.dynamictrees.ModConstants.DYNAMICTREES_LATEST
+		= "required-after:" + com.ferreusveritas.dynamictrees.ModConstants.DYNAMICTREES_LATEST
 		+ NEXT
-		+ AFTER + PHC_LATEST
+		+ "required-after:" + PHC_LATEST
 		;
 	
 }

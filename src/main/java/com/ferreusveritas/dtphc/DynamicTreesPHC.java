@@ -23,11 +23,11 @@ public class DynamicTreesPHC {
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		ModTrees.preInit();
 	}
 	
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		ModTrees.init();
 		if(HarvestCraft.fruitTreeConfigManager.enableFruitTreeGeneration) {
 			new BiomeDataBasePopulator().populate();
 		}

@@ -6,7 +6,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModItems {
 	
 	public static void registerItems(IForgeRegistry<Item> registry) {
-		// TODO Generate seed items
+		//Generate seed items
+		ModTrees.phcSpecies.values().forEach(s -> registry.register(s.getSeed()));
 	}
 	
 }

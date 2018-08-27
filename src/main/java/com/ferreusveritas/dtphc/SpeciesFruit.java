@@ -2,7 +2,6 @@ package com.ferreusveritas.dtphc;
 
 import java.util.List;
 
-import com.ferreusveritas.dynamictrees.ModBlocks;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.network.MapSignal;
@@ -14,6 +13,7 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.SpeciesRare;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
+import com.pam.harvestcraft.blocks.BlockRegistry;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling.SaplingType;
 
@@ -31,14 +31,14 @@ public class SpeciesFruit extends SpeciesRare {
 	public final SaplingType saplingType;
 	private FeatureGenFruit fruitGen;
 	public IBlockState fruitBlockState;
+	private int fruitingRadius = 8;
 	
 	public SpeciesFruit(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName, SaplingType saplingType) {
 		super(name, treeFamily, leavesProperties);
 		this.fruitName = fruitName;
 		this.saplingType = saplingType;
-
-		//A bit stockier, smaller and slower than your basic oak
-		setBasicGrowingParameters(0.4f, 10.0f, 1, 4, 0.7f);
+		
+		fruitTreeDefaults();
 		
 		switch(saplingType) {
 			default:
@@ -56,11 +56,29 @@ public class SpeciesFruit extends SpeciesRare {
 		
 		generateSeed();
 		
-		ResourceLocation fruitBlockResloc = new ResourceLocation(ModConstants.PHC_MODID, "pam" + fruitName);
-		fruitBlockState = Block.REGISTRY.getObject(fruitBlockResloc).getDefaultState();
-		fruitGen = new FeatureGenFruit(this, ModBlocks.blockFruit.getDefaultState()).setRayDistance(4);
+		Block fruitBlock = BlockRegistry.blocks.stream().filter(b -> b.getRegistryName().getResourcePath().equals("pam" + fruitName)).findFirst().get();
+		fruitBlockState = fruitBlock.getDefaultState();
+		fruitGen = new FeatureGenFruit(this, fruitBlockState).setRayDistance(4);
 		
-		setDynamicSapling(ModBlocks.blockDynamicSaplingSpecies.getDefaultState());
+		setDynamicSapling(com.ferreusveritas.dynamictrees.ModBlocks.blockDynamicSaplingSpecies.getDefaultState());
+	}
+	
+	protected void fruitTreeDefaults() {
+		setBasicGrowingParameters(0.3f, 8.0f, 1, 4, 1.0f, 5);
+	}
+	
+	protected SpeciesFruit setBasicGrowingParameters(float tapering, float energy, int upProbability, int lowestBranchHeight, float growthRate, int fruitingRadius) {
+		setBasicGrowingParameters(tapering, energy, upProbability, lowestBranchHeight, growthRate);
+		return setFruitingRadius(fruitingRadius);
+	}
+	
+	public BlockPamFruit getFruitBlock() {
+		return (BlockPamFruit) fruitBlockState.getBlock();
+	}
+	
+	public SpeciesFruit setFruitingRadius(int fruitingRadius) {
+		this.fruitingRadius = fruitingRadius;
+		return this;
 	}
 	
 	@Override
@@ -76,7 +94,7 @@ public class SpeciesFruit extends SpeciesRare {
 		IBlockState blockState = world.getBlockState(treePos);
 		BlockBranch branch = TreeHelper.getBranch(blockState);
 			
-		if(branch != null && branch.getRadius(blockState) >= 8 && natural) {
+		if(branch != null && branch.getRadius(blockState) >= fruitingRadius && natural) {
 			if(fruitBlockState.getBlock() instanceof BlockPamFruit) {
 				NodeFindEnds endFinder = new NodeFindEnds();
 				TreeHelper.startAnalysisFromRoot(world, rootPos, new MapSignal(endFinder));
