@@ -1,0 +1,9 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0":"dynamictreesphc:items/seed_0",
+        "layer1":"dynamictreesphc:items/seed_1",
+        "layer2":"dynamictreesphc:items/seed_2",
+        "layer3":"dynamictreesphc:items/seed_3"
+    }
+}

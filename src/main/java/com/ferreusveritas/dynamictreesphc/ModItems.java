@@ -1,4 +1,4 @@
-package com.ferreusveritas.dtphc;
+package com.ferreusveritas.dynamictreesphc;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;

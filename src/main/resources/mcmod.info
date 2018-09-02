@@ -1,0 +1,16 @@
+[
+	{
+		"modid": "dynamictreesphc",
+		"name": "Dynamic Trees PHC",
+		"description": "Adding Dynamic Trees compatability for Pam's Harvestcraft",
+		"version": "${version}",
+		"mcversion": "${mcversion}",
+		"url": "",
+		"updateUrl": "",
+		"authorList": ["ferreusveritas"],
+		"credits": [ "mangoose", "MatrexsVigil" ]
+		"logoFile": "",
+		"screenshots": [],
+		"dependencies": []
+	}
+]

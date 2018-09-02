@@ -1,4 +1,4 @@
-package com.ferreusveritas.dtphc;
+package com.ferreusveritas.dynamictreesphc;
 
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;

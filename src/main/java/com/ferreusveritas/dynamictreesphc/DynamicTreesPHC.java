@@ -1,5 +1,6 @@
-package com.ferreusveritas.dtphc;
+package com.ferreusveritas.dynamictreesphc;
 
+import com.ferreusveritas.dynamictreesphc.proxy.CommonProxy;
 import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
 
@@ -9,6 +10,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -21,9 +23,13 @@ public class DynamicTreesPHC {
 	@Mod.Instance(ModConstants.MODID)
 	public static DynamicTreesPHC instance;
 	
+	@SidedProxy(clientSide = "com.ferreusveritas.dynamictreesphc.proxy.ClientProxy", serverSide = "com.ferreusveritas.dynamictreesphc.proxy.CommonProxy")
+	public static CommonProxy proxy;
+	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ModTrees.preInit();
+		proxy.preInit();
 	}
 	
 	@Mod.EventHandler
@@ -32,6 +38,7 @@ public class DynamicTreesPHC {
 			new BiomeDataBasePopulator().populate();
 		}
 		preparePHC();
+		proxy.init();
 	}
 	
 	public void preparePHC() {
@@ -63,7 +70,7 @@ public class DynamicTreesPHC {
 		@SubscribeEvent
 		@SideOnly(Side.CLIENT)
 		public static void registerModels(ModelRegistryEvent event) {
-			//ModModels.registerModels(event);
+			ModModels.registerModels(event);
 		}
 
 	}
