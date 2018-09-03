@@ -1,0 +1,7 @@
+{
+	"parent": "dynamictrees:block/sapling",
+	"textures": {
+		"log": "harvestcraft:blocks/fruits/cinnamon_stage_0",
+		"leaves": "blocks/leaves_jungle"
+	}
+}

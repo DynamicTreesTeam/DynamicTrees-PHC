@@ -1,5 +1,7 @@
 package com.ferreusveritas.dynamictreesphc;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +11,9 @@ import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.ferreusveritas.dynamictreesphc.trees.TreeCinnamon;
+import com.ferreusveritas.dynamictreesphc.trees.TreeMaple;
+import com.ferreusveritas.dynamictreesphc.trees.TreePaperBark;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling.SaplingType;
 
@@ -19,19 +24,27 @@ public class ModTrees {
 	protected interface ISpeciesCreator {
 		Species createSpecies(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName, SaplingType saplingType);
 	}
-
+	
+	public static ArrayList<TreeFamily> phcTrees = new ArrayList<TreeFamily>();
 	public static Map<String, Species> phcSpecies = new HashMap<>();
 	
 	public static void preInit() {
 		
+		TreeFamily cinnamonTree = new TreeCinnamon();
+		TreeFamily mapleTree = new TreeMaple();
+		TreeFamily paperBarkTree = new TreePaperBark();
+		
+		//Register all of the trees
+		Collections.addAll(phcTrees, cinnamonTree, mapleTree, paperBarkTree);
+		phcTrees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
+		phcTrees.forEach(tree -> phcSpecies.put(tree.getName().getResourcePath(), tree.getCommonSpecies()));
+		
 		//Basic creators
 		ISpeciesCreator fruitTreeCreator = (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType);
-		ISpeciesCreator logTreeCreator = (name, treeFamily, leavesProperties, fruitName, saplingType) -> new Species(name, treeFamily, leavesProperties);
 		
 		//Set up a map of species and their sapling types
 		Map<String, SaplingType> saplingMap = new HashMap<>();
 		saplingMap.putAll(FruitRegistry.registeringFruits);
-		saplingMap.putAll(FruitRegistry.registeringLogFruits);
 		
 		//Set up a map of sapling types to tree family common species
 		Map<SaplingType, TreeFamily> familyMap = new EnumMap<>(SaplingType.class);
@@ -42,7 +55,6 @@ public class ModTrees {
 		//Set up a map of species names and their creator lambdas
 		Map<String, ISpeciesCreator> creatorMap = new HashMap<>();
 		FruitRegistry.registeringFruits.forEach((k, v) -> creatorMap.put(k, fruitTreeCreator));
-		FruitRegistry.registeringLogFruits.forEach((k, v) -> creatorMap.put(k, logTreeCreator));
 		
 		//Tailor creators to fit Dynamic Trees
 		alterCreatorMap(creatorMap);
@@ -77,11 +89,6 @@ public class ModTrees {
 		creatorMap.put(FruitRegistry.PECAN, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType) {
 			@Override protected void fruitTreeDefaults() { setBasicGrowingParameters(0.45f, 11.0f, 1, 4, 0.6f, 8); }
 		});
-
-		//Not ready for these yet
-		creatorMap.remove(FruitRegistry.CINNAMON);
-		creatorMap.remove(FruitRegistry.MAPLE);
-		creatorMap.remove(FruitRegistry.PAPERBARK);
 		
 	}
 	

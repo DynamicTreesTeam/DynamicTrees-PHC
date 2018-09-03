@@ -5,8 +5,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModItems {
 	
+	public static void preInit() { }
+	
 	public static void registerItems(IForgeRegistry<Item> registry) {
-		//Generate seed items
+		//Register all of the seed items
 		ModTrees.phcSpecies.values().forEach(s -> registry.register(s.getSeed()));
 	}
 	

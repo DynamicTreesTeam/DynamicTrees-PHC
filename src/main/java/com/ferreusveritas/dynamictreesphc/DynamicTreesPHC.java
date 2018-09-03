@@ -28,7 +28,10 @@ public class DynamicTreesPHC {
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		ModBlocks.preInit();
+		ModItems.preInit();
 		ModTrees.preInit();
+		
 		proxy.preInit();
 	}
 	
@@ -54,7 +57,7 @@ public class DynamicTreesPHC {
 		
 		@SubscribeEvent
 		public static void registerBlocks(RegistryEvent.Register<Block> event) {
-			//ModBlocks.registerBlocks(event.getRegistry());
+			ModBlocks.registerBlocks(event.getRegistry());
 		}
 		
 		@SubscribeEvent
