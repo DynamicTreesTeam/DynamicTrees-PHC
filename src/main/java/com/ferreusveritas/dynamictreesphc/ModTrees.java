@@ -30,12 +30,8 @@ public class ModTrees {
 	
 	public static void preInit() {
 		
-		TreeFamily cinnamonTree = new TreeCinnamon();
-		TreeFamily mapleTree = new TreeMaple();
-		TreeFamily paperBarkTree = new TreePaperBark();
-		
 		//Register all of the trees
-		Collections.addAll(phcTrees, cinnamonTree, mapleTree, paperBarkTree);
+		Collections.addAll(phcTrees, new TreeCinnamon(), new TreeMaple(), new TreePaperBark());
 		phcTrees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
 		phcTrees.forEach(tree -> phcSpecies.put(tree.getName().getResourcePath(), tree.getCommonSpecies()));
 		
