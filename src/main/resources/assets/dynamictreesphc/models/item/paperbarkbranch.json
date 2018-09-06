@@ -1,5 +1,5 @@
 {
-    "parent": "dynamictrees:block/smartmodel/branch",
+    "parent": "dynamictrees:item/branch",
     "textures": {
         "bark": "harvestcraft:blocks/fruits/paperbark_stage_0",
         "rings": "blocks/log_birch_top"

@@ -8,12 +8,14 @@ import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
-public class TreePaperBark extends TreeFamily {
+public class TreePaperBark extends TreeFamilyPHC {
 	
 	public static final String speciesName = "paperbark";
 	
@@ -60,6 +62,14 @@ public class TreePaperBark extends TreeFamily {
 	public List<Block> getRegisterableBlocks(List<Block> blockList) {
 		blockList.add(getCommonSpecies().getDynamicSapling().getBlock());
 		return super.getRegisterableBlocks(blockList);
+	}
+	
+	//This mod registers all of the seeds externally so we'll only provide the dynamic branch block here
+	@Override
+	public List<Item> getRegisterableItems(List<Item> itemList) {
+		//Register an itemBlock for the branch block
+		itemList.add(new ItemBlock(getDynamicBranch()).setRegistryName(getDynamicBranch().getRegistryName()));
+		return itemList;
 	}
 	
 }

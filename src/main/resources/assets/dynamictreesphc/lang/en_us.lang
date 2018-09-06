@@ -36,3 +36,7 @@ item.spiderwebseed.name=SpiderWeb Tree Seed
 item.cinnamonseed.name=Cinnamon Tree Seed
 item.mapleseed.name=Maple Tree Seed
 item.paperbarkseed.name=Paperbark Tree Seed
+
+tile.dynamictreesphc:cinnamonbranch.name=Dynamic Cinnamon Tree
+tile.dynamictreesphc:maplebranch.name=Dynamic Maple Tree
+tile.dynamictreesphc:paperbarkbranch.name=Dynamic Paper Bark Tree

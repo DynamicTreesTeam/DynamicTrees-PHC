@@ -1,19 +1,16 @@
 package com.ferreusveritas.dynamictreesphc.trees;
 
-import java.util.List;
-
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 
-import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
-public class TreeCinnamon extends TreeFamily {
+public class TreeCinnamon extends TreeFamilyPHC {
 	
 	public static final String speciesName = "cinnamon";
 	
@@ -54,13 +51,5 @@ public class TreeCinnamon extends TreeFamily {
 		setCommonSpecies(new TreeCinnamonSpecies(this));
 		getCommonSpecies().generateSeed();
 	}
-
-	//Since we created a DynamicSapling in the common species we need to let it out to be registered.
-	@Override
-	public List<Block> getRegisterableBlocks(List<Block> blockList) {
-		blockList.add(getCommonSpecies().getDynamicSapling().getBlock());
-		return super.getRegisterableBlocks(blockList);
-	}
-	
 	
 }

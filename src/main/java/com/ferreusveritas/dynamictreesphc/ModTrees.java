@@ -68,6 +68,10 @@ public class ModTrees {
 			Species.REGISTRY.register(species);
 		}
 		
+		for(Entry<String, Species> entry : phcSpecies.entrySet()) {
+			TreeRegistry.registerSaplingReplacer(FruitRegistry.getSapling(entry.getKey()).getDefaultState(), entry.getValue());
+		}
+		
 	}
 	
 	private static void alterCreatorMap(Map<String, ISpeciesCreator> creatorMap) {
