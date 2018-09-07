@@ -1,5 +1,6 @@
 package com.ferreusveritas.dynamictreesphc;
 
+import com.ferreusveritas.dynamictrees.api.WorldGenRegistry;
 import com.ferreusveritas.dynamictreesphc.proxy.CommonProxy;
 import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
@@ -38,9 +39,10 @@ public class DynamicTreesPHC {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		if(HarvestCraft.fruitTreeConfigManager.enableFruitTreeGeneration) {
-			new BiomeDataBasePopulator().populate();
+			WorldGenRegistry.registerBiomeDataBasePopulator(new BiomeDataBasePopulator());
 		}
 		preparePHC();
+		
 		proxy.init();
 	}
 	

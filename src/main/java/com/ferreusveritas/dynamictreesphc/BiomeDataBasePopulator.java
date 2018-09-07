@@ -10,20 +10,17 @@ import com.ferreusveritas.dynamictrees.api.worldgen.IBiomeDataBasePopulator;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase;
 import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase.Operation;
-import com.ferreusveritas.dynamictrees.worldgen.TreeGenerator;
 import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.config.TreeGenerationConfiguration;
 
 import net.minecraft.world.biome.Biome;
 
 public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
-	
+
 	Map<Biome, RandomSpeciesSelector> biomeMap = new HashMap<>();
 	
 	@Override
-	public void populate() {
-		
-		BiomeDataBase dbase = TreeGenerator.getTreeGenerator().biomeDataBase;
+	public void populate(BiomeDataBase dbase) {
 		
 		for(TreeGenerationConfiguration treeConfig : HarvestCraft.fruitTreeConfigManager.treeConfigurations) {
 			if(treeConfig.getEnableGeneration()) {
