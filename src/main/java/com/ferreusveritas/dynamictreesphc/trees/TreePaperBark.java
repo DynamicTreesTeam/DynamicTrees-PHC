@@ -34,11 +34,6 @@ public class TreePaperBark extends TreeFamilyPHC {
 			return BiomeDictionary.hasType(biome, Type.JUNGLE);
 		}
 		
-		@Override
-		public void addJoCodes() {
-			//Disable adding of JoCodes
-		}
-		
 	}
 	
 	public TreePaperBark() {

@@ -3,13 +3,11 @@ package com.ferreusveritas.dynamictreesphc;
 import java.util.List;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.network.MapSignal;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenFruit;
 import com.ferreusveritas.dynamictrees.systems.nodemappers.NodeFindEnds;
-import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.SpeciesRare;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
@@ -107,9 +105,7 @@ public class SpeciesFruit extends SpeciesRare {
 	
 	@Override
 	public void addJoCodes() {
-		//Just use the codes from oak trees for now
-		Species oak = TreeRegistry.findSpeciesSloppy("oak");
-		joCodeStore.addCodesFromFile(this, "assets/" + oak.getRegistryName().getResourceDomain() + "/trees/"+ oak.getRegistryName().getResourcePath() + ".txt");
+		joCodeStore.addCodesFromFile(this, "assets/" + getRegistryName().getResourceDomain() + "/trees/fruit.txt");
 	}
 	
 }

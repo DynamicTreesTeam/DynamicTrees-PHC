@@ -34,11 +34,6 @@ public class TreeMaple extends TreeFamilyPHC {
 			return BiomeDictionary.hasType(biome, Type.JUNGLE);
 		}
 		
-		@Override
-		public void addJoCodes() {
-			//Disable adding of JoCodes
-		}
-		
 	}
 		
 	public TreeMaple() {
