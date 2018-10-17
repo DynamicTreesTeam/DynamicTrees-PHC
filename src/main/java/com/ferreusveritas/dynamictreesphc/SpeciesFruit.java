@@ -80,8 +80,8 @@ public class SpeciesFruit extends SpeciesRare {
 	}
 	
 	@Override
-	public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds) {
-		super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds);
+	public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
+		super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
 		if(fruitBlockState.getBlock() instanceof BlockPamFruit) {
 			fruitGen.setQuantity(10).setEnableHash(false).setFruit(fruitBlockState.withProperty(BlockPamFruit.AGE, 2)).gen(world, rootPos.up(), endPoints, safeBounds);
 		}
