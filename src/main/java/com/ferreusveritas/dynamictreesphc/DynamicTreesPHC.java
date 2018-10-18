@@ -2,6 +2,7 @@ package com.ferreusveritas.dynamictreesphc;
 
 import com.ferreusveritas.dynamictrees.api.WorldGenRegistry;
 import com.ferreusveritas.dynamictreesphc.proxy.CommonProxy;
+import com.ferreusveritas.dynamictreesphc.worldgen.BiomeDataBasePopulator;
 import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
 

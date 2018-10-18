@@ -1,4 +1,4 @@
-package com.ferreusveritas.dynamictreesphc;
+package com.ferreusveritas.dynamictreesphc.worldgen;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +10,7 @@ import com.ferreusveritas.dynamictrees.api.worldgen.IBiomeDataBasePopulator;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase;
 import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase.Operation;
+import com.ferreusveritas.dynamictreesphc.ModTrees;
 import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.config.TreeGenerationConfiguration;
 

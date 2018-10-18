@@ -4,6 +4,7 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
+import com.ferreusveritas.dynamictreesphc.dropcreators.DropCreatorFruitLogProduct;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
@@ -27,6 +28,8 @@ public class TreeMaple extends TreeFamilyPHC {
 			
 			setDynamicSapling(speciesName);
 			setupStandardSeedDropping();
+			
+			addDropCreator(new DropCreatorFruitLogProduct((TreeFamilyPHC) treeFamily));
 		}
 		
 		@Override

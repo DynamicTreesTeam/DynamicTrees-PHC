@@ -6,6 +6,7 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
+import com.ferreusveritas.dynamictreesphc.dropcreators.DropCreatorFruitLogProduct;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -27,6 +28,8 @@ public class TreePaperBark extends TreeFamilyPHC {
 			setBasicGrowingParameters(0.2f, 10.0f, getUpProbability(), getLowestBranchHeight(), 1.0f);
 			setDynamicSapling(speciesName);
 			setupStandardSeedDropping();
+			
+			addDropCreator(new DropCreatorFruitLogProduct((TreeFamilyPHC) treeFamily));
 		}
 		
 		@Override
