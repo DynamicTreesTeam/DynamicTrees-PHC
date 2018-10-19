@@ -29,7 +29,7 @@ public class TreePaperBark extends TreeFamilyPHC {
 			setDynamicSapling(speciesName);
 			setupStandardSeedDropping();
 			
-			addDropCreator(new DropCreatorFruitLogProduct((TreeFamilyPHC) treeFamily));
+			addDropCreator(new DropCreatorFruitLogProduct((TreeFamilyPHC) treeFamily, 1.5f));
 		}
 		
 		@Override

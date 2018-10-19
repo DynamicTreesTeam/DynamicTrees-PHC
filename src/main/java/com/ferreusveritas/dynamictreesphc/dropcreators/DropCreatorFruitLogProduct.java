@@ -22,7 +22,7 @@ public class DropCreatorFruitLogProduct extends DropCreator {
 	private final float yieldPerLog;
 	
 	public DropCreatorFruitLogProduct(TreeFamilyPHC treeFamily) {
-		this(treeFamily, 2.0f);
+		this(treeFamily, 1.0f);
 	}
 	
 	public DropCreatorFruitLogProduct(TreeFamilyPHC treeFamily, float yieldPerLog) {
