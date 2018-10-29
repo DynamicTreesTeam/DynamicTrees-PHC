@@ -15,6 +15,8 @@ import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.config.TreeGenerationConfiguration;
 
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 
@@ -41,9 +43,11 @@ public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 		float harvestCraftOccurance = 0.02f;
 		
 		for(Entry<Biome, RandomSpeciesSelector> entry : biomeMap.entrySet()) {
-			dbase.setSpeciesSelector(entry.getKey(), (pos, dirt, random) -> {
-				return random.nextFloat() < harvestCraftOccurance ? entry.getValue().getSpecies(pos, dirt, random): new SpeciesSelection();
-			}, Operation.SPLICE_BEFORE);
+			if(!BiomeDictionary.hasType(entry.getKey() , Type.SPOOKY)) { //Little fruit trees mess up the roof of the roofed forest
+				dbase.setSpeciesSelector(entry.getKey(), (pos, dirt, random) -> {
+					return random.nextFloat() < harvestCraftOccurance ? entry.getValue().getSpecies(pos, dirt, random): new SpeciesSelection();
+				}, Operation.SPLICE_BEFORE);
+			}
 		}
 		
 	}
