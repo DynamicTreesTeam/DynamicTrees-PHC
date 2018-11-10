@@ -1,4 +1,4 @@
-package com.ferreusveritas.dynamictreesphc;
+package com.ferreusveritas.dynamictreesphc.trees;
 
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenFruit;

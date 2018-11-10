@@ -11,6 +11,7 @@ import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.ferreusveritas.dynamictreesphc.trees.SpeciesFruit;
 import com.ferreusveritas.dynamictreesphc.trees.TreeCinnamon;
 import com.ferreusveritas.dynamictreesphc.trees.TreeMaple;
 import com.ferreusveritas.dynamictreesphc.trees.TreePaperBark;

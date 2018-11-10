@@ -1,6 +1,7 @@
 package com.ferreusveritas.dynamictreesphc;
 
 import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictreesphc.trees.SpeciesFruit;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling;
 
