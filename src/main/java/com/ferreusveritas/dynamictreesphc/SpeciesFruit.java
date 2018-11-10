@@ -83,7 +83,7 @@ public class SpeciesFruit extends SpeciesRare {
 	public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
 		super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
 		if(fruitBlockState.getBlock() instanceof BlockPamFruit) {
-			fruitGen.setQuantity(10).setEnableHash(false).setFruit(fruitBlockState.withProperty(BlockPamFruit.AGE, 2)).gen(world, rootPos.up(), endPoints, safeBounds);
+			fruitGen.setQuantity(10).setEnableHash(false).setFruit(fruitBlockState.withProperty(BlockPamFruit.AGE, 2)).postGeneration(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
 		}
 	}
 	
@@ -96,7 +96,7 @@ public class SpeciesFruit extends SpeciesRare {
 			if(fruitBlockState.getBlock() instanceof BlockPamFruit) {
 				NodeFindEnds endFinder = new NodeFindEnds();
 				TreeHelper.startAnalysisFromRoot(world, rootPos, new MapSignal(endFinder));
-				fruitGen.setQuantity(1).setEnableHash(true).setFruit(fruitBlockState.withProperty(BlockPamFruit.AGE, 0)).gen(world, rootPos.up(), endFinder.getEnds(), SafeChunkBounds.ANY);
+				fruitGen.setQuantity(1).setEnableHash(true).setFruit(fruitBlockState.withProperty(BlockPamFruit.AGE, 0)).postGrow(world, rootPos, treePos, soilLife, natural);
 			}
 		}
 		
