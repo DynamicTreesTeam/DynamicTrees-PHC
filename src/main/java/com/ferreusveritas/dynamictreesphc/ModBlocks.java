@@ -2,7 +2,6 @@ package com.ferreusveritas.dynamictreesphc;
 
 import java.util.ArrayList;
 
-import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.pam.harvestcraft.blocks.FruitRegistry;
@@ -53,7 +52,7 @@ public class ModBlocks {
 		ArrayList<Block> treeBlocks = new ArrayList<>();
 		ModTrees.phcTrees.forEach(tree -> tree.getRegisterableBlocks(treeBlocks));
 		
-		treeBlocks.addAll(TreeHelper.getLeavesMapForModId(ModConstants.MODID).values());
+		treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(ModConstants.MODID).values());
 		registry.registerAll(treeBlocks.toArray(new Block[0]));
 	}
 	

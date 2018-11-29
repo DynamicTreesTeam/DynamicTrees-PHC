@@ -1,8 +1,8 @@
 package com.ferreusveritas.dynamictreesphc;
 
-import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
+import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 
 import net.minecraft.item.Item;
@@ -22,7 +22,7 @@ public class ModModels {
 		}
 		
 		//Register GrowingLeavesBlocks Meshers and Colorizers
-		for(BlockDynamicLeaves leaves: TreeHelper.getLeavesMapForModId(ModConstants.MODID).values()) {
+		for(BlockDynamicLeaves leaves: LeavesPaging.getLeavesMapForModId(ModConstants.MODID).values()) {
 			ModelHelper.regModel(Item.getItemFromBlock(leaves));
 		}
 		
