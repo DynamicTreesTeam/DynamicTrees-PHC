@@ -22,7 +22,6 @@ public class TreeCinnamon extends TreeFamilyPHC {
 			super(treeFamily.getName(), treeFamily, ModBlocks.cinnamonLeavesProperties);
 			
 			setBasicGrowingParameters(0.25f, 11.0f, getUpProbability(), getLowestBranchHeight(), 1.0f);
-			setDynamicSapling(speciesName);
 			setupStandardSeedDropping();
 			
 			addDropCreator(new DropCreatorFruitLogProduct((TreeFamilyPHC) treeFamily));

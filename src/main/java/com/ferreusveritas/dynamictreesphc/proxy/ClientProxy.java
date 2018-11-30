@@ -11,11 +11,9 @@ import java.util.Map.Entry;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
-import com.ferreusveritas.dynamictrees.blocks.BlockDynamicSapling;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.ModTrees;
 import com.google.gson.Gson;
@@ -97,11 +95,6 @@ public class ClientProxy extends CommonProxy {
 					return ColorizerFoliage.getFoliageColorBasic();
 				}
 			});
-		}
-		
-		//Register Sapling Colorizers
-		for(TreeFamily tree: ModTrees.phcTrees) {
-			ModelHelper.regDynamicSaplingColorHandler((BlockDynamicSapling) tree.getCommonSpecies().getDynamicSapling().getBlock());
 		}
 		
 	}

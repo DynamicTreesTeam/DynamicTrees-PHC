@@ -49,8 +49,18 @@ public class SpeciesFruit extends SpeciesRare {
 		
 		fruitBlockState = fruitBlock.getDefaultState();
 		addGenFeature(new FeatureGenFruit(this, unripeFruit, ripeFruit).setRayDistance(4).setFruitingRadius(fruitingRadius));
+	}
+	
+	@Override
+	public ResourceLocation getSaplingName() {
+		String dtModId = com.ferreusveritas.dynamictrees.ModConstants.MODID;
 		
-		setDynamicSapling(com.ferreusveritas.dynamictrees.ModBlocks.blockDynamicSaplingSpecies.getDefaultState());
+		switch(saplingType) {
+			default:
+			case TEMPERATE: return new ResourceLocation(dtModId, "oak");
+			case COLD: return new ResourceLocation(dtModId, "spruce");
+			case WARM: return new ResourceLocation(dtModId, "jungle");
+		}
 	}
 	
 	protected void fruitTreeDefaults() {

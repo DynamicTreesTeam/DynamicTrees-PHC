@@ -26,7 +26,6 @@ public class TreeMaple extends TreeFamilyPHC {
 			envFactor(Type.DRY, 0.50f);
 			envFactor(Type.FOREST, 1.05f);
 			
-			setDynamicSapling(speciesName);
 			setupStandardSeedDropping();
 			
 			addDropCreator(new DropCreatorFruitLogProduct((TreeFamilyPHC) treeFamily));

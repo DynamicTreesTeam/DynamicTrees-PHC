@@ -26,7 +26,6 @@ public class TreePaperBark extends TreeFamilyPHC {
 			super(treeFamily.getName(), treeFamily, ModBlocks.paperBarkLeavesProperties);
 			
 			setBasicGrowingParameters(0.2f, 10.0f, getUpProbability(), getLowestBranchHeight(), 1.0f);
-			setDynamicSapling(speciesName);
 			setupStandardSeedDropping();
 			
 			addDropCreator(new DropCreatorFruitLogProduct((TreeFamilyPHC) treeFamily, 1.5f));
