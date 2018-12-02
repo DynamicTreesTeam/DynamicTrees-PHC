@@ -15,7 +15,6 @@ public class ModItems {
 		
 		ArrayList<Item> treeItems = new ArrayList<>();
 		ModTrees.phcTrees.forEach(tree -> tree.getRegisterableItems(treeItems));
-		//TreeHelper.getLeavesMapForModId(DynamicTreesBOP.MODID).forEach((key, block) -> registerItemBlock(registry, block));
 		registry.registerAll(treeItems.toArray(new Item[treeItems.size()]));
 	}
 	
