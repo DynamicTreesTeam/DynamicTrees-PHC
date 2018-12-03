@@ -48,7 +48,7 @@ public class SpeciesFruit extends SpeciesRare {
 		IBlockState unripeFruit = fruitBlock.getDefaultState().withProperty(BlockPamFruit.AGE, 0);
 		
 		fruitBlockState = fruitBlock.getDefaultState();
-		addGenFeature(new FeatureGenFruit(this, unripeFruit, ripeFruit).setRayDistance(4).setFruitingRadius(fruitingRadius));
+		addGenFeature(new FeatureGenFruit(unripeFruit, ripeFruit).setRayDistance(4).setFruitingRadius(fruitingRadius));
 	}
 	
 	@Override
