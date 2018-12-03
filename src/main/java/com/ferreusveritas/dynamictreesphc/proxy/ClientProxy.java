@@ -26,16 +26,21 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 
 public class ClientProxy extends CommonProxy {
 	
+	@Override
+	public void preInit() {
+		super.preInit();
+	}
+	
+	@Override
 	public void init() {
+		super.init();
 		registerColorHandlers();
 	}
 	
@@ -77,7 +82,6 @@ public class ClientProxy extends CommonProxy {
 		
 		//Register GrowingLeavesBlocks Colorizers
 		for(BlockDynamicLeaves leaves: LeavesPaging.getLeavesMapForModId(ModConstants.MODID).values()) {
-			
 			ModelHelper.regColorHandler(leaves, new IBlockColor() {
 				@Override
 				public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
@@ -86,13 +90,6 @@ public class ClientProxy extends CommonProxy {
 						return ((BlockDynamicLeaves) block).getProperties(state).foliageColorMultiplier(state, worldIn, pos);
 					}
 					return magenta;
-				}
-			});
-			
-			ModelHelper.regColorHandler(Item.getItemFromBlock(leaves), new IItemColor() {
-				@Override
-				public int colorMultiplier(ItemStack stack, int tintIndex) {
-					return ColorizerFoliage.getFoliageColorBasic();
 				}
 			});
 		}

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ModModels {
 
 	@SideOnly(Side.CLIENT)
-	public static void registerModels(ModelRegistryEvent event) {
+	public static void register(ModelRegistryEvent event) {
 		
 		//Register Meshers for Branches
 		for(TreeFamily tree: ModTrees.phcTrees) {

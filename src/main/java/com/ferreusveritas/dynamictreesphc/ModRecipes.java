@@ -12,7 +12,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModRecipes {
 	
-	public static void registerRecipes(IForgeRegistry<IRecipe> registry) {
+	public static void register(IForgeRegistry<IRecipe> registry) {
 		//Create dirt bucket exchange recipes
 		ModTrees.phcSpecies.values().forEach(ModRecipes::speciesRecipes);
 	}

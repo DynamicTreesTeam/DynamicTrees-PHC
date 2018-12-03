@@ -1,10 +1,6 @@
 package com.ferreusveritas.dynamictreesphc;
 
-import com.ferreusveritas.dynamictrees.api.WorldGenRegistry;
 import com.ferreusveritas.dynamictreesphc.proxy.CommonProxy;
-import com.ferreusveritas.dynamictreesphc.worldgen.BiomeDataBasePopulator;
-import com.pam.harvestcraft.HarvestCraft;
-import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -30,29 +26,12 @@ public class DynamicTreesPHC {
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		ModBlocks.preInit();
-		ModItems.preInit();
-		ModTrees.preInit();
-		
 		proxy.preInit();
 	}
 	
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		if(HarvestCraft.fruitTreeConfigManager.enableFruitTreeGeneration) {
-			WorldGenRegistry.registerBiomeDataBasePopulator(new BiomeDataBasePopulator());
-		}
-		preparePHC();
-		
 		proxy.init();
-	}
-	
-	public void preparePHC() {
-		//Force disable harvestcraft tree worldgen
-		HarvestCraft.fruitTreeConfigManager.enableFruitTreeGeneration = false;
-
-		//Change fruit block behavior to remove fruit completely on harvest
-		BlockPamFruit.fruitRemoval = true;
 	}
 	
 	@Mod.EventBusSubscriber
@@ -60,23 +39,23 @@ public class DynamicTreesPHC {
 		
 		@SubscribeEvent
 		public static void registerBlocks(RegistryEvent.Register<Block> event) {
-			ModBlocks.registerBlocks(event.getRegistry());
+			ModBlocks.register(event.getRegistry());
 		}
 		
 		@SubscribeEvent
 		public static void registerItems(RegistryEvent.Register<Item> event) {
-			ModItems.registerItems(event.getRegistry());
+			ModItems.register(event.getRegistry());
 		}
 		
 		@SubscribeEvent
 		public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-			ModRecipes.registerRecipes(event.getRegistry());
+			ModRecipes.register(event.getRegistry());
 		}
 		
 		@SubscribeEvent
 		@SideOnly(Side.CLIENT)
 		public static void registerModels(ModelRegistryEvent event) {
-			ModModels.registerModels(event);
+			ModModels.register(event);
 		}
 
 	}

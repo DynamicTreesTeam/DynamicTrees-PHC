@@ -48,7 +48,7 @@ public class ModBlocks {
 		primMapleLog = FruitRegistry.getLog(FruitRegistry.MAPLE);
 	}
 	
-	public static void registerBlocks(IForgeRegistry<Block> registry) {
+	public static void register(IForgeRegistry<Block> registry) {
 		ArrayList<Block> treeBlocks = new ArrayList<>();
 		ModTrees.phcTrees.forEach(tree -> tree.getRegisterableBlocks(treeBlocks));
 		
