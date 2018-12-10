@@ -1,14 +1,13 @@
 package com.ferreusveritas.dynamictreesphc.proxy;
 
-import com.ferreusveritas.dynamictrees.api.WorldGenRegistry;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModItems;
 import com.ferreusveritas.dynamictreesphc.ModTrees;
-import com.ferreusveritas.dynamictreesphc.worldgen.BiomeDataBasePopulator;
 import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
 
 public class CommonProxy {
+	
 	
 	public void preInit() {
 		ModBlocks.preInit();
@@ -17,9 +16,7 @@ public class CommonProxy {
 	}
 	
 	public void init() {
-		if(HarvestCraft.fruitTreeConfigManager.enableFruitTreeGeneration) {
-			WorldGenRegistry.registerBiomeDataBasePopulator(new BiomeDataBasePopulator());
-		}
+		ModTrees.init();
 		preparePHC();
 	}
 	

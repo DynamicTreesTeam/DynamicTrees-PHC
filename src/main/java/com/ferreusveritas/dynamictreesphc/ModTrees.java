@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
+import com.ferreusveritas.dynamictrees.api.WorldGenRegistry.BiomeDataBasePopulatorRegistryEvent;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
@@ -15,19 +16,30 @@ import com.ferreusveritas.dynamictreesphc.trees.SpeciesFruit;
 import com.ferreusveritas.dynamictreesphc.trees.TreeCinnamon;
 import com.ferreusveritas.dynamictreesphc.trees.TreeMaple;
 import com.ferreusveritas.dynamictreesphc.trees.TreePaperBark;
+import com.ferreusveritas.dynamictreesphc.worldgen.BiomeDataBasePopulator;
+import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling.SaplingType;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@Mod.EventBusSubscriber(modid = ModConstants.MODID)
 public class ModTrees {
 	
 	protected interface ISpeciesCreator {
 		Species createSpecies(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName, SaplingType saplingType);
 	}
 	
+	public static boolean fruitTreeGen;
+	
 	public static ArrayList<TreeFamily> phcTrees = new ArrayList<TreeFamily>();
 	public static Map<String, Species> phcSpecies = new HashMap<>();
+	
+	public static void init() {
+		fruitTreeGen = HarvestCraft.fruitTreeConfigManager.enableFruitTreeGeneration;
+	}
 	
 	public static void preInit() {
 		
@@ -91,6 +103,13 @@ public class ModTrees {
 			@Override protected void fruitTreeDefaults() { setBasicGrowingParameters(0.45f, 11.0f, 1, 4, 0.6f, 8); }
 		});
 		
+	}
+	
+	@SubscribeEvent
+	public static void registerDataBasePopulators(final BiomeDataBasePopulatorRegistryEvent event) {
+		if(fruitTreeGen) {
+			event.register(new BiomeDataBasePopulator());
+		}
 	}
 	
 }
