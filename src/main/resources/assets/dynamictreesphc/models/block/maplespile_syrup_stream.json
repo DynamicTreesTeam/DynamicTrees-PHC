@@ -1,0 +1,30 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "textures": {
+        "syrup": "dynamictreesphc:blocks/maplesyrup",
+        "particle": "dynamictreesphc:blocks/maplesyrup"
+    },
+    "elements": [
+        {
+            "from": [ 7.5, 10.5, 4.0 ], 
+            "to": [ 8.5, 11.5, 7.0 ], 
+            "faces": {
+                "east": { "texture": "#syrup", "uv": [ 5.0, 13.0, 8.0, 14.0 ] },
+                "south": { "texture": "#syrup", "uv": [ 6.0, 12.0, 7.0, 13.0 ] },
+                "west": { "texture": "#syrup", "uv": [ 3.0, 12.0, 6.0, 13.0 ] },
+                "up": { "texture": "#syrup", "uv": [ 2.0, 11.0, 3.0, 14.0 ] }
+            }
+        },
+        {
+            "from": [ 7.5, 5.5, 6.0 ], 
+            "to": [ 8.5, 10.5, 7.0 ], 
+            "faces": {
+                "north": { "texture": "#syrup", "uv": [ 3.0, 10.0, 4.0, 15.0 ] },
+                "east": { "texture": "#syrup", "uv": [ 4.0, 10.0, 5.0, 15.0 ] },
+                "south": { "texture": "#syrup", "uv": [ 5.0, 10.0, 6.0, 15.0 ] },
+                "west": { "texture": "#syrup", "uv": [ 4.0, 10.0, 5.0, 15.0 ] },
+                "down": { "texture": "#syrup", "uv": [ 3.0, 12.0, 4.0, 13.0 ] }
+            }
+        }
+    ]
+}

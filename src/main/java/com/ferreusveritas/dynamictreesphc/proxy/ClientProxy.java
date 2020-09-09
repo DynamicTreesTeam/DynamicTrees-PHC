@@ -56,9 +56,9 @@ public class ClientProxy extends CommonProxy {
 			JsonObject json = je.getAsJsonObject();
 			for(Entry<String, JsonElement> entry : json.entrySet()) {
 				String speciesName = entry.getKey();
-				Species species = ModTrees.phcSpecies.get(speciesName);
+				Species species = ModTrees.phcFruitSpecies.get(speciesName);
 				if(species != null) {
-					Seed seed = species.getSeed();			
+					Seed seed = species.getSeed();
 					JsonArray colors = entry.getValue().getAsJsonArray();
 					List<Integer> colorArray = new ArrayList<>(4);
 					colors.forEach(i -> colorArray.add(Integer.parseInt(i.getAsString(), 16)));
@@ -70,7 +70,7 @@ public class ClientProxy extends CommonProxy {
 							}
 						});
 					}
-					
+
 				}
 			}
 		}

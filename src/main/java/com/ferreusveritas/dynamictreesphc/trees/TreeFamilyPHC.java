@@ -14,12 +14,4 @@ public class TreeFamilyPHC extends TreeFamily {
 		super(resourceLocation);
 	}
 	
-	//This mod registers all of the seeds externally so we'll only provide the dynamic branch block here
-	@Override
-	public List<Item> getRegisterableItems(List<Item> itemList) {
-		//Register an itemBlock for the branch block
-		itemList.add(new ItemBlock(getDynamicBranch()).setRegistryName(getDynamicBranch().getRegistryName()));
-		return itemList;
-	}
-	
 }

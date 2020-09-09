@@ -29,7 +29,7 @@ minecraft {
 	replace "1.12.2-9999.9999.9999z", project.version
 	replaceIn "ModConstants.java"
 	
-	//makeObfSourceJar = false
+	makeObfSourceJar = false
 	
 	if (project.hasProperty('mappings_version'))
 		mappings = project.mappings_version
@@ -54,9 +54,9 @@ processResources {
 	}
 }
 
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
-}
-
-tasks.build.dependsOn deobfJar
+//task deobfJar(type: Jar) {
+//    from sourceSets.main.output
+//    classifier = 'deobf'
+//}
+//
+//tasks.build.dependsOn deobfJar

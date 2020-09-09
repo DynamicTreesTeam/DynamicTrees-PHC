@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "#*",
+    "&"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "*": {
+      "item": "minecraft:iron_nugget"
+    },
+    "&": {
+      "item": "harvestcraft:maplesyrupitem"
+    }
+  },
+  "result": {
+    "item": "dynamictreesphc:maplespile",
+    "count": 1
+  }
+}

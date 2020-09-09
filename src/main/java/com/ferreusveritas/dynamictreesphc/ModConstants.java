@@ -1,5 +1,9 @@
 package com.ferreusveritas.dynamictreesphc;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 	
 	public static final String MODID = "dynamictreesphc";
@@ -17,5 +21,9 @@ public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 		+ NEXT
 		+ REQAFTER + PHC_LATEST
 		;
-	
+
+	public static final List<String> NOFRUIT = new LinkedList<>(Arrays.asList("cinnamon","paperbark","maple"));
+
+	public static final List<String> PALMS = new LinkedList<>(Arrays.asList("date","papaya","dragonfruit","banana","coconut"));
+
 }

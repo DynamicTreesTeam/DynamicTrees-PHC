@@ -10,12 +10,10 @@ import java.util.Map.Entry;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.WorldGenRegistry.BiomeDataBasePopulatorRegistryEvent;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
+import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
-import com.ferreusveritas.dynamictreesphc.trees.SpeciesFruit;
-import com.ferreusveritas.dynamictreesphc.trees.TreeCinnamon;
-import com.ferreusveritas.dynamictreesphc.trees.TreeMaple;
-import com.ferreusveritas.dynamictreesphc.trees.TreePaperBark;
+import com.ferreusveritas.dynamictreesphc.trees.*;
 import com.ferreusveritas.dynamictreesphc.worldgen.BiomeDataBasePopulator;
 import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.blocks.FruitRegistry;
@@ -34,27 +32,33 @@ public class ModTrees {
 	
 	public static boolean fruitTreeGen;
 	
-	public static ArrayList<TreeFamily> phcTrees = new ArrayList<TreeFamily>();
-	public static Map<String, Species> phcSpecies = new HashMap<>();
+	public static ArrayList<TreeFamily> phcTrees = new ArrayList<>();
+	public static Map<String, Species> phcFruitSpecies = new HashMap<>();
 	
 	public static void init() {
 		fruitTreeGen = HarvestCraft.fruitTreeConfigManager.enableFruitTreeGeneration;
 	}
 	
 	public static void preInit() {
-		
+
+		System.out.println(phcTrees.size());
+
 		//Register all of the trees
+		phcTrees.forEach(tree -> phcFruitSpecies.put(tree.getName().getResourcePath(), tree.getCommonSpecies()));
+		//we add the special trees later so they dont get added into phcFruitSpecies
 		Collections.addAll(phcTrees, new TreeCinnamon(), new TreeMaple(), new TreePaperBark());
 		phcTrees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
-		phcTrees.forEach(tree -> phcSpecies.put(tree.getName().getResourcePath(), tree.getCommonSpecies()));
 		
 		//Basic creators
-		ISpeciesCreator fruitTreeCreator = (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType);
+		ISpeciesCreator fruitTreeCreator = SpeciesFruit::new;
+		ISpeciesCreator palmTreeCreator = SpeciesPalm::new;
 		
 		//Set up a map of species and their sapling types
 		Map<String, SaplingType> saplingMap = new HashMap<>();
 		saplingMap.putAll(FruitRegistry.registeringFruits);
-		
+
+		//We create the fruit blocks
+
 		//Set up a map of sapling types to tree family common species
 		Map<SaplingType, TreeFamily> familyMap = new EnumMap<>(SaplingType.class);
 		familyMap.put(SaplingType.TEMPERATE, TreeRegistry.findSpeciesSloppy("oak").getFamily());
@@ -63,7 +67,13 @@ public class ModTrees {
 		
 		//Set up a map of species names and their creator lambdas
 		Map<String, ISpeciesCreator> creatorMap = new HashMap<>();
-		FruitRegistry.registeringFruits.forEach((k, v) -> creatorMap.put(k, fruitTreeCreator));
+		FruitRegistry.registeringFruits.forEach((species, sapling) -> {
+			if (ModConstants.PALMS.contains(species)){
+				creatorMap.put(species, palmTreeCreator);
+			} else{
+				creatorMap.put(species, fruitTreeCreator);
+			}
+		});
 		
 		//Tailor creators to fit Dynamic Trees
 		alterCreatorMap(creatorMap);
@@ -77,11 +87,19 @@ public class ModTrees {
 			ResourceLocation resLoc = new ResourceLocation(ModConstants.MODID, fruitName);
 			ILeavesProperties leavesProperties = family.getCommonSpecies().getLeavesProperties();
 			Species species = creator.createSpecies(resLoc, family, leavesProperties, fruitName, saplingType);
-			phcSpecies.put(fruitName, species);
+			phcFruitSpecies.put(fruitName, species);
 			Species.REGISTRY.register(species);
 		}
-		
-		for(Entry<String, Species> entry : phcSpecies.entrySet()) {
+
+		//Create fruit blocks
+		for(Entry<String, Species> entry : phcFruitSpecies.entrySet()) {
+			if (!ModConstants.NOFRUIT.contains(entry.getKey())){
+				BlockFruit fruit = new BlockFruit(new ResourceLocation(ModConstants.MODID, entry.getKey()).toString());
+				ModBlocks.fruits.put(entry.getKey(), fruit);
+			}
+		};
+
+		for(Entry<String, Species> entry : phcFruitSpecies.entrySet()) {
 			TreeRegistry.registerSaplingReplacer(FruitRegistry.getSapling(entry.getKey()).getDefaultState(), entry.getValue());
 		}
 		

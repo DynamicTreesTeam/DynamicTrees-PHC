@@ -1,0 +1,88 @@
+{
+  "multipart": [
+    {   "when": { "facing": "south" },
+      "apply": { "model": "dynamictreesphc:maplespile_empty" }
+    },
+    {   "when": { "facing": "west" },
+      "apply": { "model": "dynamictreesphc:maplespile_empty", "y": 90 }
+    },
+    {   "when": { "facing": "north" },
+      "apply": { "model": "dynamictreesphc:maplespile_empty", "y": 180 }
+    },
+    {   "when": { "facing": "east" },
+      "apply": { "model": "dynamictreesphc:maplespile_empty", "y": 270 }
+    },
+    {   "when": { "facing": "south", "filling": "0|1|2" },
+      "apply": { "model": "dynamictreesphc:maplespile_bucket" }
+    },
+    {   "when": { "facing": "west", "filling": "0|1|2" },
+      "apply": { "model": "dynamictreesphc:maplespile_bucket", "y": 90 }
+    },
+    {   "when": { "facing": "north", "filling": "0|1|2" },
+      "apply": { "model": "dynamictreesphc:maplespile_bucket", "y": 180 }
+    },
+    {   "when": { "facing": "east", "filling": "0|1|2" },
+      "apply": { "model": "dynamictreesphc:maplespile_bucket", "y": 270 }
+    },
+    {   "when": { "facing": "south", "filling": "3" },
+      "apply": { "model": "dynamictreesphc:maplespile_bucket_full" }
+    },
+    {   "when": { "facing": "west", "filling": "3" },
+      "apply": { "model": "dynamictreesphc:maplespile_bucket_full", "y": 90 }
+    },
+    {   "when": { "facing": "north", "filling": "3" },
+      "apply": { "model": "dynamictreesphc:maplespile_bucket_full", "y": 180 }
+    },
+    {   "when": { "facing": "east", "filling": "3" },
+      "apply": { "model": "dynamictreesphc:maplespile_bucket_full", "y": 270 }
+    },
+    {   "when": { "facing": "south", "filling": "1|2|3" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_stream" }
+    },
+    {   "when": { "facing": "west", "filling": "1|2|3" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_stream", "y": 90 }
+    },
+    {   "when": { "facing": "north", "filling": "1|2|3" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_stream", "y": 180 }
+    },
+    {   "when": { "facing": "east", "filling": "1|2|3" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_stream", "y": 270 }
+    },
+    {   "when": { "facing": "south", "filling": "1" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_1" }
+    },
+    {   "when": { "facing": "west", "filling": "1" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_1", "y": 90 }
+    },
+    {   "when": { "facing": "north", "filling": "1" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_1", "y": 180 }
+    },
+    {   "when": { "facing": "east", "filling": "1" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_1", "y": 270 }
+    },
+    {   "when": { "facing": "south", "filling": "2" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_2" }
+    },
+    {   "when": { "facing": "west", "filling": "2" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_2", "y": 90 }
+    },
+    {   "when": { "facing": "north", "filling": "2" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_2", "y": 180 }
+    },
+    {   "when": { "facing": "east", "filling": "2" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_2", "y": 270 }
+    },
+    {   "when": { "facing": "south", "filling": "3" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_3" }
+    },
+    {   "when": { "facing": "west", "filling": "3" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_3", "y": 90 }
+    },
+    {   "when": { "facing": "north", "filling": "3" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_3", "y": 180 }
+    },
+    {   "when": { "facing": "east", "filling": "3" },
+      "apply": { "model": "dynamictreesphc:maplespile_syrup_3", "y": 270 }
+    }
+  ]
+}

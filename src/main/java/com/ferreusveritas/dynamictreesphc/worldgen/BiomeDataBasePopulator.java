@@ -28,7 +28,7 @@ public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 		for(TreeGenerationConfiguration treeConfig : HarvestCraft.fruitTreeConfigManager.treeConfigurations) {
 			if(treeConfig.getEnableGeneration()) {
 				String fruitName = treeConfig.getFruit();
-				Species species = ModTrees.phcSpecies.get(fruitName);
+				Species species = ModTrees.phcFruitSpecies.get(fruitName);
 				if(species != null) {
 					for(Biome biome : treeConfig.getBiomesAllowed()) {
 						if(dbase.shouldCancelVanillaTreeGen(biome)) {//Only populate biomes with Dynamic Trees that have been cancelled

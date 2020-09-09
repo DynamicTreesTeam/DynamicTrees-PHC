@@ -43,7 +43,7 @@ public class DropCreatorFruitLogProduct extends DropCreator {
 			int numFruits = (int) (volume * yieldPerLog);
 			int maxStackSize = fruit.getItemStackLimit();
 			while(numFruits > 0) {
-				dropList.add(new ItemStack(fruit, numFruits >= maxStackSize ? maxStackSize : numFruits));
+				dropList.add(new ItemStack(fruit, Math.min(numFruits, maxStackSize)));
 				numFruits -= maxStackSize;
 			}
 		}

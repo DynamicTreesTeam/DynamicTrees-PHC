@@ -2,6 +2,7 @@ package com.ferreusveritas.dynamictreesphc.trees;
 
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenFruit;
+import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.SpeciesRare;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.pam.harvestcraft.blocks.BlockRegistry;
@@ -13,20 +14,22 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
-public class SpeciesFruit extends SpeciesRare {
+public class SpeciesFruit extends Species {
 	
 	public final String fruitName;
 	public final SaplingType saplingType;
 	public IBlockState fruitBlockState;
 	private int fruitingRadius = 5;
-	
+
 	public SpeciesFruit(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName, SaplingType saplingType) {
 		super(name, treeFamily, leavesProperties);
 		this.fruitName = fruitName;
 		this.saplingType = saplingType;
-		
+
 		fruitTreeDefaults();
-		
+
+		setRequiresTileEntity(true);
+
 		switch(saplingType) {
 			default:
 			case TEMPERATE:
@@ -40,17 +43,19 @@ public class SpeciesFruit extends SpeciesRare {
 				envFactor(Type.COLD, 0.50f);
 				break;
 		}
-		
 		generateSeed();
-		
+
+		setFruitBlock();
+	}
+
+	protected void setFruitBlock (){
 		Block fruitBlock = BlockRegistry.blocks.stream().filter(b -> b.getRegistryName().getResourcePath().equals("pam" + fruitName)).findFirst().get();
 		IBlockState ripeFruit = fruitBlock.getDefaultState().withProperty(BlockPamFruit.AGE, 2);
 		IBlockState unripeFruit = fruitBlock.getDefaultState().withProperty(BlockPamFruit.AGE, 0);
-		
 		fruitBlockState = fruitBlock.getDefaultState();
 		addGenFeature(new FeatureGenFruit(unripeFruit, ripeFruit).setRayDistance(4).setFruitingRadius(fruitingRadius));
 	}
-	
+
 	@Override
 	public ResourceLocation getSaplingName() {
 		String dtModId = com.ferreusveritas.dynamictrees.ModConstants.MODID;

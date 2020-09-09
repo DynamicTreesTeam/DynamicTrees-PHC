@@ -1,18 +1,24 @@
 package com.ferreusveritas.dynamictreesphc.trees;
 
+import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
+import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamSpecial;
 import com.ferreusveritas.dynamictreesphc.dropcreators.DropCreatorFruitLogProduct;
 
+import com.pam.harvestcraft.blocks.FruitRegistry;
+import com.pam.harvestcraft.blocks.growables.BlockPamFruitLog;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class TreeMaple extends TreeFamilyPHC {
-	public static final String speciesName = "maple";
+	public static final String speciesName = FruitRegistry.MAPLE;
 	
 	//Species need not be created as a nested class.  They can be created after the tree has already been constructed.
 	public class TreeMapleSpecies extends Species {
@@ -25,10 +31,10 @@ public class TreeMaple extends TreeFamilyPHC {
 			envFactor(Type.HOT, 0.50f);
 			envFactor(Type.DRY, 0.50f);
 			envFactor(Type.FOREST, 1.05f);
-			
+
+			generateSeed();
+
 			setupStandardSeedDropping();
-			
-			addDropCreator(new DropCreatorFruitLogProduct((TreeFamilyPHC) treeFamily));
 		}
 		
 		@Override
@@ -40,9 +46,8 @@ public class TreeMaple extends TreeFamilyPHC {
 		
 	public TreeMaple() {
 		super(new ResourceLocation(ModConstants.MODID, speciesName));
-		
-		//Set up primitive log. This controls what is dropped on harvest.
-		setPrimitiveLog(ModBlocks.primMapleLog.getDefaultState());
+
+		setPrimitiveLog(FruitRegistry.getLog(speciesName).getDefaultState());
 
 		ModBlocks.mapleLeavesProperties.setTree(this);
 	}
@@ -50,7 +55,13 @@ public class TreeMaple extends TreeFamilyPHC {
 	@Override
 	public void createSpecies() {
 		setCommonSpecies(new TreeMapleSpecies(this));
-		getCommonSpecies().generateSeed();
 	}
-	
+
+	@Override
+	public BlockBranch createBranch() {
+		return new BlockBranchPamSpecial(
+				getName()+"branch",
+				speciesName,
+				0.5f);
+	}
 }

@@ -1,20 +1,29 @@
 package com.ferreusveritas.dynamictreesphc;
 
+import com.ferreusveritas.dynamictrees.ModConstants;
+import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictreesphc.trees.SpeciesFruit;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModRecipes {
 	
 	public static void register(IForgeRegistry<IRecipe> registry) {
 		//Create dirt bucket exchange recipes
-		ModTrees.phcSpecies.values().forEach(ModRecipes::speciesRecipes);
+		ModTrees.phcFruitSpecies.values().forEach(ModRecipes::speciesRecipes);
+
+		Species appleSpecies = TreeRegistry.findSpecies(new ResourceLocation(ModConstants.MODID, "apple"));
+		Block sapling = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("harvestcraft", "apple_sapling"));
+		com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(new ItemStack(sapling), appleSpecies.getSeedStack(1), true, "seedfromsapling");
 	}
 	
 	private static void speciesRecipes(Species species) {
