@@ -19,6 +19,7 @@ import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling.SaplingType;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -96,6 +97,11 @@ public class ModTrees {
 			if (!ModConstants.NOFRUIT.contains(entry.getKey())){
 				BlockFruit fruit = new BlockFruit(new ResourceLocation(ModConstants.MODID, entry.getKey()).toString());
 				ModBlocks.fruits.put(entry.getKey(), fruit);
+				fruit.setDroppedItem(new ItemStack(FruitRegistry.getFood(entry.getKey())));
+				Species species = entry.getValue();
+				if (species instanceof SpeciesFruit){
+					((SpeciesFruit)species).setFruitBlock(fruit);
+				}
 			}
 		};
 

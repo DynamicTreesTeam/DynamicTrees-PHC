@@ -1,10 +1,12 @@
 package com.ferreusveritas.dynamictreesphc.trees;
 
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
+import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenFruit;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.SpeciesRare;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.pam.harvestcraft.blocks.BlockRegistry;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling.SaplingType;
@@ -19,7 +21,7 @@ public class SpeciesFruit extends Species {
 	public final String fruitName;
 	public final SaplingType saplingType;
 	public IBlockState fruitBlockState;
-	private int fruitingRadius = 5;
+	protected int fruitingRadius = 5;
 
 	public SpeciesFruit(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName, SaplingType saplingType) {
 		super(name, treeFamily, leavesProperties);
@@ -45,15 +47,11 @@ public class SpeciesFruit extends Species {
 		}
 		generateSeed();
 
-		setFruitBlock();
 	}
 
-	protected void setFruitBlock (){
-		Block fruitBlock = BlockRegistry.blocks.stream().filter(b -> b.getRegistryName().getResourcePath().equals("pam" + fruitName)).findFirst().get();
-		IBlockState ripeFruit = fruitBlock.getDefaultState().withProperty(BlockPamFruit.AGE, 2);
-		IBlockState unripeFruit = fruitBlock.getDefaultState().withProperty(BlockPamFruit.AGE, 0);
+	public void setFruitBlock (BlockFruit fruitBlock){
 		fruitBlockState = fruitBlock.getDefaultState();
-		addGenFeature(new FeatureGenFruit(unripeFruit, ripeFruit).setRayDistance(4).setFruitingRadius(fruitingRadius));
+		addGenFeature(new FeatureGenFruit(fruitBlock).setRayDistance(4).setFruitingRadius(fruitingRadius));
 	}
 
 	@Override
@@ -78,8 +76,8 @@ public class SpeciesFruit extends Species {
 		return this;
 	}
 	
-	public BlockPamFruit getFruitBlock() {
-		return (BlockPamFruit) fruitBlockState.getBlock();
+	public BlockFruit getFruitBlock() {
+		return (BlockFruit) fruitBlockState.getBlock();
 	}
 	
 	@Override

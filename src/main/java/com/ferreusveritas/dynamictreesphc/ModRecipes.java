@@ -2,11 +2,13 @@ package com.ferreusveritas.dynamictreesphc;
 
 import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
+import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictreesphc.trees.SpeciesFruit;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling;
 
+import com.pam.harvestcraft.item.items.ItemPamFood;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,10 +37,13 @@ public class ModRecipes {
 		
 		if(species instanceof SpeciesFruit) {			
 			SpeciesFruit speciesFruit = (SpeciesFruit)species;
-			BlockPamFruit blockPamFruit = speciesFruit.getFruitBlock();
-			BlockPamSapling saplingFruit = blockPamFruit.getSapling();
-			Item fruitItem = blockPamFruit.getFruitItem();
-			ItemStack saplingStack = new ItemStack(saplingFruit);
+			BlockFruit blockFruit = speciesFruit.getFruitBlock();
+			Item fruitItem = blockFruit.getFruitDrop().getItem();
+			Block saplingBlock = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(fruitItem.getRegistryName().getResourceDomain(), species.getRegistryName().getResourcePath()+"_sapling"));
+			if (saplingBlock == null){
+				return;
+			}
+			ItemStack saplingStack = new ItemStack(saplingBlock);
 			ItemStack fruitStack = new ItemStack(fruitItem);
 			ItemStack seedStack = species.getSeedStack(1);
 			

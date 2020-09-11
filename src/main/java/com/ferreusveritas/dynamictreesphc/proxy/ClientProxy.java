@@ -16,6 +16,8 @@ import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.ModTrees;
+import com.ferreusveritas.dynamictreesphc.items.ItemDynamicSeedMaple;
+import com.ferreusveritas.dynamictreesphc.renderer.RenderMapleSeed;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -30,12 +32,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void preInit() {
 		super.preInit();
+		registerEntityRenderers();
 	}
 	
 	@Override
@@ -94,6 +98,10 @@ public class ClientProxy extends CommonProxy {
 			});
 		}
 		
+	}
+
+	public void registerEntityRenderers() {
+		RenderingRegistry.registerEntityRenderingHandler(ItemDynamicSeedMaple.EntityItemMapleSeed.class, new RenderMapleSeed.Factory());
 	}
 	
 }

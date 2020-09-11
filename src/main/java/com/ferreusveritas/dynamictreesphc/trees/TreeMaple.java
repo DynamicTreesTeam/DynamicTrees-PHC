@@ -1,18 +1,31 @@
 package com.ferreusveritas.dynamictreesphc.trees;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamSpecial;
+import com.ferreusveritas.dynamictreesphc.blocks.BlockMapleSpile;
 import com.ferreusveritas.dynamictreesphc.dropcreators.DropCreatorFruitLogProduct;
 
+import com.ferreusveritas.dynamictreesphc.items.ItemDynamicSeedMaple;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruitLog;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -32,7 +45,7 @@ public class TreeMaple extends TreeFamilyPHC {
 			envFactor(Type.DRY, 0.50f);
 			envFactor(Type.FOREST, 1.05f);
 
-			generateSeed();
+			setSeedStack(new ItemStack(new ItemDynamicSeedMaple()));
 
 			setupStandardSeedDropping();
 		}
@@ -62,6 +75,24 @@ public class TreeMaple extends TreeFamilyPHC {
 		return new BlockBranchPamSpecial(
 				getName()+"branch",
 				speciesName,
-				0.5f);
+				0.5f){
+			@Override
+			public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+				if (playerIn.getHeldItem(hand).getItem() == Items.IRON_INGOT &&
+						worldIn.getBlockState(pos.offset(facing)).getBlock().isReplaceable(worldIn, pos.offset(facing)) &&
+						TreeHelper.getRadius(worldIn, pos) >= 7){
+					worldIn.setBlockState(pos.offset(facing), ModBlocks.mapleSpile.getDefaultState().withProperty(BlockHorizontal.FACING, facing));
+					if (!playerIn.isCreative()){
+						playerIn.getHeldItem(hand).shrink(1);
+					}
+					worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ZOMBIE_ATTACK_DOOR_WOOD, SoundCategory.BLOCKS, 1, 1.5f, false);
+					//worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 1, 1, false);
+					//worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1, 0.8f, false);
+
+					return true;
+				}
+				return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+			}
+		};
 	}
 }

@@ -1,8 +1,9 @@
 package com.ferreusveritas.dynamictreesphc.blocks;
 
-import akka.japi.pf.FI;
+import com.ferreusveritas.dynamictrees.ModTabs;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
+import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.block.*;
@@ -10,9 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -26,14 +25,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Random;
 
 public class BlockMapleSpile extends BlockHorizontal {
 
     public static final PropertyBool FILLED = PropertyBool.create("filled");
 
-    public static final float syrupChance = 0.1f;
+    private static final float baseSyrupChance = 5f; //percent
+    private static final float outOfSeasonSyrupChance = 0.1f; //percent
 
     protected static final AxisAlignedBB SPILE_EAST_AABB = new AxisAlignedBB(
             -1 /16f,10  /16f,7  /16f,
@@ -53,20 +52,24 @@ public class BlockMapleSpile extends BlockHorizontal {
         defaultState();
         setRegistryName(name);
         setUnlocalizedName(name.toString());
-        setSoundType(new SoundType(
-                1.0F,
-                1.5F,
-                SoundEvents.BLOCK_WOOD_PLACE, //block broken
-                SoundEvents.BLOCK_METAL_STEP,
-                SoundEvents.BLOCK_WOOD_BREAK, //block placed
-                SoundEvents.BLOCK_METAL_HIT,
-                SoundEvents.BLOCK_METAL_FALL));
-        setHardness(0.1f);
+        setSoundType(SoundType.METAL);
+        setHardness(0.5f);
         setTickRandomly(true);
+//        setCreativeTab(ModTabs.dynamicTreesTab);
     }
 
     protected void defaultState (){
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(FILLED, false));
+    }
+
+    //Update syrup extract rate depending on seasons
+    public float getSyrupChance (World world){
+        return Math.max(Math.min(baseSyrupChance / 100f, 1),0);
+//        float season = SeasonHelper.getSeasonValue(world);
+//        if (season >= 3.5 && season <= 0.5){
+//            return Math.max(Math.min(baseSyrupChance / 100f, 1),0);
+//        }
+//        else return Math.max(Math.min(outOfSeasonSyrupChance / 100f, 1),0);
     }
 
     protected BlockStateContainer createBlockState()
@@ -89,7 +92,7 @@ public class BlockMapleSpile extends BlockHorizontal {
         if (!this.canBlockStay(worldIn, pos, state)) {
             this.dropBlock(worldIn, pos, state);
         } else {
-            if (worldIn.rand.nextFloat() <= syrupChance){
+            if (worldIn.rand.nextFloat() <= getSyrupChance(worldIn)){
                 worldIn.setBlockState(pos, state.withProperty(FILLED, true));
             }
         }
@@ -107,17 +110,17 @@ public class BlockMapleSpile extends BlockHorizontal {
             }
             return true;
         }
-        if (dropSyrup(worldIn, pos, state)){
+        if (dropSyrup(worldIn, pos, state, playerIn)){
             return true;
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
-    protected boolean dropSyrup (World worldIn, BlockPos pos, IBlockState state){
+    protected boolean dropSyrup (World worldIn, BlockPos pos, IBlockState state, EntityPlayer player){
         if (state.getValue(FILLED)){
             if (!worldIn.isRemote && !worldIn.restoringBlockSnapshots) {
                 ItemStack drop = new ItemStack(FruitRegistry.getLog(FruitRegistry.MAPLE).getFruitItem());
-                spawnAsEntity(worldIn, pos, drop);
+                player.addItemStackToInventory(drop);
                 System.out.println(drop);
             }
             worldIn.setBlockState(pos, state.withProperty(FILLED, false));
@@ -137,7 +140,15 @@ public class BlockMapleSpile extends BlockHorizontal {
     protected void dropBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
-        this.dropBlockAsItem(worldIn, pos, state, 0);
+        spawnAsEntity(worldIn, pos, new ItemStack(Items.IRON_NUGGET));
+    }
+
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+        if (!player.isCreative()){
+            spawnAsEntity(worldIn, pos, new ItemStack(Items.IRON_NUGGET));
+        }
+        super.onBlockHarvested(worldIn, pos, state, player);
     }
 
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
@@ -152,39 +163,30 @@ public class BlockMapleSpile extends BlockHorizontal {
         return false;
     }
 
-    @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
-    }
-
-    @Override
-    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
-
-        IBlockState thisState = worldIn.getBlockState(pos);
-        if (!thisState.getBlock().isReplaceable(worldIn, pos)) return false;
-
-        IBlockState logState = worldIn.getBlockState(pos.offset(side.getOpposite()));
-        if (TreeHelper.isBranch(logState)){
-            BlockBranch branch = TreeHelper.getBranch(logState);
-            return branch.getFamily().getPrimitiveLog().getBlock() == FruitRegistry.getLog(FruitRegistry.MAPLE) &&
-                    branch.getRadius(logState) >= 7;
-        }
-        return false;
-    }
-
-    @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        super.harvestBlock(worldIn, player, pos, state, te, stack);
-        if (!player.isCreative()){
-            this.dropBlockAsItem(worldIn, pos, state, 0);
-        }
-    }
-
-    @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        if (facing.getAxis() == EnumFacing.Axis.Y) facing = EnumFacing.NORTH;
-        return this.getDefaultState().withProperty(FACING, facing);
-    }
+//    @Override
+//    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+//        return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
+//    }
+//
+//    @Override
+//    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
+//
+//        IBlockState thisState = worldIn.getBlockState(pos);
+//        if (!thisState.getBlock().isReplaceable(worldIn, pos)) return false;
+//
+//        IBlockState logState = worldIn.getBlockState(pos.offset(side.getOpposite()));
+//        if (TreeHelper.isBranch(logState)){
+//            BlockBranch branch = TreeHelper.getBranch(logState);
+//            return branch.getFamily().getPrimitiveLog().getBlock() == FruitRegistry.getLog(FruitRegistry.MAPLE) &&
+//                    branch.getRadius(logState) >= 7;
+//        }
+//        return false;
+//    }
+//    @Override
+//    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+//        if (facing.getAxis() == EnumFacing.Axis.Y) facing = EnumFacing.NORTH;
+//        return this.getDefaultState().withProperty(FACING, facing);
+//    }
 
     @Override public IBlockState withRotation(IBlockState state, Rotation rot) {
         return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
@@ -194,10 +196,7 @@ public class BlockMapleSpile extends BlockHorizontal {
     }
 
     @Override public boolean isFullCube(IBlockState state) { return false; }
-    @Override public boolean isOpaqueCube(IBlockState state)
-    {
-        return false;
-    }
+    @Override public boolean isOpaqueCube(IBlockState state) { return false; }
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {

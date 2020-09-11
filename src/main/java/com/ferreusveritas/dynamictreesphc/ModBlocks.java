@@ -17,6 +17,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -28,7 +29,7 @@ public class ModBlocks {
 	public static LeavesProperties mapleLeavesProperties;
 	public static LeavesProperties paperBarkLeavesProperties;
 	
-	public static LeavesProperties[] phcLeavesProperties;
+	public static LeavesProperties[] phcLeavesProperties, palmLeavesProperties, largePalmLeavesProperties;
 
 	public static Map<String, BlockFruit> fruits = new HashMap<>();
 
@@ -40,13 +41,19 @@ public class ModBlocks {
 		//Set up primitive leaves. This controls what is dropped on shearing, leaves replacement, etc.
 		cinnamonLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
 		mapleLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.SPRUCE)){
-			// we make maple leaves have oak-like coloring despite being spruce. Makes it look nicer
+			// we make maple leaves have oak-like coloring despite being spruce. Makes it look more interesting
 			@Override
 			public int foliageColorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos) {
-				return cinnamonLeavesProperties.foliageColorMultiplier(state, world, pos);
+				return world.getBiome(pos).getFoliageColorAtPos(pos);
 			}
 		};
-		paperBarkLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
+		paperBarkLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE)){
+			// we make paperbark leaves have birch-like coloring despite being spruce. Makes it look more interesting
+			@Override
+			public int foliageColorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos) {
+				return ColorizerFoliage.getFoliageColorBirch();
+			}
+		};
 		
 		//For this mod it is vital that these are never reordered.  If a leaves properties is removed from the
 		//mod then there should be a LeavesProperties.NULLPROPERTIES used as a placeholder.

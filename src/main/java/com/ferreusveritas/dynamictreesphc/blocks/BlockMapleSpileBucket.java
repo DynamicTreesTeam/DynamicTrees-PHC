@@ -1,22 +1,14 @@
 package com.ferreusveritas.dynamictreesphc.blocks;
 
-import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModItems;
 import com.pam.harvestcraft.blocks.FruitRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -27,7 +19,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Random;
 
 public class BlockMapleSpileBucket extends BlockMapleSpile {
@@ -80,15 +71,10 @@ public class BlockMapleSpileBucket extends BlockMapleSpile {
             this.dropBlock(worldIn, pos, state);
         } else {
             int filling = worldIn.getBlockState(pos).getValue(FILLING);
-            if (worldIn.rand.nextFloat() <= syrupChance && filling < maxFilling){
+            if (worldIn.rand.nextFloat() <= getSyrupChance(worldIn) && filling < maxFilling){
                 worldIn.setBlockState(pos, state.withProperty(FILLING, filling + 1));
             }
         }
-    }
-
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(ModItems.mapleSpile);
     }
 
     @Override
@@ -96,19 +82,20 @@ public class BlockMapleSpileBucket extends BlockMapleSpile {
         if (worldIn.getBlockState(pos).getValue(FILLING) == 0 && playerIn.isSneaking()){
             EnumFacing dir = state.getValue(FACING);
             worldIn.setBlockState(pos, ModBlocks.mapleSpile.getDefaultState().withProperty(FACING, dir));
-            spawnAsEntity(worldIn, pos, new ItemStack(Items.BUCKET));
+            playerIn.addItemStackToInventory(new ItemStack(Items.BUCKET));
             return true;
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
-    protected boolean dropSyrup (World worldIn, BlockPos pos, IBlockState state){
+    @Override
+    protected boolean dropSyrup (World worldIn, BlockPos pos, IBlockState state, EntityPlayer player){
         int filling = worldIn.getBlockState(pos).getValue(FILLING);
         if (filling > 0){
             if (!worldIn.isRemote && !worldIn.restoringBlockSnapshots) {
                 ItemStack drop = new ItemStack(FruitRegistry.getLog(FruitRegistry.MAPLE).getFruitItem());
                 drop.setCount(filling + (filling == maxFilling ? 1 : 0)); //Adds one bonus syrup if collected when its full
-                spawnAsEntity(worldIn, pos, drop);
+                player.addItemStackToInventory(drop);
             }
             worldIn.setBlockState(pos, state.withProperty(FILLING, 0));
             return true;
@@ -120,16 +107,27 @@ public class BlockMapleSpileBucket extends BlockMapleSpile {
     protected void dropBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
-        this.dropBlockAsItem(worldIn, pos, state, 0);
         spawnAsEntity(worldIn, pos, new ItemStack(Items.BUCKET));
+        spawnAsEntity(worldIn, pos, new ItemStack(Items.IRON_NUGGET));
     }
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        super.harvestBlock(worldIn, player, pos, state, te, stack);
+    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         if (!player.isCreative()){
             spawnAsEntity(worldIn, pos, new ItemStack(Items.BUCKET));
+            spawnAsEntity(worldIn, pos, new ItemStack(Items.IRON_NUGGET));
         }
+        super.onBlockHarvested(worldIn, pos, state, player);
+    }
+
+    @Override
+    public boolean hasComparatorInputOverride(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
+        return blockState.getValue(FILLING) * 5;
     }
 
     @Override

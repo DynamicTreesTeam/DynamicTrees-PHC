@@ -32,7 +32,7 @@ public class TreePaperBark extends TreeFamilyPHC {
 		public TreePaperBarkSpecies(TreeFamily treeFamily) {
 			super(treeFamily.getName(), treeFamily, ModBlocks.paperBarkLeavesProperties);
 			
-			setBasicGrowingParameters(0.2f, 10.0f, 4, 5, 1.0f);
+			setBasicGrowingParameters(0.2f, 16.0f, 4, 5, 1.0f);
 
 			generateSeed();
 

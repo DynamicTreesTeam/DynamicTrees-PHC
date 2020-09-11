@@ -1,10 +1,12 @@
 package com.ferreusveritas.dynamictreesphc;
 
+import com.ferreusveritas.dynamictreesphc.items.ItemDynamicSeedMaple;
 import com.ferreusveritas.dynamictreesphc.proxy.CommonProxy;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -12,6 +14,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -51,12 +55,16 @@ public class DynamicTreesPHC {
 		public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 			ModRecipes.register(event.getRegistry());
 		}
-		
+
+		@SubscribeEvent
+		public static void registerEntities(RegistryEvent.Register<EntityEntry> event) {
+			ModEntities.registerEntities(event.getRegistry());
+		}
+
 		@SubscribeEvent
 		@SideOnly(Side.CLIENT)
 		public static void registerModels(ModelRegistryEvent event) {
 			ModModels.register(event);
 		}
-
 	}
 }

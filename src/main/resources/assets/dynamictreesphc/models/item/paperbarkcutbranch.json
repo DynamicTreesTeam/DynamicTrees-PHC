@@ -1,7 +1,7 @@
 {
     "parent": "dynamictrees:item/branch",
     "textures": {
-        "bark": "harvestcraft:blocks/fruits/paperbark_stage_2",
+        "bark": "harvestcraft:blocks/fruits/paperbark_stage_0",
         "rings": "dynamictreesphc:blocks/paperbark_log_top"
     }
 }

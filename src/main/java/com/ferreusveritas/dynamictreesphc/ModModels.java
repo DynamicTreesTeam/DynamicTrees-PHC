@@ -20,8 +20,6 @@ public class ModModels {
 			ModelHelper.regModel(tree.getCommonSpecies().getSeed());
 			ModelHelper.regModel(tree);
 		}
-		ModelHelper.regModel(ModItems.mapleSpile);
-
 		ModTrees.phcFruitSpecies.values().stream().filter(s -> s.getSeed() != Seed.NULLSEED).forEach(s -> ModelHelper.regModel(s.getSeed()));//Register Seed Item Models
 	}
 	
