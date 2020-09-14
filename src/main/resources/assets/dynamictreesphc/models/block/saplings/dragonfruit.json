@@ -1,0 +1,37 @@
+{   "parent": "block/block",
+  "textures": {
+    "particle": "harvestcraft:items/dragonfruititem",
+    "texture": "dynamictreesphc:blocks/dragonfruitpalmfrond"
+  },
+  "display": {
+    "fixed": {
+      "rotation": [ 0, 90, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 0.5, 0.5, 0.5 ]
+    }
+  },
+  "elements": [
+    {	"from": [ 6, 0, 6 ],
+      "to": [ 10, 8, 10 ],
+      "faces": {
+        "down":  { "uv": [ 10, 3, 11, 4 ], "texture": "#texture", "tintindex": 0, "cullface": "down"},
+        "up":    { "uv": [ 10, 0, 11, 1 ], "texture": "#texture", "tintindex": 0},
+        "north": { "uv": [ 10, 1, 11, 3 ], "texture": "#texture", "tintindex": 0},
+        "south": { "uv": [ 10, 1, 11, 3 ], "texture": "#texture", "tintindex": 0},
+        "west":  { "uv": [ 10, 1, 11, 3 ], "texture": "#texture", "tintindex": 0},
+        "east":  { "uv": [ 10, 1, 11, 3 ], "texture": "#texture", "tintindex": 0}
+      }
+    },
+    {	"from": [ 9, 5, 9 ],
+      "to": [ 11, 7, 11 ],
+      "faces": {
+        "down":  { "uv": [ 7, 7, 9, 9 ], "texture": "#particle"},
+        "up":    { "uv": [ 7, 7, 9, 9 ], "texture": "#particle"},
+        "north": { "uv": [ 7, 7, 9, 9 ], "texture": "#particle"},
+        "south": { "uv": [ 7, 7, 9, 9 ], "texture": "#particle"},
+        "west":  { "uv": [ 7, 7, 9, 9 ], "texture": "#particle"},
+        "east":  { "uv": [ 7, 7, 9, 9 ], "texture": "#particle"}
+      }
+    }
+  ]
+}

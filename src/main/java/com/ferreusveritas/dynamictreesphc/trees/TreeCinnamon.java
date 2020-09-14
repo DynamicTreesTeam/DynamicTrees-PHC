@@ -6,13 +6,7 @@ import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamSpecial;
-import com.ferreusveritas.dynamictreesphc.dropcreators.DropCreatorFruitLogProduct;
-
 import com.pam.harvestcraft.blocks.FruitRegistry;
-import com.pam.harvestcraft.blocks.growables.BlockPamFruitLog;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
@@ -64,6 +58,6 @@ public class TreeCinnamon extends TreeFamilyPHC {
 		return new BlockBranchPamSpecial(
 				getName()+"branch",
 				speciesName,
-				1);
+				1.5f);
 	}
 }

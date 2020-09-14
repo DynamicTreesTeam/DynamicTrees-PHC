@@ -1,0 +1,56 @@
+{
+  "textures": {
+    "particle": "blocks/log_jungle",
+    "log": "blocks/log_jungle",
+    "texture": "dynamictreesphc:blocks/dragonfruitpalmbase"
+  },
+  "elements": [
+    {   "from": [ 5, 0, 5 ],
+      "to": [ 11, 16, 11 ],
+      "faces": {
+        "down":  { "uv": [ 4, 4, 10, 10 ], "texture": "#log", "cullface": "down" },
+        "north": { "uv": [ 4, 0, 10, 16 ], "texture": "#log" },
+        "south": { "uv": [ 4, 0, 10, 16 ], "texture": "#log" },
+        "west":  { "uv": [ 4, 0, 10, 16 ], "texture": "#log" },
+        "east":  { "uv": [ 4, 0, 10, 16 ], "texture": "#log" }
+      }
+    },
+    {   "from": [ 5, 16, 5 ],
+      "to": [ 11, 32, 11 ],
+      "faces": {
+        "up":    { "uv": [ 4, 4, 10, 10 ], "texture": "#log", "cullface": "up"   },
+        "north": { "uv": [ 4, 0, 10, 16 ], "texture": "#log" },
+        "south": { "uv": [ 4, 0, 10, 16 ], "texture": "#log" },
+        "west":  { "uv": [ 4, 0, 10, 16 ], "texture": "#log" },
+        "east":  { "uv": [ 4, 0, 10, 16 ], "texture": "#log" }
+      }
+    },
+    {   "from": [ 4, -16, 4 ],
+      "to": [ 12, 0, 12 ],
+      "faces": {
+        "north": { "uv": [ 0, 0, 8, 16 ], "texture": "#texture", "tintindex": 0},
+        "south": { "uv": [ 0, 0, 8, 16 ], "texture": "#texture", "tintindex": 0},
+        "west":  { "uv": [ 0, 0, 8, 16 ], "texture": "#texture", "tintindex": 0},
+        "east":  { "uv": [ 0, 0, 8, 16 ], "texture": "#texture", "tintindex": 0}
+      }
+    },
+    {   "from": [ 4, 0, 4 ],
+      "to": [ 12, 16, 12 ],
+      "faces": {
+        "north": { "uv": [ 8, 0, 16, 16 ], "texture": "#texture", "tintindex": 0},
+        "south": { "uv": [ 8, 0, 16, 16 ], "texture": "#texture", "tintindex": 0},
+        "west":  { "uv": [ 8, 0, 16, 16 ], "texture": "#texture", "tintindex": 0},
+        "east":  { "uv": [ 8, 0, 16, 16 ], "texture": "#texture", "tintindex": 0}
+      }
+    },
+    {   "from": [ 4, 16, 4 ],
+      "to": [ 12, 32, 12 ],
+      "faces": {
+        "north": { "uv": [ 8, 0, 16, 16 ], "texture": "#texture", "tintindex": 0},
+        "south": { "uv": [ 8, 0, 16, 16 ], "texture": "#texture", "tintindex": 0},
+        "west":  { "uv": [ 8, 0, 16, 16 ], "texture": "#texture", "tintindex": 0},
+        "east":  { "uv": [ 8, 0, 16, 16 ], "texture": "#texture", "tintindex": 0}
+      }
+    }
+  ]
+}

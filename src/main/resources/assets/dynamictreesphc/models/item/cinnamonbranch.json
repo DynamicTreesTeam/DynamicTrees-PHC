@@ -1,7 +1,7 @@
 {
     "parent": "dynamictrees:item/branch",
     "textures": {
-        "bark": "dynamictreesphc:blocks/cinnamon_log",
-        "rings": "dynamictreesphc:blocks/cinnamon_log_top"
+        "bark": "harvestcraft:blocks/fruits/cinnamon_log",
+        "rings": "harvestcraft:blocks/fruits/cinnamon_log_top"
     }
 }

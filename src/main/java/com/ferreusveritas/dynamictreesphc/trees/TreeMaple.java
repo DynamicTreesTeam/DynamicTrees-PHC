@@ -7,13 +7,8 @@ import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamSpecial;
-import com.ferreusveritas.dynamictreesphc.blocks.BlockMapleSpile;
-import com.ferreusveritas.dynamictreesphc.dropcreators.DropCreatorFruitLogProduct;
-
 import com.ferreusveritas.dynamictreesphc.items.ItemDynamicSeedMaple;
 import com.pam.harvestcraft.blocks.FruitRegistry;
-import com.pam.harvestcraft.blocks.growables.BlockPamFruitLog;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -75,7 +70,7 @@ public class TreeMaple extends TreeFamilyPHC {
 		return new BlockBranchPamSpecial(
 				getName()+"branch",
 				speciesName,
-				0.5f){
+				0.2f){
 			@Override
 			public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 				if (playerIn.getHeldItem(hand).getItem() == Items.IRON_INGOT &&
@@ -86,9 +81,6 @@ public class TreeMaple extends TreeFamilyPHC {
 						playerIn.getHeldItem(hand).shrink(1);
 					}
 					worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ZOMBIE_ATTACK_DOOR_WOOD, SoundCategory.BLOCKS, 1, 1.5f, false);
-					//worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 1, 1, false);
-					//worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1, 0.8f, false);
-
 					return true;
 				}
 				return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);

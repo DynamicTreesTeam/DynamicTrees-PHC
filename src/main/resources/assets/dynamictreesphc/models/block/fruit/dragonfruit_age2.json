@@ -1,0 +1,45 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dynamictreesphc:blocks/dragonfruit",
+		"fruit": "dynamictreesphc:blocks/dragonfruit"
+	},
+	"elements": [
+		{
+			"name": "fruit",
+			"from": [6.5, 12, 6.5],
+			"to": [9.5, 16, 9.5],
+			"faces": {
+				"north": {"uv": [7, 4, 11, 9], "texture": "#fruit"},
+				"east": {"uv": [7, 4, 11, 9], "texture": "#fruit"},
+				"south": {"uv": [7, 4, 11, 9], "texture": "#fruit"},
+				"west": {"uv": [7, 4, 11, 9], "texture": "#fruit"},
+				"up": {"uv": [7, 0, 11, 4], "texture": "#fruit"},
+				"down": {"uv": [7, 9, 11, 13], "texture": "#fruit"}
+			}
+		},
+		{
+			"name": "tail1",
+			"from": [6.4, 10, 8],
+			"to": [9.6, 12, 8],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 9, 8]},
+			"faces": {
+				"north": {"uv": [0, 9, 5, 12], "texture": "#fruit"},
+				"south": {"uv": [0, 9, 5, 12], "texture": "#fruit"}
+			}
+		},
+		{
+			"name": "tail2",
+			"from": [8, 10, 6.4],
+			"to": [8, 12, 9.6],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 9, 8]},
+			"faces": {
+				"east": {"uv": [0, 9, 5, 12], "texture": "#fruit"},
+				"west": {"uv": [0, 9, 5, 12], "texture": "#fruit"}
+			}
+		}
+	]
+}

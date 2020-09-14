@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "hydro=1,tree=0": {"model": "dynamictreesphc:palmleaves/datefrond#dynamicpalmfrondsphclarge"},
+    "hydro=2,tree=0": {"model": "dynamictreesphc:palmleaves/datefrond#dynamicpalmfrondsphclarge"},
+    "hydro=3,tree=0": {"model": "dynamictreesphc:palmleaves/datecoretop"},
+    "hydro=4,tree=0": {"model": "dynamictreesphc:palmleaves/datecorebottom"},
+    "hydro=1,tree=1": {"model": "dynamictreesphc:palmleaves/coconutfrond#dynamicpalmfrondsphcsmall"},
+    "hydro=2,tree=1": {"model": "dynamictreesphc:palmleaves/coconutfrond#dynamicpalmfrondsphcsmall"},
+    "hydro=3,tree=1": {"model": "dynamictreesphc:palmleaves/coconutcoretop"},
+    "hydro=4,tree=1": {"model": "dynamictreesphc:palmleaves/coconutcorebottom"},
+    "hydro=1,tree=2": {"model": "dynamictreesphc:palmleaves/papayafrond#dynamicpalmfrondsphcsmall"},
+    "hydro=2,tree=2": {"model": "dynamictreesphc:palmleaves/papayafrond#dynamicpalmfrondsphcsmall"},
+    "hydro=3,tree=2": {"model": "dynamictreesphc:palmleaves/papayacoretop"},
+    "hydro=4,tree=2": {"model": "dynamictreesphc:palmleaves/papayacorebottom"},
+    "hydro=1,tree=3": {"model": "dynamictreesphc:palmleaves/bananafrond#dynamicpalmfrondsphcsmall"},
+    "hydro=2,tree=3": {"model": "dynamictreesphc:palmleaves/bananafrond#dynamicpalmfrondsphcsmall"},
+    "hydro=3,tree=3": {"model": "dynamictreesphc:palmleaves/bananacoretop"},
+    "hydro=4,tree=3": {"model": "dynamictreesphc:palmleaves/bananacorebottom"}
+  }
+}

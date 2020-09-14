@@ -1,5 +1,7 @@
 package com.ferreusveritas.dynamictreesphc;
 
+import com.pam.harvestcraft.blocks.FruitRegistry;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,8 +24,23 @@ public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 		+ REQAFTER + PHC_LATEST
 		;
 
-	public static final List<String> NOFRUIT = new LinkedList<>(Arrays.asList("cinnamon","paperbark","maple"));
+	public static final List<String> NOFRUIT = new LinkedList<>(Arrays.asList(FruitRegistry.CINNAMON,FruitRegistry.PAPERBARK,FruitRegistry.MAPLE));
 
-	public static final List<String> PALMS = new LinkedList<>(Arrays.asList("date","papaya","dragonfruit","banana","coconut"));
+	public static final List<String> NOFRUITRECIPE = new LinkedList<>(Arrays.asList(FruitRegistry.COCONUT));
+	//Coconut is a nut too but we exclude it cause this is for recipes
+	public static final List<String> NUTS = new LinkedList<>(Arrays.asList(FruitRegistry.ALMOND, FruitRegistry.CASHEW, FruitRegistry.CHESTNUT, FruitRegistry.HAZELNUT, FruitRegistry.NUTMEG, FruitRegistry.PECAN, FruitRegistry.PISTACHIO, FruitRegistry.WALNUT));
+
+	public static final List<String> PALMS = new LinkedList<>(Arrays.asList(FruitRegistry.DATE,FruitRegistry.PAPAYA,FruitRegistry.DRAGONFRUIT,FruitRegistry.BANANA,FruitRegistry.COCONUT));
+
+	public static final class SEASON {
+		public static final float SPRING_START = 0;
+		public static final float SPRING_MID = 0.5f;
+		public static final float SUMMER_START = 1f;
+		public static final float SUMMER_MID = 1.5f;
+		public static final float FALL_START = 2f;
+		public static final float FALL_MID = 2.5f;
+		public static final float WINTER_START = 3f;
+		public static final float WINTER_MID = 3.5f;
+	}
 
 }

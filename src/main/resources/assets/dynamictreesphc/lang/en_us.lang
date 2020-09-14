@@ -7,7 +7,7 @@ item.dynamictreesphc:breadfruitseed.name=Breadfruit Seed
 item.dynamictreesphc:cashewseed.name=Germinated Cashew
 item.dynamictreesphc:cherryseed.name=Cherry Stone
 item.dynamictreesphc:chestnutseed.name=Germinated Chestnut
-item.dynamictreesphc:coconutseed.name=Germinated Coconut
+item.dynamictreesphc:coconutseed.name=Coconut
 item.dynamictreesphc:dateseed.name=Date Seed
 item.dynamictreesphc:dragonfruitseed.name=Dragonfruit Seeds
 item.dynamictreesphc:durianseed.name=Durian Seed
@@ -29,7 +29,7 @@ item.dynamictreesphc:passionfruitseed.name=Passionfruit Seed
 item.dynamictreesphc:pawpawseed.name=Pawpaw Seed
 item.dynamictreesphc:peachseed.name=Peach Stone
 item.dynamictreesphc:pearseed.name=Pear Pip
-item.dynamictreesphc:pecanseed.name=Pecan Tree Seed
+item.dynamictreesphc:pecanseed.name=Germinated Pecan
 item.dynamictreesphc:peppercornseed.name=Black Pepper Seeds
 item.dynamictreesphc:persimmonseed.name=Persimmon Seeds
 item.dynamictreesphc:pistachioseed.name=Germinated Pistachio
@@ -47,8 +47,15 @@ item.dynamictreesphc:cinnamonseed.name=Cinnamon Tree Seed
 item.dynamictreesphc:mapleseed.name=Maple Samara
 item.dynamictreesphc:paperbarkseed.name=Paperbark Tree Seeds
 
-tile.dynamictreesphc:cinnamonbranch.name=Dynamic Cinnamon Tree
-tile.dynamictreesphc:maplebranch.name=Dynamic Maple Tree
-tile.dynamictreesphc:paperbarkbranch.name=Dynamic Paper Bark Tree
+item.dynamictreesphc:leaves0.name=Leaves
+item.dynamictreesphc:leavespalm0.name=Palm Leaves
+item.dynamictreesphc:leavespalm1.name=Palm Leaves
+
+tile.dynamictreesphc:cinnamonbranch.name=Cinnamon Tree
+tile.dynamictreesphc:maplebranch.name=Maple Tree
+tile.dynamictreesphc:paperbarkbranch.name=Paper Bark Tree
+tile.dynamictreesphc:paperbarkcutbranch.name=Paper Bark Tree
+tile.dynamictreesphc:palmbranch.name=Palm Tree
 
 tile.dynamictreesphc:maplespile.name=Maple Syrup Spile
+tile.dynamictreesphc:maplespilebucket.name=Maple Syrup Spile

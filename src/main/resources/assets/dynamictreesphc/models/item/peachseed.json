@@ -1,3 +1,6 @@
 {
-    "parent": "dynamictreesphc:item/seed"
+    "parent":"dynamictrees:item/standardseed",
+    "textures": {
+        "layer0":"dynamictreesphc:items/peachseed"
+    }
 }

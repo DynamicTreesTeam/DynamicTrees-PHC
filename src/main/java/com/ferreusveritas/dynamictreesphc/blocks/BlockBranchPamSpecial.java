@@ -53,9 +53,9 @@ public class BlockBranchPamSpecial extends BlockBranchBasic {
         float woodVolume = destroyData.woodVolume;// The amount of wood calculated from the body of the tree network
         List<ItemStack> woodItems;
         if (silkTouch){
-            woodItems = getLogDrops(world, cutPos, destroyData.species, woodVolume * fortuneFactor, true, heldItem);
+            woodItems = getLogDrops(world, cutPos, destroyData.species, woodVolume * fortuneFactor, true);
         } else {
-            woodItems = getLogDrops(world, cutPos, destroyData.species, woodVolume * fortuneFactor, false, heldItem);
+            woodItems = getLogDrops(world, cutPos, destroyData.species, woodVolume * fortuneFactor, false);
         }
 
         float chance = 1.0f;
@@ -81,12 +81,12 @@ public class BlockBranchPamSpecial extends BlockBranchBasic {
         float burntWoodVolume = 0;
 
         //Get all of the wood drops
-        List<ItemStack> woodDropList = getLogDrops(world, cutPos, destroyData.species, destroyData.woodVolume, false, ItemStack.EMPTY);
+        List<ItemStack> woodDropList = getLogDrops(world, cutPos, destroyData.species, destroyData.woodVolume, false);
 
         //This will drop the EntityFallingTree into the world
         EntityFallingTree.dropTree(world, destroyData, woodDropList, destroyType);
     }
-    public List<ItemStack> getLogDrops(World world, BlockPos pos, Species species, float volume, boolean silkTouch, ItemStack heldItem) {
+    public List<ItemStack> getLogDrops(World world, BlockPos pos, Species species, float volume, boolean silkTouch) {
         List<ItemStack> ret = new java.util.ArrayList<>();//A list for storing all the dead tree guts
         volume *= ModConfigs.treeHarvestMultiplier;// For cheaters.. you know who you are.
         if (silkTouch) {

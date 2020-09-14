@@ -9,17 +9,21 @@ import com.ferreusveritas.dynamictrees.blocks.BlockTrunkShell;
 import com.ferreusveritas.dynamictrees.compat.WailaBranchHandler;
 import com.ferreusveritas.dynamictrees.systems.nodemappers.NodeNetVolume;
 import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamSpecial;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.SpecialChars;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class WailaBranchHandlerPHC extends WailaBranchHandler {
@@ -63,27 +67,29 @@ public class WailaBranchHandlerPHC extends WailaBranchHandler {
         if(species != Species.NULLSPECIES) {
             tooltip.add("Species: " + species.getRegistryName().getResourcePath());
 
-            String renderString = "";
+            StringBuilder renderString = new StringBuilder();
 
             ItemStack seedStack = species.getSeedStack(1);
             String seedName = seedStack.getItem().getRegistryName().toString();
-            renderString += SpecialChars.getRenderString("waila.stack", "1", seedName, String.valueOf(1), String.valueOf(seedStack.getItemDamage()));
+            renderString.append(SpecialChars.getRenderString("waila.stack", "1", seedName, String.valueOf(1), String.valueOf(seedStack.getItemDamage())));
 
             if(lastVolume > 0) {
-                Species.LogsAndSticks las = species.getLogsAndSticks(lastVolume);
+                boolean silkTouch = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, accessor.getPlayer().getHeldItemMainhand()) >= 1;
 
-                if(las.logs > 0) {
+                BlockBranch log = TreeHelper.getBranch(accessor.getBlock());
+                if (log instanceof BlockBranchPamSpecial){
+                    List<ItemStack> logs = ((BlockBranchPamSpecial)TreeHelper.getBranch(accessor.getBlock())).getLogDrops(accessor.getWorld(), accessor.getPosition(), species, lastVolume, silkTouch);
 
-                }
-
-                if(las.sticks > 0) {
-                    ItemStack stickStack = species.getFamily().getStick(1);
-                    String stickName = stickStack.getItem().getRegistryName().toString();
-                    renderString += SpecialChars.getRenderString("waila.stack", "1", stickName, String.valueOf(las.sticks), String.valueOf(stickStack.getItemDamage()));
+                    for (ItemStack logStack : logs){
+                        if (!logStack.isEmpty()){
+                            String stickName = logStack.getItem().getRegistryName().toString();
+                            renderString.append(SpecialChars.getRenderString("waila.stack", "1", stickName, String.valueOf(logStack.getCount()), String.valueOf(logStack.getItemDamage())));
+                        }
+                   }
                 }
             }
 
-            tooltip.add(renderString);
+            tooltip.add(renderString.toString());
         }
 
         return tooltip;

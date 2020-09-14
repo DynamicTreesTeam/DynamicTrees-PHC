@@ -1,26 +1,19 @@
 package com.ferreusveritas.dynamictreesphc.trees;
 
-import java.util.List;
-
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamPaper;
-import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamSpecial;
-import com.ferreusveritas.dynamictreesphc.dropcreators.DropCreatorFruitLogProduct;
-
 import com.pam.harvestcraft.blocks.FruitRegistry;
-import com.pam.harvestcraft.blocks.growables.BlockPamFruitLog;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+
+import java.util.List;
 
 public class TreePaperBark extends TreeFamilyPHC {
 	
@@ -45,7 +38,9 @@ public class TreePaperBark extends TreeFamilyPHC {
 		}
 		
 	}
-	
+
+	public static BlockBranchPamPaper paperbarkBranch, paperbarkCutBranch;
+
 	public TreePaperBark() {
 		super(new ResourceLocation(ModConstants.MODID, speciesName));
 
@@ -60,10 +55,26 @@ public class TreePaperBark extends TreeFamilyPHC {
 	}
 
 	@Override
+	public List<Block> getRegisterableBlocks(List<Block> blockList) {
+		paperbarkCutBranch = new BlockBranchPamPaper(
+				getName()+"cutbranch",
+				speciesName,
+				2f,
+				true
+		);
+		paperbarkCutBranch.setFamily(this);
+		blockList.add(paperbarkCutBranch);
+		return super.getRegisterableBlocks(blockList);
+	}
+
+	@Override
 	public BlockBranch createBranch() {
-		return new BlockBranchPamPaper(
+		paperbarkBranch = new BlockBranchPamPaper(
 				getName()+"branch",
 				speciesName,
-				1.5f);
+				2f,
+				false
+		);
+		return paperbarkBranch;
 	}
 }

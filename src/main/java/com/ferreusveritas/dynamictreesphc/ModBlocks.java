@@ -1,15 +1,14 @@
 package com.ferreusveritas.dynamictreesphc;
 
-import java.util.*;
-
+import com.ferreusveritas.dynamictrees.api.TreeRegistry;
+import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
-import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictreesphc.blocks.BlockDynamicLeavesPalm;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockMapleSpile;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockMapleSpileBucket;
 import com.pam.harvestcraft.blocks.FruitRegistry;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOldLeaf;
 import net.minecraft.block.BlockPlanks;
@@ -21,6 +20,10 @@ import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class ModBlocks {
 
 	public static BlockMapleSpile mapleSpile, mapleSpileWithBucket;
@@ -28,15 +31,26 @@ public class ModBlocks {
 	public static LeavesProperties cinnamonLeavesProperties;
 	public static LeavesProperties mapleLeavesProperties;
 	public static LeavesProperties paperBarkLeavesProperties;
-	
-	public static LeavesProperties[] phcLeavesProperties, palmLeavesProperties, largePalmLeavesProperties;
+	public static LeavesProperties datePalmLeavesProperties;
+	public static LeavesProperties papayaLeavesProperties;
+	public static LeavesProperties bananaLeavesProperties;
+	public static LeavesProperties coconutLeavesProperties;
+	public static LeavesProperties dragonfruitLeavesProperties;
 
+	public static LeavesProperties[] phcLeavesProperties;
+
+	public static BlockDynamicLeavesPalm leavesPalm0, leavesPalm1;
+
+	public static Map<String, LeavesProperties> palmLeavesProperties = new HashMap<>();
 	public static Map<String, BlockFruit> fruits = new HashMap<>();
 
 	public static void preInit() {
 
 		mapleSpile = new BlockMapleSpile(new ResourceLocation(ModConstants.MODID, "maplespile"));
 		mapleSpileWithBucket = new BlockMapleSpileBucket(new ResourceLocation(ModConstants.MODID, "maplespilebucket"));
+
+		leavesPalm0 = new BlockDynamicLeavesPalm("leavespalm0");
+		leavesPalm1 = new BlockDynamicLeavesPalm("leavespalm1");
 
 		//Set up primitive leaves. This controls what is dropped on shearing, leaves replacement, etc.
 		cinnamonLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
@@ -54,7 +68,18 @@ public class ModBlocks {
 				return ColorizerFoliage.getFoliageColorBirch();
 			}
 		};
-		
+		datePalmLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm"));
+		papayaLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm"));
+		dragonfruitLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm")){
+			// since dragonfruit is a cactus it shouldnt change color, so with stick with birch which doesnt change with biome
+			@Override
+			public int foliageColorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos) {
+				return ColorizerFoliage.getFoliageColorBirch();
+			}
+		};
+		bananaLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm"));
+		coconutLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm"));
+
 		//For this mod it is vital that these are never reordered.  If a leaves properties is removed from the
 		//mod then there should be a LeavesProperties.NULLPROPERTIES used as a placeholder.
 		phcLeavesProperties = new LeavesProperties[] {
@@ -67,6 +92,27 @@ public class ModBlocks {
 			LeavesPaging.getNextLeavesBlock(ModConstants.MODID, lp);
 		}
 
+		datePalmLeavesProperties.setDynamicLeavesState(leavesPalm0.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
+		coconutLeavesProperties.setDynamicLeavesState(leavesPalm0.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 1));
+		leavesPalm0.setProperties(0, datePalmLeavesProperties);
+		leavesPalm0.setProperties(1, coconutLeavesProperties);
+
+		papayaLeavesProperties.setDynamicLeavesState(leavesPalm0.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 2));
+		bananaLeavesProperties.setDynamicLeavesState(leavesPalm0.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 3));
+		leavesPalm0.setProperties(2, papayaLeavesProperties);
+		leavesPalm0.setProperties(3, bananaLeavesProperties);
+
+		dragonfruitLeavesProperties.setDynamicLeavesState(leavesPalm1.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
+		leavesPalm1.setProperties(0, dragonfruitLeavesProperties);
+
+		 palmLeavesProperties = new HashMap<String, LeavesProperties>(){{
+			put(FruitRegistry.DATE, datePalmLeavesProperties);
+			put(FruitRegistry.PAPAYA, papayaLeavesProperties);
+			put(FruitRegistry.BANANA, bananaLeavesProperties);
+			put(FruitRegistry.COCONUT, coconutLeavesProperties);
+			put(FruitRegistry.DRAGONFRUIT, dragonfruitLeavesProperties);
+		}};
+
 	}
 	
 	public static void register(IForgeRegistry<Block> registry) {
@@ -75,7 +121,7 @@ public class ModBlocks {
 
 		fruits.values().forEach(registry::register);
 
-		registry.registerAll(mapleSpile, mapleSpileWithBucket);
+		registry.registerAll(mapleSpile, mapleSpileWithBucket, leavesPalm0, leavesPalm1);
 
 		treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(ModConstants.MODID).values());
 		registry.registerAll(treeBlocks.toArray(new Block[0]));

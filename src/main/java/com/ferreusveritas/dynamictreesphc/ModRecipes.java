@@ -1,20 +1,19 @@
 package com.ferreusveritas.dynamictreesphc;
 
-import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictreesphc.trees.SpeciesFruit;
-import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
-import com.pam.harvestcraft.blocks.growables.BlockPamSapling;
-
-import com.pam.harvestcraft.item.items.ItemPamFood;
+import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModRecipes {
@@ -23,9 +22,18 @@ public class ModRecipes {
 		//Create dirt bucket exchange recipes
 		ModTrees.phcFruitSpecies.values().forEach(ModRecipes::speciesRecipes);
 
-		Species appleSpecies = TreeRegistry.findSpecies(new ResourceLocation(ModConstants.MODID, "apple"));
-		Block sapling = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("harvestcraft", "apple_sapling"));
-		com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(new ItemStack(sapling), appleSpecies.getSeedStack(1), true, "seedfromsapling");
+		//We add apple sapling recipe separately as the PHC apple tree didnt get a dynamic version
+		Species appleSpecies = TreeRegistry.findSpecies(new ResourceLocation(com.ferreusveritas.dynamictrees.ModConstants.MODID, "apple"));
+		Block appleSapling = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("harvestcraft", "apple_sapling"));
+		com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(new ItemStack(appleSapling), appleSpecies.getSeedStack(1), true, "seedfromsapling");
+
+		String[] specialSpecies = new String[]{FruitRegistry.CINNAMON, FruitRegistry.MAPLE, FruitRegistry.PAPERBARK};
+		for (String name : specialSpecies){
+			Species species = TreeRegistry.findSpecies(new ResourceLocation(com.ferreusveritas.dynamictreesphc.ModConstants.MODID, name));
+			Block sapling = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("harvestcraft", name+"_sapling"));
+			com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(new ItemStack(sapling), species.getSeedStack(1), true, "seedfromsapling");
+
+		}
 	}
 	
 	private static void speciesRecipes(Species species) {
@@ -46,9 +54,19 @@ public class ModRecipes {
 			ItemStack saplingStack = new ItemStack(saplingBlock);
 			ItemStack fruitStack = new ItemStack(fruitItem);
 			ItemStack seedStack = species.getSeedStack(1);
-			
+			String fruit = species.getRegistryName().getResourcePath();
+			ItemStack bonemeal = new ItemStack(Items.DYE, 1, 15);
+
 			com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(saplingStack, seedStack, true, "seedfromsapling");//Sapling <-> Seed exchange
-			com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(fruitStack, seedStack, false, "seedfromfruit");//Fruit --> Seed exchange
+			if (!ModConstants.NOFRUITRECIPE.contains(fruit)){
+				com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(fruitStack, seedStack, false, "seedfromfruit");//Fruit --> Seed exchange
+
+				if (!ModConstants.NUTS.contains(fruit)){ //nut recipes include bonemeal to "germinate" them
+					GameRegistry.addShapelessRecipe(new ResourceLocation(species.getRegistryName().getResourceDomain(), fruit + "seedfromfruitdirect"), (ResourceLocation)null, seedStack, Ingredient.fromStacks(fruitStack));
+				} else {
+					GameRegistry.addShapelessRecipe(new ResourceLocation(species.getRegistryName().getResourceDomain(), fruit + "seedfromfruitgerminate"), (ResourceLocation)null, seedStack, Ingredient.fromStacks(fruitStack), Ingredient.fromStacks(bonemeal));
+				}
+			}
 		}
 	}
 	

@@ -2,6 +2,6 @@
     "parent": "dynamictrees:block/smartmodel/branch",
     "textures": {
         "bark": "harvestcraft:blocks/fruits/maple_stage_0",
-        "rings": "dynamictreesphc:blocks/maple_log_top"
+        "rings": "harvestcraft:blocks/fruits/maple_log_top"
     }
 }

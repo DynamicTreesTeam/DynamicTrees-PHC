@@ -1,28 +1,24 @@
 package com.ferreusveritas.dynamictreesphc;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.WorldGenRegistry.BiomeDataBasePopulatorRegistryEvent;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruit;
 import com.ferreusveritas.dynamictreesphc.trees.*;
 import com.ferreusveritas.dynamictreesphc.worldgen.BiomeDataBasePopulator;
 import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling.SaplingType;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 @Mod.EventBusSubscriber(modid = ModConstants.MODID)
 public class ModTrees {
@@ -35,19 +31,20 @@ public class ModTrees {
 	
 	public static ArrayList<TreeFamily> phcTrees = new ArrayList<>();
 	public static Map<String, Species> phcFruitSpecies = new HashMap<>();
+
+	public static TreeFamily palmFamily;
 	
 	public static void init() {
 		fruitTreeGen = HarvestCraft.fruitTreeConfigManager.enableFruitTreeGeneration;
 	}
 	
 	public static void preInit() {
-
-		System.out.println(phcTrees.size());
+		palmFamily = new TreePalm();
 
 		//Register all of the trees
 		phcTrees.forEach(tree -> phcFruitSpecies.put(tree.getName().getResourcePath(), tree.getCommonSpecies()));
 		//we add the special trees later so they dont get added into phcFruitSpecies
-		Collections.addAll(phcTrees, new TreeCinnamon(), new TreeMaple(), new TreePaperBark());
+		Collections.addAll(phcTrees, new TreeCinnamon(), new TreeMaple(), new TreePaperBark(), palmFamily);
 		phcTrees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
 		
 		//Basic creators
@@ -84,10 +81,11 @@ public class ModTrees {
 			String fruitName = creatorEntry.getKey();
 			ISpeciesCreator creator = creatorEntry.getValue();
 			SaplingType saplingType = saplingMap.get(fruitName);
-			TreeFamily family = familyMap.get(saplingType);
+			TreeFamily family = (ModConstants.PALMS.contains(fruitName)) ? palmFamily : familyMap.get(saplingType);
 			ResourceLocation resLoc = new ResourceLocation(ModConstants.MODID, fruitName);
-			ILeavesProperties leavesProperties = family.getCommonSpecies().getLeavesProperties();
+			ILeavesProperties leavesProperties = (ModConstants.PALMS.contains(fruitName)) ? ModBlocks.palmLeavesProperties.get(fruitName) : family.getCommonSpecies().getLeavesProperties();
 			Species species = creator.createSpecies(resLoc, family, leavesProperties, fruitName, saplingType);
+			if (family.getCommonSpecies() == Species.NULLSPECIES) family.setCommonSpecies(species);
 			phcFruitSpecies.put(fruitName, species);
 			Species.REGISTRY.register(species);
 		}
@@ -95,7 +93,7 @@ public class ModTrees {
 		//Create fruit blocks
 		for(Entry<String, Species> entry : phcFruitSpecies.entrySet()) {
 			if (!ModConstants.NOFRUIT.contains(entry.getKey())){
-				BlockFruit fruit = new BlockFruit(new ResourceLocation(ModConstants.MODID, entry.getKey()).toString());
+				BlockFruit fruit = new BlockPamFruit(new ResourceLocation(ModConstants.MODID, entry.getKey()));
 				ModBlocks.fruits.put(entry.getKey(), fruit);
 				fruit.setDroppedItem(new ItemStack(FruitRegistry.getFood(entry.getKey())));
 				Species species = entry.getValue();
@@ -115,16 +113,16 @@ public class ModTrees {
 
 		//Dynamic Trees already has an apple tree
 		creatorMap.remove(FruitRegistry.APPLE);
-		
+
 		//Temperate nut trees are typically hardwoods that grow slowly and usually very large.
 		creatorMap.put(FruitRegistry.WALNUT, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType) {
-				@Override protected void fruitTreeDefaults() { setBasicGrowingParameters(0.4f, 12.0f, 1, 4, 0.7f, 8); }
+				@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.4f, 12.0f, 1, 4, 0.7f, 8); }
 		});
 		creatorMap.put(FruitRegistry.CHESTNUT, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType) {
-			@Override protected void fruitTreeDefaults() { setBasicGrowingParameters(0.45f, 11.0f, 1, 4, 0.6f, 8); }
+			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.45f, 11.0f, 1, 4, 0.6f, 8); }
 		});
 		creatorMap.put(FruitRegistry.PECAN, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType) {
-			@Override protected void fruitTreeDefaults() { setBasicGrowingParameters(0.45f, 11.0f, 1, 4, 0.6f, 8); }
+			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.45f, 11.0f, 1, 4, 0.6f, 8); }
 		});
 		
 	}

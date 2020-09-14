@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -79,24 +80,27 @@ public class BlockMapleSpileBucket extends BlockMapleSpile {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (worldIn.getBlockState(pos).getValue(FILLING) == 0 && playerIn.isSneaking()){
-            EnumFacing dir = state.getValue(FACING);
-            worldIn.setBlockState(pos, ModBlocks.mapleSpile.getDefaultState().withProperty(FACING, dir));
-            playerIn.addItemStackToInventory(new ItemStack(Items.BUCKET));
-            return true;
+        if (state.getProperties().containsKey(FILLING)){
+            if (worldIn.getBlockState(pos).getValue(FILLING) == 0 && playerIn.isSneaking()){
+                EnumFacing dir = state.getValue(FACING);
+                worldIn.setBlockState(pos, ModBlocks.mapleSpile.getDefaultState().withProperty(FACING, dir));
+                playerIn.addItemStackToInventory(new ItemStack(Items.BUCKET));
+                return true;
+            }
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
     @Override
-    protected boolean dropSyrup (World worldIn, BlockPos pos, IBlockState state, EntityPlayer player){
+    protected boolean giveSyrup(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player){
         int filling = worldIn.getBlockState(pos).getValue(FILLING);
         if (filling > 0){
             if (!worldIn.isRemote && !worldIn.restoringBlockSnapshots) {
                 ItemStack drop = new ItemStack(FruitRegistry.getLog(FruitRegistry.MAPLE).getFruitItem());
                 drop.setCount(filling + (filling == maxFilling ? 1 : 0)); //Adds one bonus syrup if collected when its full
                 player.addItemStackToInventory(drop);
-            }
+           }
+            worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1, 1 + filling/4f, false);
             worldIn.setBlockState(pos, state.withProperty(FILLING, 0));
             return true;
         }
@@ -118,6 +122,11 @@ public class BlockMapleSpileBucket extends BlockMapleSpile {
             spawnAsEntity(worldIn, pos, new ItemStack(Items.IRON_NUGGET));
         }
         super.onBlockHarvested(worldIn, pos, state, player);
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(Items.BUCKET);
     }
 
     @Override

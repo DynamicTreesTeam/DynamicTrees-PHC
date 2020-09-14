@@ -1,31 +1,32 @@
 package com.ferreusveritas.dynamictreesphc.blocks;
 
-import com.ferreusveritas.dynamictrees.ModTabs;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.pam.harvestcraft.blocks.FruitRegistry;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import java.util.Random;
+
+import static com.ferreusveritas.dynamictreesphc.ModConstants.SEASON;
 
 public class BlockMapleSpile extends BlockHorizontal {
 
@@ -33,6 +34,7 @@ public class BlockMapleSpile extends BlockHorizontal {
 
     private static final float baseSyrupChance = 5f; //percent
     private static final float outOfSeasonSyrupChance = 0.1f; //percent
+    private static final float chanceToBreak = 0.2f; //percent
 
     protected static final AxisAlignedBB SPILE_EAST_AABB = new AxisAlignedBB(
             -1 /16f,10  /16f,7  /16f,
@@ -64,12 +66,11 @@ public class BlockMapleSpile extends BlockHorizontal {
 
     //Update syrup extract rate depending on seasons
     public float getSyrupChance (World world){
-        return Math.max(Math.min(baseSyrupChance / 100f, 1),0);
-//        float season = SeasonHelper.getSeasonValue(world);
-//        if (season >= 3.5 && season <= 0.5){
-//            return Math.max(Math.min(baseSyrupChance / 100f, 1),0);
-//        }
-//        else return Math.max(Math.min(outOfSeasonSyrupChance / 100f, 1),0);
+        Float season = SeasonHelper.getSeasonValue(world);
+        if (season == null || (season >= SEASON.WINTER_MID && season <= SEASON.SPRING_MID)){
+            return Math.max(Math.min(baseSyrupChance / 100f, 1),0);
+        }
+        else return Math.max(Math.min(outOfSeasonSyrupChance / 100f, 1),0);
     }
 
     protected BlockStateContainer createBlockState()
@@ -100,29 +101,43 @@ public class BlockMapleSpile extends BlockHorizontal {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (state.getProperties().containsKey(FILLED) && playerIn.getHeldItemMainhand().getItem() == Items.BUCKET){
-            EnumFacing dir = state.getValue(FACING);
-            worldIn.setBlockState(pos, ModBlocks.mapleSpileWithBucket.getDefaultState()
-                    .withProperty(FACING, dir)
-                    .withProperty(BlockMapleSpileBucket.FILLING, state.getValue(FILLED)?1:0));
-            if (!playerIn.isCreative()){
-                playerIn.getHeldItemMainhand().shrink(1);
+        if (state.getProperties().containsKey(FILLED)){
+            if (!worldIn.getBlockState(pos).getValue(FILLED) && playerIn.isSneaking()){
+                worldIn.setBlockToAir(pos);
+                if (worldIn.rand.nextFloat() <= chanceToBreak){
+                    worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1, 1, false);
+                    worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1, 1, false);
+                    playerIn.addItemStackToInventory(new ItemStack(Items.IRON_NUGGET));
+                } else {
+                    worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1, 1, false);
+                    playerIn.addItemStackToInventory(new ItemStack(Items.IRON_INGOT));
+                }
+                return true;
             }
-            return true;
+            if (playerIn.getHeldItemMainhand().getItem() == Items.BUCKET){
+                EnumFacing dir = state.getValue(FACING);
+                worldIn.setBlockState(pos, ModBlocks.mapleSpileWithBucket.getDefaultState()
+                        .withProperty(FACING, dir)
+                        .withProperty(BlockMapleSpileBucket.FILLING, state.getValue(FILLED)?1:0));
+                if (!playerIn.isCreative()){
+                    playerIn.getHeldItemMainhand().shrink(1);
+                }
+                return true;
+            }
         }
-        if (dropSyrup(worldIn, pos, state, playerIn)){
+        if (giveSyrup(worldIn, pos, state, playerIn)){
             return true;
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
-    protected boolean dropSyrup (World worldIn, BlockPos pos, IBlockState state, EntityPlayer player){
+    protected boolean giveSyrup(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player){
         if (state.getValue(FILLED)){
             if (!worldIn.isRemote && !worldIn.restoringBlockSnapshots) {
                 ItemStack drop = new ItemStack(FruitRegistry.getLog(FruitRegistry.MAPLE).getFruitItem());
                 player.addItemStackToInventory(drop);
-                System.out.println(drop);
             }
+            worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1, 1f, false);
             worldIn.setBlockState(pos, state.withProperty(FILLED, false));
             return true;
         }
@@ -163,7 +178,12 @@ public class BlockMapleSpile extends BlockHorizontal {
         return false;
     }
 
-//    @Override
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(Items.IRON_INGOT);
+    }
+
+    //    @Override
 //    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 //        return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
 //    }

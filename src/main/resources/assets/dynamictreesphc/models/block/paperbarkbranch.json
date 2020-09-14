@@ -2,6 +2,6 @@
     "parent": "dynamictrees:block/smartmodel/branch",
     "textures": {
         "bark": "harvestcraft:blocks/fruits/paperbark_stage_2",
-        "rings": "dynamictreesphc:blocks/paperbark_log_top"
+        "rings": "harvestcraft:blocks/fruits/paperbark_log_top"
     }
 }
