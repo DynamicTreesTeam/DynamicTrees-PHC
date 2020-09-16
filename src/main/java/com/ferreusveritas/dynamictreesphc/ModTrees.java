@@ -7,6 +7,7 @@ import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruit;
+import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruitPalm;
 import com.ferreusveritas.dynamictreesphc.trees.*;
 import com.ferreusveritas.dynamictreesphc.worldgen.BiomeDataBasePopulator;
 import com.pam.harvestcraft.HarvestCraft;
@@ -32,21 +33,27 @@ public class ModTrees {
 	public static ArrayList<TreeFamily> phcTrees = new ArrayList<>();
 	public static Map<String, Species> phcFruitSpecies = new HashMap<>();
 
-	public static TreeFamily palmFamily;
+	public static TreeFamily palmTrees, dragonfruitTree, cinnamonTree, mapleTree, paperBarkTree;
 	
 	public static void init() {
 		fruitTreeGen = HarvestCraft.fruitTreeConfigManager.enableFruitTreeGeneration;
 	}
 	
 	public static void preInit() {
-		palmFamily = new TreePalm();
+		cinnamonTree = new TreeCinnamon();
+		mapleTree = new TreeMaple();
+		paperBarkTree = new TreePaperBark();
+		palmTrees = new TreePalm();
+		dragonfruitTree = new TreeDragonfruit();
 
 		//Register all of the trees
-		phcTrees.forEach(tree -> phcFruitSpecies.put(tree.getName().getResourcePath(), tree.getCommonSpecies()));
-		//we add the special trees later so they dont get added into phcFruitSpecies
-		Collections.addAll(phcTrees, new TreeCinnamon(), new TreeMaple(), new TreePaperBark(), palmFamily);
-		phcTrees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
-		
+		Collections.addAll(phcTrees, cinnamonTree, mapleTree, paperBarkTree, palmTrees, dragonfruitTree);
+
+		//Register non-fruit species
+		cinnamonTree.registerSpecies(Species.REGISTRY);
+		mapleTree.registerSpecies(Species.REGISTRY);
+		paperBarkTree.registerSpecies(Species.REGISTRY);
+
 		//Basic creators
 		ISpeciesCreator fruitTreeCreator = SpeciesFruit::new;
 		ISpeciesCreator palmTreeCreator = SpeciesPalm::new;
@@ -68,7 +75,7 @@ public class ModTrees {
 		FruitRegistry.registeringFruits.forEach((species, sapling) -> {
 			if (ModConstants.PALMS.contains(species)){
 				creatorMap.put(species, palmTreeCreator);
-			} else{
+			} else {
 				creatorMap.put(species, fruitTreeCreator);
 			}
 		});
@@ -81,21 +88,34 @@ public class ModTrees {
 			String fruitName = creatorEntry.getKey();
 			ISpeciesCreator creator = creatorEntry.getValue();
 			SaplingType saplingType = saplingMap.get(fruitName);
-			TreeFamily family = (ModConstants.PALMS.contains(fruitName)) ? palmFamily : familyMap.get(saplingType);
-			ResourceLocation resLoc = new ResourceLocation(ModConstants.MODID, fruitName);
-			ILeavesProperties leavesProperties = (ModConstants.PALMS.contains(fruitName)) ? ModBlocks.palmLeavesProperties.get(fruitName) : family.getCommonSpecies().getLeavesProperties();
-			Species species = creator.createSpecies(resLoc, family, leavesProperties, fruitName, saplingType);
-			if (family.getCommonSpecies() == Species.NULLSPECIES) family.setCommonSpecies(species);
-			phcFruitSpecies.put(fruitName, species);
-			Species.REGISTRY.register(species);
+			if (fruitName.equals(FruitRegistry.DRAGONFRUIT)){
+				phcFruitSpecies.put(fruitName, dragonfruitTree.getCommonSpecies());
+			} else {
+				TreeFamily family = (ModConstants.PALMS.contains(fruitName)) ? palmTrees : familyMap.get(saplingType);
+				ResourceLocation resLoc = new ResourceLocation(ModConstants.MODID, fruitName);
+				ILeavesProperties leavesProperties = (ModConstants.PALMS.contains(fruitName)) ? ModBlocks.palmLeavesProperties.get(fruitName) : family.getCommonSpecies().getLeavesProperties();
+				Species species = creator.createSpecies(resLoc, family, leavesProperties, fruitName, saplingType);
+				if (family.getCommonSpecies() == Species.NULLSPECIES) family.setCommonSpecies(species);
+				phcFruitSpecies.put(fruitName, species);
+				Species.REGISTRY.register(species);
+			}
 		}
 
 		//Create fruit blocks
 		for(Entry<String, Species> entry : phcFruitSpecies.entrySet()) {
 			if (!ModConstants.NOFRUIT.contains(entry.getKey())){
-				BlockFruit fruit = new BlockPamFruit(new ResourceLocation(ModConstants.MODID, entry.getKey()));
+				BlockFruit fruit;
+				if (ModConstants.SIDEDFRUIT.contains(entry.getKey())){
+					fruit = new BlockPamFruitPalm(new ResourceLocation(ModConstants.MODID, entry.getKey()));
+				} else {
+					fruit = new BlockPamFruit(new ResourceLocation(ModConstants.MODID, entry.getKey()));
+				}
 				ModBlocks.fruits.put(entry.getKey(), fruit);
-				fruit.setDroppedItem(new ItemStack(FruitRegistry.getFood(entry.getKey())));
+				if (ModConstants.SEEDISFRUIT.contains(entry.getKey())){
+					fruit.setDroppedItem(entry.getValue().getSeedStack(1));
+				} else {
+					fruit.setDroppedItem(new ItemStack(FruitRegistry.getFood(entry.getKey())));
+				}
 				Species species = entry.getValue();
 				if (species instanceof SpeciesFruit){
 					((SpeciesFruit)species).setFruitBlock(fruit);

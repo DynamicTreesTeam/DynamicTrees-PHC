@@ -1,0 +1,10 @@
+{
+  "blocks.fruit.bonk": {
+    "category": "block",
+    "subtitle": "blocks.fruit.bonk",
+    "sounds": [{
+      "name": "dynamictreesphc:blocks/fruit/bonk",
+      "stream": true
+    }]
+  }
+}

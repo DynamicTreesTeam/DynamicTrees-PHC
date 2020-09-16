@@ -58,7 +58,7 @@ public class ModRecipes {
 			ItemStack bonemeal = new ItemStack(Items.DYE, 1, 15);
 
 			com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(saplingStack, seedStack, true, "seedfromsapling");//Sapling <-> Seed exchange
-			if (!ModConstants.NOFRUITRECIPE.contains(fruit)){
+			if (!ModConstants.SEEDISFRUIT.contains(fruit)){
 				com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(fruitStack, seedStack, false, "seedfromfruit");//Fruit --> Seed exchange
 
 				if (!ModConstants.NUTS.contains(fruit)){ //nut recipes include bonemeal to "germinate" them

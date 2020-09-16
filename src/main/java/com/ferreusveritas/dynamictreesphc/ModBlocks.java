@@ -39,7 +39,7 @@ public class ModBlocks {
 
 	public static LeavesProperties[] phcLeavesProperties;
 
-	public static BlockDynamicLeavesPalm leavesPalm0, leavesPalm1;
+	public static BlockDynamicLeavesPalm leavesPalm, leavesDragonfruit;
 
 	public static Map<String, LeavesProperties> palmLeavesProperties = new HashMap<>();
 	public static Map<String, BlockFruit> fruits = new HashMap<>();
@@ -49,8 +49,8 @@ public class ModBlocks {
 		mapleSpile = new BlockMapleSpile(new ResourceLocation(ModConstants.MODID, "maplespile"));
 		mapleSpileWithBucket = new BlockMapleSpileBucket(new ResourceLocation(ModConstants.MODID, "maplespilebucket"));
 
-		leavesPalm0 = new BlockDynamicLeavesPalm("leavespalm0");
-		leavesPalm1 = new BlockDynamicLeavesPalm("leavespalm1");
+		leavesPalm = new BlockDynamicLeavesPalm("leaves_palm");
+		leavesDragonfruit = new BlockDynamicLeavesPalm("leaves_dragonfruit");
 
 		//Set up primitive leaves. This controls what is dropped on shearing, leaves replacement, etc.
 		cinnamonLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
@@ -92,25 +92,24 @@ public class ModBlocks {
 			LeavesPaging.getNextLeavesBlock(ModConstants.MODID, lp);
 		}
 
-		datePalmLeavesProperties.setDynamicLeavesState(leavesPalm0.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
-		coconutLeavesProperties.setDynamicLeavesState(leavesPalm0.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 1));
-		leavesPalm0.setProperties(0, datePalmLeavesProperties);
-		leavesPalm0.setProperties(1, coconutLeavesProperties);
+		datePalmLeavesProperties.setDynamicLeavesState(leavesPalm.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
+		coconutLeavesProperties.setDynamicLeavesState(leavesPalm.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 1));
+		leavesPalm.setProperties(0, datePalmLeavesProperties);
+		leavesPalm.setProperties(1, coconutLeavesProperties);
 
-		papayaLeavesProperties.setDynamicLeavesState(leavesPalm0.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 2));
-		bananaLeavesProperties.setDynamicLeavesState(leavesPalm0.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 3));
-		leavesPalm0.setProperties(2, papayaLeavesProperties);
-		leavesPalm0.setProperties(3, bananaLeavesProperties);
+		papayaLeavesProperties.setDynamicLeavesState(leavesPalm.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 2));
+		bananaLeavesProperties.setDynamicLeavesState(leavesPalm.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 3));
+		leavesPalm.setProperties(2, papayaLeavesProperties);
+		leavesPalm.setProperties(3, bananaLeavesProperties);
 
-		dragonfruitLeavesProperties.setDynamicLeavesState(leavesPalm1.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
-		leavesPalm1.setProperties(0, dragonfruitLeavesProperties);
+		dragonfruitLeavesProperties.setDynamicLeavesState(leavesDragonfruit.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
+		leavesDragonfruit.setProperties(0, dragonfruitLeavesProperties);
 
 		 palmLeavesProperties = new HashMap<String, LeavesProperties>(){{
 			put(FruitRegistry.DATE, datePalmLeavesProperties);
 			put(FruitRegistry.PAPAYA, papayaLeavesProperties);
 			put(FruitRegistry.BANANA, bananaLeavesProperties);
 			put(FruitRegistry.COCONUT, coconutLeavesProperties);
-			put(FruitRegistry.DRAGONFRUIT, dragonfruitLeavesProperties);
 		}};
 
 	}
@@ -121,7 +120,7 @@ public class ModBlocks {
 
 		fruits.values().forEach(registry::register);
 
-		registry.registerAll(mapleSpile, mapleSpileWithBucket, leavesPalm0, leavesPalm1);
+		registry.registerAll(mapleSpile, mapleSpileWithBucket, leavesPalm, leavesDragonfruit);
 
 		treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(ModConstants.MODID).values());
 		registry.registerAll(treeBlocks.toArray(new Block[0]));

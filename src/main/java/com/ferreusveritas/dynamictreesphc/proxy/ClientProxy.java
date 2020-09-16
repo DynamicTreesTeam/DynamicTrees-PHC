@@ -75,8 +75,8 @@ public class ClientProxy extends CommonProxy {
 		//Register GrowingLeavesBlocks Colorizers
 
 		List<BlockDynamicLeaves> leavesList = new LinkedList<>(LeavesPaging.getLeavesMapForModId(ModConstants.MODID).values());
-		leavesList.add(ModBlocks.leavesPalm0);
-		leavesList.add(ModBlocks.leavesPalm1);
+		leavesList.add(ModBlocks.leavesPalm);
+		leavesList.add(ModBlocks.leavesDragonfruit);
 		for(BlockDynamicLeaves leaves: leavesList) {
 			ModelHelper.regColorHandler(leaves, new IBlockColor() {
 				@Override

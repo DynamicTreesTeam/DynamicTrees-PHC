@@ -12,26 +12,30 @@ import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class TreePalm extends TreeFamilyPHC {
 
-    public TreePalm() {
-        super(new ResourceLocation(ModConstants.MODID, "palm"));
-
-        setPrimitiveLog(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE), new ItemStack(Blocks.LOG, 1, 3));
+    public TreePalm (){
+        this(new ResourceLocation(ModConstants.MODID, "palm"));
 
         this.canSupportCocoa = true;
 
         for (LeavesProperties properties : ModBlocks.palmLeavesProperties.values()){
-            System.out.println(properties);
             properties.setTree(this);
         }
+    }
+    public TreePalm(ResourceLocation name) {
+        super(name);
+
+        setPrimitiveLog(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE), new ItemStack(Blocks.LOG, 1, 3));
 
         addConnectableVanillaLeaves((state) -> state == Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
     }

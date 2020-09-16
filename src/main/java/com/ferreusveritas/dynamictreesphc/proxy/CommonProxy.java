@@ -2,6 +2,7 @@ package com.ferreusveritas.dynamictreesphc.proxy;
 
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModItems;
+import com.ferreusveritas.dynamictreesphc.ModSounds;
 import com.ferreusveritas.dynamictreesphc.ModTrees;
 import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
@@ -18,6 +19,7 @@ public class CommonProxy {
 	public void init() {
 		ModTrees.init();
 		preparePHC();
+		ModSounds.registerSounds();
 	}
 	
 	public void preparePHC() {

@@ -71,7 +71,7 @@ public class FeatureGenFruitPalm implements IPostGenFeature, IPostGrowFeature {
         }
         if (isSided){
             EnumFacing placeDir = EnumFacing.HORIZONTALS[world.rand.nextInt(4)];
-            leavesPos = leavesPos.down(); //we move the pos up so the fruit can stick to the trunk
+            leavesPos = leavesPos.down(); //we move the pos down so the fruit can stick to the trunk
             if (world.isAirBlock(leavesPos.offset(placeDir))){
                 world.setBlockState(leavesPos.offset(placeDir), fruitPod.getDefaultState().withProperty(BlockPamFruitPalm.FACING, placeDir.getOpposite()).withProperty(BlockPamFruitPalm.AGE, worldGen?(world.rand.nextInt(3)):0));
             }

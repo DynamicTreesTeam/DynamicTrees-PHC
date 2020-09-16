@@ -26,11 +26,17 @@ public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 
 	public static final List<String> NOFRUIT = new LinkedList<>(Arrays.asList(FruitRegistry.CINNAMON,FruitRegistry.PAPERBARK,FruitRegistry.MAPLE));
 
-	public static final List<String> NOFRUITRECIPE = new LinkedList<>(Arrays.asList(FruitRegistry.COCONUT));
+	public static final List<String> FALLINGFRUIT = new LinkedList<>(Arrays.asList(FruitRegistry.COCONUT, FruitRegistry.DURIAN, FruitRegistry.JACKFRUIT, FruitRegistry.BREADFRUIT));
+
+	public static final List<String> SEEDISFRUIT = new LinkedList<>(Arrays.asList(FruitRegistry.COCONUT));
 	//Coconut is a nut too but we exclude it cause this is for recipes
 	public static final List<String> NUTS = new LinkedList<>(Arrays.asList(FruitRegistry.ALMOND, FruitRegistry.CASHEW, FruitRegistry.CHESTNUT, FruitRegistry.HAZELNUT, FruitRegistry.NUTMEG, FruitRegistry.PECAN, FruitRegistry.PISTACHIO, FruitRegistry.WALNUT));
 
 	public static final List<String> PALMS = new LinkedList<>(Arrays.asList(FruitRegistry.DATE,FruitRegistry.PAPAYA,FruitRegistry.DRAGONFRUIT,FruitRegistry.BANANA,FruitRegistry.COCONUT));
+
+	//Fruits that have a direction property, for being placed on the side of blocks.
+	public static final List<String> SIDEDFRUIT = new LinkedList<>(Arrays.asList(FruitRegistry.DATE,FruitRegistry.PAPAYA,FruitRegistry.COCONUT));
+
 
 	public static final class SEASON {
 		public static final float SPRING_START = 0;

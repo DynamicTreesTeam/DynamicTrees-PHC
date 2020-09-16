@@ -4,6 +4,7 @@ import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.network.MapSignal;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
+import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorSeed;
@@ -27,8 +28,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class SpeciesPalm extends SpeciesFruit {
@@ -36,32 +39,36 @@ public class SpeciesPalm extends SpeciesFruit {
 	public SpeciesPalm(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName, SaplingType saplingType) {
 		super(name, treeFamily, leavesProperties, fruitName, saplingType);
 
-		addDropCreator(new DropCreatorSeed(3.0f) {
-			@Override
-			public List<ItemStack> getHarvestDrop(World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int soilLife, int fortune) {
-				if(random.nextInt(16) == 0) { // 1 in 4 chance to drop a seed on destruction..
-					dropList.add(getSeedStack(1));
-				}
+		addDropCreator(new DropCreatorSeed() {
+			@Override public List<ItemStack> getHarvestDrop(World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int soilLife, int fortune) {
+				float rarity = getHarvestRarity();
+				rarity *= (fortune + 1) / 16f;
+				rarity *= Math.min(species.seasonalSeedDropFactor(world, leafPos) + 0.15f, 1.0);
+				if(rarity > random.nextFloat()) dropList.add(getFruit (species)); //1 in 16 chance to drop a fruit on destruction..
 				return dropList;
 			}
 
-//			private ItemStack getFruit (){
-//				return new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(
-//						new ResourceLocation("forestry", "fruits"))), 1, 5);
-//			}
+			private ItemStack getFruit (Species species){
+				if (fruitName.equals(FruitRegistry.COCONUT)) //coconut seeds are whole coconuts while the food is an open coconut
+					return species.getSeedStack(1);
+				return new ItemStack(FruitRegistry.getFood(fruitName));
+			}
 
-			@Override
-			public List<ItemStack> getLeavesDrop(IBlockAccess access, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, int fortune) {
-				int chance = 16;
+			@Override public List<ItemStack> getLeavesDrop(IBlockAccess access, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, int fortune) {
+				int chance = 20; //See BlockLeaves#getSaplingDropChance(state);
+				//Hokey fortune stuff here to match Vanilla logic.
 				if (fortune > 0) {
-					chance -= fortune;
-					if (chance < 3) {
-						chance = 3;
-					}
+					chance -= 2 << fortune;
+					if (chance < 10) chance = 10;
 				}
-				if (random.nextInt(chance) == 0) {
-					dropList.add(getSeedStack(1));
+				float seasonFactor = 1.0f;
+				if(access instanceof World) {
+					World world = (World) access;
+					if(!world.isRemote) seasonFactor = species.seasonalSeedDropFactor(world, breakPos);
 				}
+				if(random.nextInt((int) (chance / getLeavesRarity())) == 0)
+					if(seasonFactor > random.nextFloat())
+						dropList.add(getFruit(species));
 				return dropList;
 			}
 		});
@@ -84,9 +91,6 @@ public class SpeciesPalm extends SpeciesFruit {
 	public float getEnergy(World world, BlockPos pos) {
 		long day = world.getWorldTime() / 24000L;
 		int month = (int) day / 30; // Change the hashs every in-game month
-		if (fruitName.equals(FruitRegistry.DRAGONFRUIT)){
-			return super.getEnergy(world, pos) * biomeSuitability(world, pos) - (CoordUtils.coordHashCode(pos.up(month), 3) % 2);
-		}
 		return super.getEnergy(world, pos) * biomeSuitability(world, pos) + (CoordUtils.coordHashCode(pos.up(month), 3) % 3); // Vary the height energy by a psuedorandom hash function
 	}
 
@@ -112,6 +116,19 @@ public class SpeciesPalm extends SpeciesFruit {
 		return super.postGrow(world, rootPos, treePos, soilLife, natural);
 	}
 
+	public boolean transitionToTree(World world, BlockPos pos) {
+		//Ensure planting conditions are right
+		TreeFamily family = getFamily();
+		if(world.isAirBlock(pos.up()) && isAcceptableSoil(world, pos.down(), world.getBlockState(pos.down()))) {
+			family.getDynamicBranch().setRadius(world, pos, (int)family.getPrimaryThickness(), null);//set to a single branch with 1 radius
+			world.setBlockState(pos.up(), getLeavesProperties().getDynamicLeavesState());//Place 2 leaf blocks on top
+			world.setBlockState(pos.up(2), getLeavesProperties().getDynamicLeavesState().withProperty(BlockDynamicLeaves.HYDRO, 3));
+			placeRootyDirtBlock(world, pos.down(), 15);//Set to fully fertilized rooty dirt underneath
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
 		for (BlockPos endPoint : endPoints) {
@@ -122,56 +139,24 @@ public class SpeciesPalm extends SpeciesFruit {
 	public void setFruitBlock (BlockFruit fruitBlock){
 		fruitBlockState = fruitBlock.getDefaultState();
 		int growHeightOptions = 1;
-		if (fruitName.equals(FruitRegistry.DRAGONFRUIT) || fruitName.equals(FruitRegistry.PAPAYA)){
+		if (fruitName.equals(FruitRegistry.PAPAYA)){
 			growHeightOptions = 2;
 		}
-		addGenFeature(new FeatureGenFruitPalm(fruitBlock, growHeightOptions, fruitBlock instanceof BlockPamFruitPalm && !fruitName.equals(FruitRegistry.COCONUT)));
-	}
-
-	@Override
-	public boolean canBoneMeal() {
-		if (fruitName.equals(FruitRegistry.DRAGONFRUIT)){
-			return false;
-		}
-		return super.canBoneMeal();
-	}
-
-	@Override
-	public ResourceLocation getSaplingName() {
-		if (fruitName.equals(FruitRegistry.DRAGONFRUIT)){
-			return new ResourceLocation(ModConstants.MODID, FruitRegistry.DRAGONFRUIT);
-		}
-		return super.getSaplingName();
-	}
-
-	@Override
-	public SoundType getSaplingSound() {
-		if (fruitName.equals(FruitRegistry.DRAGONFRUIT)){
-			return SoundType.CLOTH;
-		}
-		return super.getSaplingSound();
-	}
-
-	@Override
-	public AxisAlignedBB getSaplingBoundingBox() {
-		if (fruitName.equals(FruitRegistry.DRAGONFRUIT)){
-			return new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.5D, 0.625D);
-		}
-		return super.getSaplingBoundingBox();
+		addGenFeature(new FeatureGenFruitPalm(fruitBlock, growHeightOptions, fruitBlock instanceof BlockPamFruitPalm));
 	}
 
 	@Override
 	protected void fruitTreeDefaults(String name) {
-		switch (name){
-			case FruitRegistry.BANANA:
-				setBasicGrowingParameters(0.8f, 5.0f, 1, 4, 1.0f, fruitingRadius);
-				break;
-			case FruitRegistry.DRAGONFRUIT:
-				setBasicGrowingParameters(1.0f, 3.0f, 1, 4, 1.0f, fruitingRadius);
-				break;
-			default:
-				setBasicGrowingParameters(0.4f, 8.0f, 1, 4, 0.8f, fruitingRadius);
+		if (FruitRegistry.BANANA.equals(name)) {
+			setBasicGrowingParameters(0.8f, 5.0f, 1, 4, 1.0f, fruitingRadius);
+		} else {
+			setBasicGrowingParameters(0.4f, 8.0f, 1, 4, 0.8f, fruitingRadius);
 		}
+	}
+
+	@Override
+	public void addJoCodes() {
+		joCodeStore.addCodesFromFile(this, "assets/" + getRegistryName().getResourceDomain() + "/trees/palm.txt");
 	}
 
 }
