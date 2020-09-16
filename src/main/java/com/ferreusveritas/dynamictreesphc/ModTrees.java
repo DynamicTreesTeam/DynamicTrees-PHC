@@ -8,6 +8,7 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruit;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruitPalm;
+import com.ferreusveritas.dynamictreesphc.compat.PamTrees;
 import com.ferreusveritas.dynamictreesphc.trees.*;
 import com.ferreusveritas.dynamictreesphc.worldgen.BiomeDataBasePopulator;
 import com.pam.harvestcraft.HarvestCraft;
@@ -90,6 +91,7 @@ public class ModTrees {
 			SaplingType saplingType = saplingMap.get(fruitName);
 			if (fruitName.equals(FruitRegistry.DRAGONFRUIT)){
 				phcFruitSpecies.put(fruitName, dragonfruitTree.getCommonSpecies());
+				dragonfruitTree.registerSpecies(Species.REGISTRY);
 			} else {
 				TreeFamily family = (ModConstants.PALMS.contains(fruitName)) ? palmTrees : familyMap.get(saplingType);
 				ResourceLocation resLoc = new ResourceLocation(ModConstants.MODID, fruitName);
@@ -126,7 +128,8 @@ public class ModTrees {
 		for(Entry<String, Species> entry : phcFruitSpecies.entrySet()) {
 			TreeRegistry.registerSaplingReplacer(FruitRegistry.getSapling(entry.getKey()).getDefaultState(), entry.getValue());
 		}
-		
+
+		PamTrees.treePreInit();
 	}
 	
 	private static void alterCreatorMap(Map<String, ISpeciesCreator> creatorMap) {

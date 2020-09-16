@@ -3,6 +3,7 @@ package com.ferreusveritas.dynamictreesphc;
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.ferreusveritas.dynamictreesphc.compat.PamTrees;
 import com.ferreusveritas.dynamictreesphc.trees.TreePaperBark;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -22,6 +23,8 @@ public class ModModels {
 		ModelHelper.regModel(TreePaperBark.paperbarkCutBranch);
 
 		ModTrees.phcFruitSpecies.values().stream().filter(s -> s.getSeed() != Seed.NULLSEED).forEach(s -> ModelHelper.regModel(s.getSeed()));//Register Seed Item Models
+
+		PamTrees.modelRegister(event);
 	}
 	
 }

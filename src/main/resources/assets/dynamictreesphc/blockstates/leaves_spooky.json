@@ -1,0 +1,7 @@
+{
+  "multipart": [
+    {   "when": { "tree": "0" },
+      "apply": { "model": "spookytree:spookytree_leaves" }
+    }
+  ]
+}

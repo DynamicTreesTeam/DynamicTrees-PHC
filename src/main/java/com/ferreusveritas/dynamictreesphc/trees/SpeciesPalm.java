@@ -148,9 +148,9 @@ public class SpeciesPalm extends SpeciesFruit {
 	@Override
 	protected void fruitTreeDefaults(String name) {
 		if (FruitRegistry.BANANA.equals(name)) {
-			setBasicGrowingParameters(0.8f, 5.0f, 1, 4, 1.0f, fruitingRadius);
+			setBasicGrowingParameters(0.8f, 5.0f, 1, 4, 0.6f, fruitingRadius);
 		} else {
-			setBasicGrowingParameters(0.4f, 8.0f, 1, 4, 0.8f, fruitingRadius);
+			setBasicGrowingParameters(0.4f, 8.0f, 1, 4, 0.3f, fruitingRadius);
 		}
 	}
 

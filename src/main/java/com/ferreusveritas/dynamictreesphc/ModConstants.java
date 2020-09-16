@@ -1,5 +1,6 @@
 package com.ferreusveritas.dynamictreesphc;
 
+import com.ferreusveritas.dynamictreesphc.compat.PamTrees;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 
 import java.util.Arrays;
@@ -17,12 +18,16 @@ public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 	
 	//Other Mod Versions
 	public static final String PHC_LATEST = PHC_MODID + AT + com.pam.harvestcraft.Reference.VERSION + ORGREATER;
-	
+
 	public static final String DEPENDENCIES
-		= REQAFTER + DYNAMICTREES_LATEST
-		+ NEXT
-		+ REQAFTER + PHC_LATEST
-		;
+			= REQAFTER + DYNAMICTREES_LATEST
+			+ NEXT
+			+ REQAFTER + PHC_LATEST
+			+ NEXT
+			+ OPTAFTER + PamTrees.REDBUDTREE_MOD
+			+ NEXT
+			+ OPTAFTER + PamTrees.SPOOKYTREE_MOD
+			;
 
 	public static final List<String> NOFRUIT = new LinkedList<>(Arrays.asList(FruitRegistry.CINNAMON,FruitRegistry.PAPERBARK,FruitRegistry.MAPLE));
 

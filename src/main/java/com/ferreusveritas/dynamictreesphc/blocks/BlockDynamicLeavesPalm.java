@@ -49,7 +49,7 @@ public class BlockDynamicLeavesPalm extends BlockDynamicLeaves {
         CONNECTIONS = new Properties.PropertyAdapter[Surround.values().length];
 
         for (Surround surr : Surround.values()) {
-            CONNECTIONS[surr.ordinal()] = new Properties.PropertyAdapter<Boolean>(PropertyBool.create("conn_" + surr.toString()));
+            CONNECTIONS[surr.ordinal()] = new Properties.PropertyAdapter<>(PropertyBool.create("conn_" + surr.toString()));
         }
     }
 

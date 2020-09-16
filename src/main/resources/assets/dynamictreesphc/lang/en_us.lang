@@ -52,6 +52,9 @@ item.dynamictreesphc:cinnamonseed.name=Cinnamon Tree Seed
 item.dynamictreesphc:mapleseed.name=Maple Samara
 item.dynamictreesphc:paperbarkseed.name=Paperbark Tree Seeds
 
+item.dynamictreesphc:redbudseed.name=Redbud Pod
+item.dynamictreesphc:spookyseed.name=Spooky Capsule
+
 species.dynamictreesphc:apple.name=Apple
 species.dynamictreesphc:almond.name=Almond
 species.dynamictreesphc:apricot.name=Apricot
@@ -101,9 +104,15 @@ item.dynamictreesphc:cinnamon.name=Cinnamon
 item.dynamictreesphc:maple.name=Maple
 item.dynamictreesphc:paperbark.name=Paperbark
 
+item.dynamictreesphc:redbud.name=Redbud
+item.dynamictreesphc:spooky.name=Spooky
+
 item.dynamictreesphc:leaves0.name=Leaves
-item.dynamictreesphc:leavespalm0.name=Palm Leaves
-item.dynamictreesphc:leavespalm1.name=Palm Leaves
+item.dynamictreesphc:leaves_dragonfruit.name=Dragonfruit Cactus
+item.dynamictreesphc:leaves_palm.name=Palm Leaves
+
+item.dynamictreesphc:leaves_redbud.name=Redbud Leaves
+item.dynamictreesphc:leaves_spooky.name=Spooky Leaves
 
 tile.dynamictreesphc:cinnamonbranch.name=Cinnamon Tree
 tile.dynamictreesphc:maplebranch.name=Maple Tree
@@ -111,6 +120,8 @@ tile.dynamictreesphc:paperbarkbranch.name=Paper Bark Tree
 tile.dynamictreesphc:paperbarkcutbranch.name=Paper Bark Tree
 tile.dynamictreesphc:dragonfruitbranch.name=Dragonfruit Cactus
 tile.dynamictreesphc:palmbranch.name=Palm Tree
+
+tile.dynamictreesphc:spookybranch.name=Spooky Tree
 
 tile.dynamictreesphc:maplespile.name=Maple Syrup Spile
 tile.dynamictreesphc:maplespilebucket.name=Maple Syrup Spile

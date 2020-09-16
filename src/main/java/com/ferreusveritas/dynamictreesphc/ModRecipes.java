@@ -3,6 +3,7 @@ package com.ferreusveritas.dynamictreesphc;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictreesphc.compat.PamTrees;
 import com.ferreusveritas.dynamictreesphc.trees.SpeciesFruit;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.block.Block;
@@ -34,6 +35,8 @@ public class ModRecipes {
 			com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(new ItemStack(sapling), species.getSeedStack(1), true, "seedfromsapling");
 
 		}
+
+		PamTrees.recipeRegister(registry);
 	}
 	
 	private static void speciesRecipes(Species species) {
