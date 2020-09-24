@@ -1,6 +1,5 @@
 package com.ferreusveritas.dynamictreesphc;
 
-import com.ferreusveritas.dynamictreesphc.compat.PamTrees;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 
 import java.util.Arrays;
@@ -22,12 +21,7 @@ public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 	public static final String DEPENDENCIES
 			= REQAFTER + DYNAMICTREES_LATEST
 			+ NEXT
-			+ REQAFTER + PHC_LATEST
-			+ NEXT
-			+ OPTAFTER + PamTrees.REDBUDTREE_MOD
-			+ NEXT
-			+ OPTAFTER + PamTrees.SPOOKYTREE_MOD
-			;
+			+ REQAFTER + PHC_LATEST;
 
 	public static final List<String> NOFRUIT = new LinkedList<>(Arrays.asList(FruitRegistry.CINNAMON,FruitRegistry.PAPERBARK,FruitRegistry.MAPLE));
 
@@ -41,17 +35,5 @@ public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 
 	//Fruits that have a direction property, for being placed on the side of blocks.
 	public static final List<String> SIDEDFRUIT = new LinkedList<>(Arrays.asList(FruitRegistry.DATE,FruitRegistry.PAPAYA,FruitRegistry.COCONUT));
-
-
-	public static final class SEASON {
-		public static final float SPRING_START = 0;
-		public static final float SPRING_MID = 0.5f;
-		public static final float SUMMER_START = 1f;
-		public static final float SUMMER_MID = 1.5f;
-		public static final float FALL_START = 2f;
-		public static final float FALL_MID = 2.5f;
-		public static final float WINTER_START = 3f;
-		public static final float WINTER_MID = 3.5f;
-	}
 
 }

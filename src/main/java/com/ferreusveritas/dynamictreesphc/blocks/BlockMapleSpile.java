@@ -26,15 +26,13 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static com.ferreusveritas.dynamictreesphc.ModConstants.SEASON;
-
 public class BlockMapleSpile extends BlockHorizontal {
 
     public static final PropertyBool FILLED = PropertyBool.create("filled");
 
-    private static final float baseSyrupChance = 5f; //percent
-    private static final float outOfSeasonSyrupChance = 0.1f; //percent
-    private static final float chanceToBreak = 0.2f; //percent
+    private static final double baseSyrupChance = 0.05D;
+    private static final double outOfSeasonSyrupChance = 0.001D;
+    private static final double chanceToBreak = 0.02D;
 
     protected static final AxisAlignedBB SPILE_EAST_AABB = new AxisAlignedBB(
             -1 /16f,10  /16f,7  /16f,
@@ -57,7 +55,6 @@ public class BlockMapleSpile extends BlockHorizontal {
         setSoundType(SoundType.METAL);
         setHardness(0.5f);
         setTickRandomly(true);
-//        setCreativeTab(ModTabs.dynamicTreesTab);
     }
 
     protected void defaultState (){
@@ -65,12 +62,12 @@ public class BlockMapleSpile extends BlockHorizontal {
     }
 
     //Update syrup extract rate depending on seasons
-    public float getSyrupChance (World world){
+    public double getSyrupChance (World world){
         Float season = SeasonHelper.getSeasonValue(world);
-        if (season == null || (season >= SEASON.WINTER_MID && season <= SEASON.SPRING_MID)){
-            return Math.max(Math.min(baseSyrupChance / 100f, 1),0);
+        if (season == null || SeasonHelper.isSeasonBetween(season, SeasonHelper.WINTER+0.5f, SeasonHelper.SPRING+0.5f)){
+            return Math.max(Math.min(baseSyrupChance, 1),0);
         }
-        else return Math.max(Math.min(outOfSeasonSyrupChance / 100f, 1),0);
+        else return Math.max(Math.min(outOfSeasonSyrupChance, 1),0);
     }
 
     protected BlockStateContainer createBlockState()

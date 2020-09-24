@@ -1,9 +1,5 @@
 package com.ferreusveritas.dynamictreesphc.worldgen;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.ferreusveritas.dynamictrees.api.worldgen.BiomePropertySelectors.RandomSpeciesSelector;
 import com.ferreusveritas.dynamictrees.api.worldgen.BiomePropertySelectors.SpeciesSelection;
 import com.ferreusveritas.dynamictrees.api.worldgen.IBiomeDataBasePopulator;
@@ -13,10 +9,13 @@ import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase.Operation;
 import com.ferreusveritas.dynamictreesphc.ModTrees;
 import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.config.TreeGenerationConfiguration;
-
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 
@@ -49,7 +48,7 @@ public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 				}, Operation.SPLICE_BEFORE);
 			}
 		}
-		
+
 	}
 	
 }

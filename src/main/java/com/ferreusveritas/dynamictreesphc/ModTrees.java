@@ -8,7 +8,6 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruit;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruitPalm;
-import com.ferreusveritas.dynamictreesphc.compat.PamTrees;
 import com.ferreusveritas.dynamictreesphc.trees.*;
 import com.ferreusveritas.dynamictreesphc.worldgen.BiomeDataBasePopulator;
 import com.pam.harvestcraft.HarvestCraft;
@@ -128,8 +127,6 @@ public class ModTrees {
 		for(Entry<String, Species> entry : phcFruitSpecies.entrySet()) {
 			TreeRegistry.registerSaplingReplacer(FruitRegistry.getSapling(entry.getKey()).getDefaultState(), entry.getValue());
 		}
-
-		PamTrees.treePreInit();
 	}
 	
 	private static void alterCreatorMap(Map<String, ISpeciesCreator> creatorMap) {

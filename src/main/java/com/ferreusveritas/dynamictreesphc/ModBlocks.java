@@ -8,7 +8,6 @@ import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockDynamicLeavesPalm;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockMapleSpile;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockMapleSpileBucket;
-import com.ferreusveritas.dynamictreesphc.compat.PamTrees;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOldLeaf;
@@ -112,8 +111,6 @@ public class ModBlocks {
 			put(FruitRegistry.BANANA, bananaLeavesProperties);
 			put(FruitRegistry.COCONUT, coconutLeavesProperties);
 		}};
-
-		 PamTrees.blockPreInit();
 	}
 	
 	public static void register(IForgeRegistry<Block> registry) {
@@ -126,8 +123,6 @@ public class ModBlocks {
 
 		treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(ModConstants.MODID).values());
 		registry.registerAll(treeBlocks.toArray(new Block[0]));
-
-		PamTrees.blockRegister(registry);
 	}
 	
 }

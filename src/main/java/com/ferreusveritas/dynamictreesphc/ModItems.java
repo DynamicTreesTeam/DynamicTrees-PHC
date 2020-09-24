@@ -1,6 +1,5 @@
 package com.ferreusveritas.dynamictreesphc;
 
-import com.ferreusveritas.dynamictreesphc.compat.PamTrees;
 import com.ferreusveritas.dynamictreesphc.trees.TreePaperBark;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.item.Item;
@@ -29,8 +28,6 @@ public class ModItems {
 		ArrayList<Item> treeItems = new ArrayList<>();
 		ModTrees.phcTrees.forEach(tree -> tree.getRegisterableItems(treeItems));
 		registry.registerAll(treeItems.toArray(new Item[0]));
-
-		PamTrees.itemRegister(registry);
 	}
 	
 }

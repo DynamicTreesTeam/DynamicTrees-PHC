@@ -17,12 +17,10 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static com.ferreusveritas.dynamictreesphc.ModConstants.SEASON;
-
 public class BlockBranchPamPaper extends BlockBranchPamSpecial {
 
-    protected final float barkRegrowChance = 5f; //percent
-    protected final float barkRegrowOutOfSeasonChance = 2f; //percent
+    protected final double barkRegrowChance = 0.05D;
+    protected final double barkRegrowOutOfSeasonChance = 0.02D;
     protected final int minStripRadius = 7;
 
     public BlockBranchPamPaper(String name, String logName, float yieldPerLog, boolean tick) {
@@ -30,12 +28,12 @@ public class BlockBranchPamPaper extends BlockBranchPamSpecial {
         setTickRandomly(tick);
     }
 
-    public float getBarkRegrowChance(World world) {
+    public double getBarkRegrowChance(World world) {
         Float season = SeasonHelper.getSeasonValue(world);
-        if (season == null || (season >= SEASON.FALL_START && season < SEASON.WINTER_START)){ //bark grows faster in autumn
-            return Math.max(Math.min(barkRegrowChance / 100f, 1),0);
+        if (season == null || SeasonHelper.isSeasonBetween(season, SeasonHelper.AUTUMN, SeasonHelper.WINTER)){ //bark grows faster in autumn
+            return Math.max(Math.min(barkRegrowChance, 1),0);
         }
-        else return Math.max(Math.min(barkRegrowOutOfSeasonChance / 100f, 1),0);
+        else return Math.max(Math.min(barkRegrowOutOfSeasonChance, 1),0);
     }
 
     public int getMinStripRadius() {
