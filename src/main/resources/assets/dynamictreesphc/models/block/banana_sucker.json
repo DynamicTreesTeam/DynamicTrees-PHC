@@ -1,0 +1,53 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"particle": "dynamictreesphc:blocks/bananapalmfrond",
+		"leaves": "dynamictreesphc:blocks/bananapalmfrond",
+		"log": "blocks/log_jungle"
+	},
+	"ambientocclusion": false,
+	"elements": [
+		{
+			"from": [8, 8, -2],
+			"to": [8, 32, 14],
+			"shade": false,
+			"faces": {
+				"east": {"uv": [12, 4, 8, 10], "texture": "#leaves", "tintindex": 0 },
+				"west": {"uv": [8, 4, 12, 10], "texture": "#leaves", "tintindex": 0 }
+			}
+		},
+		{
+			"from": [8, 5, -2],
+			"to": [8, 29, 14],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 6, 1]},
+			"faces": {
+				"east": {"uv": [12, 4, 8, 10], "texture": "#leaves", "tintindex": 0 },
+				"west": {"uv": [8, 4, 12, 10], "texture": "#leaves", "tintindex": 0 }
+			}
+		},
+		{
+			"from": [8, 3, -2],
+			"to": [8, 27, 14],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 5, 1]},
+			"faces": {
+				"east": {"uv": [12, 4, 8, 10], "texture": "#leaves", "tintindex": 0 },
+				"west": {"uv": [8, 4, 12, 10], "texture": "#leaves", "tintindex": 0 }
+			}
+		},
+		{
+			"from": [7, 0, 0],
+			"to": [9, 8, 2],
+			"faces": {
+				"north": {"uv": [0, 0, 2, 8], "texture": "#log"},
+				"east": {"uv": [0, 0, 2, 8], "texture": "#log"},
+				"south": {"uv": [0, 0, 2, 8], "texture": "#log"},
+				"west": {"uv": [0, 0, 2, 8], "texture": "#log"},
+				"up": {"uv": [7, 7, 9, 9], "texture": "#log"},
+				"down": {"uv": [7, 7, 9, 9], "texture": "#log", "cullface": "down"}
+			}
+		}
+	]
+}

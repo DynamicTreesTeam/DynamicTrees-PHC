@@ -217,8 +217,7 @@ public class BlockMapleSpile extends BlockHorizontal {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        switch (state.getValue(FACING))
-        {
+        switch (state.getValue(FACING)) {
             case SOUTH:
                 return SPILE_SOUTH_AABB;
             case NORTH:

@@ -27,7 +27,8 @@ public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 
 	public static final List<String> FALLINGFRUIT = new LinkedList<>(Arrays.asList(FruitRegistry.COCONUT, FruitRegistry.DURIAN, FruitRegistry.JACKFRUIT, FruitRegistry.BREADFRUIT));
 
-	public static final List<String> SEEDISFRUIT = new LinkedList<>(Arrays.asList(FruitRegistry.COCONUT));
+	public static final List<String> SEEDISFRUIT = new LinkedList<>(Arrays.asList(FruitRegistry.COCONUT, FruitRegistry.BANANA));
+	public static final List<String> FRUITDROPSSEED = new LinkedList<>(Arrays.asList(FruitRegistry.COCONUT));
 	//Coconut is a nut too but we exclude it cause this is for recipes
 	public static final List<String> NUTS = new LinkedList<>(Arrays.asList(FruitRegistry.ALMOND, FruitRegistry.CASHEW, FruitRegistry.CHESTNUT, FruitRegistry.HAZELNUT, FruitRegistry.NUTMEG, FruitRegistry.PECAN, FruitRegistry.PISTACHIO, FruitRegistry.WALNUT));
 

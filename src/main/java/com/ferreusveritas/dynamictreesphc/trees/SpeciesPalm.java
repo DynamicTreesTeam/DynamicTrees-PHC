@@ -13,9 +13,11 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
+import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruitPalm;
 import com.ferreusveritas.dynamictreesphc.dropcreators.FeatureGenFruitPalm;
+import com.ferreusveritas.dynamictreesphc.dropcreators.FeatureGenSuckers;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling.SaplingType;
 import net.minecraft.block.SoundType;
@@ -38,6 +40,10 @@ public class SpeciesPalm extends SpeciesFruit {
 
 	public SpeciesPalm(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName, SaplingType saplingType) {
 		super(name, treeFamily, leavesProperties, fruitName, saplingType);
+
+		if (fruitName.equals(FruitRegistry.BANANA)){
+			addGenFeature(new FeatureGenSuckers(ModBlocks.bananaSucker));
+		}
 
 		addDropCreator(new DropCreatorSeed() {
 			@Override public List<ItemStack> getHarvestDrop(World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int soilLife, int fortune) {
@@ -142,7 +148,12 @@ public class SpeciesPalm extends SpeciesFruit {
 		if (fruitName.equals(FruitRegistry.PAPAYA)){
 			growHeightOptions = 2;
 		}
-		addGenFeature(new FeatureGenFruitPalm(fruitBlock, growHeightOptions, fruitBlock instanceof BlockPamFruitPalm));
+		if (fruitName.equals(FruitRegistry.BANANA)) {
+			addGenFeature(new FeatureGenFruitPalm(fruitBlock, growHeightOptions, fruitBlock instanceof BlockPamFruitPalm, true));
+		} else {
+			addGenFeature(new FeatureGenFruitPalm(fruitBlock, growHeightOptions, fruitBlock instanceof BlockPamFruitPalm));
+		}
+
 	}
 
 	@Override

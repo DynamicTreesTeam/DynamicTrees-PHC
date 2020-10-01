@@ -1,8 +1,8 @@
 {
     "variants": {
-        "age=0": { "model": "dynamictreesphc:fruit/apricot_age0" },
-        "age=1": { "model": "dynamictreesphc:fruit/apricot_age1" },
-        "age=2": { "model": "dynamictreesphc:fruit/apricot_age2" },
-        "age=3": { "model": "dynamictreesphc:fruit/apricot_age3" }
+        "age=0": { "model": "dynamictreesphc:fruit/durian_age0" },
+        "age=1": { "model": "dynamictreesphc:fruit/durian_age1" },
+        "age=2": { "model": "dynamictreesphc:fruit/durian_age2" },
+        "age=3": { "model": "dynamictreesphc:fruit/durian_age3" }
     }
 }

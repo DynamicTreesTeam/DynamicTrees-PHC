@@ -146,8 +146,7 @@ public class BlockMapleSpileBucket extends BlockMapleSpile {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        switch (state.getValue(FACING))
-        {
+        switch (state.getValue(FACING)) {
             case SOUTH:
                 return SPILEBUCKET_SOUTH_AABB.setMaxY(12 /16f);
             case NORTH:

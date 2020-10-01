@@ -14,7 +14,10 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.Objects;
 
 public class ModRecipes {
 	
@@ -34,6 +37,16 @@ public class ModRecipes {
 			com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(new ItemStack(sapling), species.getSeedStack(1), true, "seedfromsapling");
 
 		}
+
+		//We add passionfruit recipes separately since the whole thing is handled in a different way
+		ItemStack passionfruitSeed = new ItemStack(ModItems.passionfruitSeed);
+		ItemStack passionfruit = new ItemStack(FruitRegistry.getFood(FruitRegistry.PASSIONFRUIT));
+		ItemStack passionfruitSapling = new ItemStack(Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("harvestcraft", "passionfruit_sapling"))));
+		GameRegistry.addShapelessRecipe(new ResourceLocation(ModConstants.MODID, "passionfruitseedfromsapling"), null, passionfruitSeed, Ingredient.fromStacks(passionfruitSapling), Ingredient.fromItem(com.ferreusveritas.dynamictrees.ModItems.dirtBucket));
+		GameRegistry.addShapelessRecipe(new ResourceLocation(ModConstants.MODID, "passionfruitseedfromfruit"), null, passionfruitSeed, Ingredient.fromStacks(passionfruit), Ingredient.fromItem(com.ferreusveritas.dynamictrees.ModItems.dirtBucket));
+		GameRegistry.addShapelessRecipe(new ResourceLocation(ModConstants.MODID, "passionfruitsapling"), null, passionfruitSapling, Ingredient.fromStacks(passionfruitSeed), Ingredient.fromItem(com.ferreusveritas.dynamictrees.ModItems.dirtBucket));
+		GameRegistry.addShapelessRecipe(new ResourceLocation(ModConstants.MODID, "passionfruitseedfromfruitdirect"), null, passionfruitSeed, Ingredient.fromStacks(passionfruit));
+		OreDictionary.registerOre("treeSapling", passionfruitSeed);
 	}
 	
 	private static void speciesRecipes(Species species) {

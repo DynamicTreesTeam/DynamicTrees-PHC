@@ -1,0 +1,120 @@
+{
+  "multipart": [
+    {   "when": { "south": "true" },
+      "apply": { "model": "dynamictreesphc:vine_passionfruit" }
+    },
+    {   "when": { "west": "true" },
+      "apply": { "model": "dynamictreesphc:vine_passionfruit", "y": 90 }
+    },
+    {   "when": { "north": "true" },
+      "apply": { "model": "dynamictreesphc:vine_passionfruit", "y": 180 }
+    },
+    {   "when": { "east": "true" },
+      "apply": { "model": "dynamictreesphc:vine_passionfruit", "y": 270 }
+    },
+    {   "when": { "up": "true" },
+      "apply": { "model": "dynamictreesphc:vine_passionfruit_up" }
+    },
+    {   "when": { "up": "false", "north": "false", "west": "false", "south": "false", "east": "false"  },
+      "apply": { "model": "dynamictreesphc:vine_passionfruit_up" }
+    },
+
+
+    {   "when": { "up": "false", "north": "false", "west": "false", "south": "false", "east": "true" },
+      "apply": { "model": "dynamictreesphc:fruit/passionfruit_age3", "y": 270 }
+    },
+    {   "when": { "up": "false", "north": "false", "west": "false", "south": "true", "east": "false"  },
+      "apply": { "model": "dynamictreesphc:fruit/passionfruit_age3" }
+    },
+    {   "when": { "up": "false", "north": "false", "west": "true", "south": "false", "east": "false"  },
+      "apply": { "model": "dynamictreesphc:fruit/passionfruit_age3", "y": 90 }
+    },
+    {   "when": { "up": "false", "north": "true", "west": "false", "south": "false", "east": "false" },
+      "apply": { "model": "dynamictreesphc:fruit/passionfruit_age3", "y": 180 }
+    },
+    {   "when": { "up": "true" },
+      "apply": { "model": "dynamictreesphc:fruit/passionfruit_age3_up" }
+    },
+    {   "when": { "up": "false", "north": "false", "west": "false", "south": "false", "east": "false"  },
+      "apply": { "model": "dynamictreesphc:fruit/passionfruit_age3_up" }
+    },
+
+
+    {   "when": { "up": "false", "north": "true", "west": "false", "south": "true", "east": "false"  },
+      "apply": [
+        {"model": "dynamictreesphc:fruit/passionfruit_age3"},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 180}
+      ]
+    },
+    {   "when": { "up": "false", "north": "true", "west": "true", "south": "false", "east": "false"  },
+      "apply": [
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 90},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 180}
+      ]
+    },
+    {   "when": { "up": "false", "north": "true", "west": "false", "south": "false", "east": "true" },
+      "apply": [
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 270},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 180}
+      ]
+    },
+    {   "when": { "up": "false", "north": "false", "west": "true", "south": "true", "east": "false"  },
+      "apply": [
+        {"model": "dynamictreesphc:fruit/passionfruit_age3"},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 90}
+      ]
+    },
+    {   "when": { "up": "false", "north": "false", "west": "true", "south": "false", "east": "true" },
+      "apply": [
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 270},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 90}
+      ]
+    },
+    {   "when": { "up": "false", "north": "false", "west": "false", "south": "true", "east": "true" },
+      "apply": [
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 270},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3"}
+      ]
+    },
+
+
+    {   "when": { "up": "false", "north": "false", "west": "true", "south": "true", "east": "true"  },
+      "apply": [
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 90},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3"},
+        { "model": "dynamictreesphc:fruit/passionfruit_age3", "y": 270 }
+      ]
+    },
+    {   "when": { "up": "false", "north": "true", "west": "false", "south": "true", "east": "true" },
+      "apply": [
+        {"model": "dynamictreesphc:fruit/passionfruit_age3"},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 180 },
+        { "model": "dynamictreesphc:fruit/passionfruit_age3", "y": 270 }
+      ]
+    },
+    {   "when": { "up": "false", "north": "true", "west": "true", "south": "false", "east": "true"  },
+      "apply": [
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 90},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 180 },
+        { "model": "dynamictreesphc:fruit/passionfruit_age3", "y": 270 }
+      ]
+    },
+    {   "when": { "up": "false", "north": "true", "west": "true", "south": "true", "east": "false" },
+      "apply": [
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 90},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 180 },
+        { "model": "dynamictreesphc:fruit/passionfruit_age3" }
+      ]
+    },
+
+
+    {   "when": { "up": "false", "north": "true", "west": "true", "south": "true", "east": "true" },
+      "apply": [
+        {"model": "dynamictreesphc:fruit/passionfruit_age3"},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 90},
+        {"model": "dynamictreesphc:fruit/passionfruit_age3", "y": 180 },
+        { "model": "dynamictreesphc:fruit/passionfruit_age3", "y": 270 }
+      ]
+    }
+  ]
+}

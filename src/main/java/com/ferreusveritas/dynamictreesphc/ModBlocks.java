@@ -5,9 +5,7 @@ import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
-import com.ferreusveritas.dynamictreesphc.blocks.BlockDynamicLeavesPalm;
-import com.ferreusveritas.dynamictreesphc.blocks.BlockMapleSpile;
-import com.ferreusveritas.dynamictreesphc.blocks.BlockMapleSpileBucket;
+import com.ferreusveritas.dynamictreesphc.blocks.*;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOldLeaf;
@@ -27,6 +25,9 @@ import java.util.Map;
 public class ModBlocks {
 
 	public static BlockMapleSpile mapleSpile, mapleSpileWithBucket;
+	public static BlockSucker bananaSucker;
+	public static BlockVinePassionfruit passionfruitVine0, passionfruitVine1, passionfruitVine2, passionfruitVine3;
+	public static BlockDynamicSaplingPassionfruit passionfruitSapling;
 
 	public static LeavesProperties cinnamonLeavesProperties;
 	public static LeavesProperties mapleLeavesProperties;
@@ -46,8 +47,15 @@ public class ModBlocks {
 
 	public static void preInit() {
 
-		mapleSpile = new BlockMapleSpile(new ResourceLocation(ModConstants.MODID, "maplespile"));
-		mapleSpileWithBucket = new BlockMapleSpileBucket(new ResourceLocation(ModConstants.MODID, "maplespilebucket"));
+		mapleSpile = new BlockMapleSpile(new ResourceLocation(ModConstants.MODID, "maple_spile"));
+		mapleSpileWithBucket = new BlockMapleSpileBucket(new ResourceLocation(ModConstants.MODID, "maple_spile_bucket"));
+
+		bananaSucker = new BlockSucker(new ResourceLocation(ModConstants.MODID, "banana_sucker"));
+		passionfruitVine0 = new BlockVinePassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruit_vine"));
+		passionfruitVine1 = new BlockVinePassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruit_vine_age1"));
+		passionfruitVine2 = new BlockVinePassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruit_vine_age2"));
+		passionfruitVine3 = new BlockVinePassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruit_vine_age3"));
+		passionfruitSapling = new BlockDynamicSaplingPassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruit_sapling"));
 
 		leavesPalm = new BlockDynamicLeavesPalm("leaves_palm");
 		leavesDragonfruit = new BlockDynamicLeavesPalm("leaves_dragonfruit");
@@ -119,7 +127,8 @@ public class ModBlocks {
 
 		fruits.values().forEach(registry::register);
 
-		registry.registerAll(mapleSpile, mapleSpileWithBucket, leavesPalm, leavesDragonfruit);
+		registry.registerAll(mapleSpile, mapleSpileWithBucket, bananaSucker, leavesPalm, leavesDragonfruit);
+		registry.registerAll(passionfruitVine0, passionfruitVine1, passionfruitVine2, passionfruitVine3, passionfruitSapling);
 
 		treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(ModConstants.MODID).values());
 		registry.registerAll(treeBlocks.toArray(new Block[0]));

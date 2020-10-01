@@ -43,9 +43,7 @@ public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 		
 		for(Entry<Biome, RandomSpeciesSelector> entry : biomeMap.entrySet()) {
 			if(!BiomeDictionary.hasType(entry.getKey() , Type.SPOOKY)) { //Little fruit trees mess up the roof of the roofed forest
-				dbase.setSpeciesSelector(entry.getKey(), (pos, dirt, random) -> {
-					return random.nextFloat() < harvestCraftOccurance ? entry.getValue().getSpecies(pos, dirt, random): new SpeciesSelection();
-				}, Operation.SPLICE_BEFORE);
+				dbase.setSpeciesSelector(entry.getKey(), (pos, dirt, random) -> random.nextFloat() < harvestCraftOccurance ? entry.getValue().getSpecies(pos, dirt, random): new SpeciesSelection(), Operation.SPLICE_BEFORE);
 			}
 		}
 

@@ -6,7 +6,6 @@ import com.ferreusveritas.dynamictreesphc.ModSounds;
 import com.google.common.collect.Lists;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockAnvil;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
@@ -15,23 +14,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityFallingBlock;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -45,6 +35,7 @@ public class BlockPamFruit extends BlockFruit {
     protected final String fruitName;
 
     public static double randomFruitFallChance = 0.005D;
+    private static final float distanceFromPlayerToFall = 10;
 
     protected final AxisAlignedBB[] CHERRY = new AxisAlignedBB[] {
             new AxisAlignedBB(7/16.0, 1f, 7/16.0, 9/16.0, 15/16.0, 9/16.0),
@@ -92,9 +83,21 @@ public class BlockPamFruit extends BlockFruit {
         this.fruitName = name.getResourcePath();
     }
 
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        if (state.getValue(AGE) >= 3) {
+            ItemStack toDrop = this.getFruitDrop();
+            if (fruitName.equals(FruitRegistry.BANANA) && world instanceof World) {
+                toDrop.setCount(1 + ((World)world).rand.nextInt(4));
+            }
+            if (!toDrop.isEmpty()) {
+                drops.add(toDrop);
+            }
+        }
+    }
+
     @Override
     public boolean canBlockStay(World world, BlockPos pos, IBlockState state) {
-        if (fruitName.equals(FruitRegistry.DRAGONFRUIT)){
+        if (fruitName.equals(FruitRegistry.DRAGONFRUIT) || fruitName.equals(FruitRegistry.BANANA)){
             return world.getBlockState(pos.up()).getBlock() instanceof BlockLeaves || world.getBlockState(pos.up(2)).getBlock() instanceof BlockLeaves;
         }
         return super.canBlockStay(world,pos,state);
@@ -120,6 +123,9 @@ public class BlockPamFruit extends BlockFruit {
     }
 
     private void blockFall(World worldIn, BlockPos pos, IBlockState state) {
+        if (worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), distanceFromPlayerToFall, false) == null){
+            return;
+        }
         if ((worldIn.isAirBlock(pos.down()) || BlockFalling.canFallThrough(worldIn.getBlockState(pos.down()))) && pos.getY() >= 0)
         {
             if (worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32)))

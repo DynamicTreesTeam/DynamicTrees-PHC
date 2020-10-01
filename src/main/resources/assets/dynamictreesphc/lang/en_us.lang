@@ -115,5 +115,6 @@ tile.dynamictreesphc:paperbarkcutbranch.name=Paper Bark Tree
 tile.dynamictreesphc:dragonfruitbranch.name=Dragonfruit Cactus
 tile.dynamictreesphc:palmbranch.name=Palm Tree
 
-tile.dynamictreesphc:maplespile.name=Maple Syrup Spile
-tile.dynamictreesphc:maplespilebucket.name=Maple Syrup Spile
+tile.dynamictreesphc:maple_spile.name=Maple Syrup Spile
+tile.dynamictreesphc:maple_spile_bucket.name=Maple Syrup Spile
+tile.dynamictreesphc:passionfruit_vine.name=Passionfruit Vines

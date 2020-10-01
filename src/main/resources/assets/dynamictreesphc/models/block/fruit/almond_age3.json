@@ -1,0 +1,69 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dynamictreesphc:blocks/almond",
+		"apple": "dynamictreesphc:blocks/almond"
+	},
+	"elements": [
+		{
+			"from": [6.4, 11, 6.4],
+			"to": [9.6, 15, 9.6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [12, 5, 16, 10], "texture": "#apple"},
+				"east": {"uv": [8, 5, 12, 10], "texture": "#apple"},
+				"south": {"uv": [8, 5, 12, 10], "texture": "#apple"},
+				"west": {"uv": [8, 5, 12, 10], "texture": "#apple"},
+				"up": {"uv": [8, 0, 12, 4], "texture": "#apple"},
+				"down": {"uv": [8, 11, 12, 15], "texture": "#apple"}
+			}
+		},
+		{
+			"from": [9.6, 11, 6.4],
+			"to": [6.4, 15, 9.6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [12, 5, 16, 10], "texture": "#apple"},
+				"east": {"uv": [8, 5, 12, 10], "texture": "#apple"},
+				"south": {"uv": [8, 5, 12, 10], "texture": "#apple"},
+				"west": {"uv": [8, 5, 12, 10], "texture": "#apple"},
+				"up": {"uv": [8, 0, 12, 4], "texture": "#apple"},
+				"down": {"uv": [8, 11, 12, 15], "texture": "#apple"}
+			}
+		},
+		{
+			"from": [7.2, 11.4, 6.8],
+			"to": [8.8, 14.6, 9.2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8.4, 8.4]},
+			"faces": {
+				"north": {"uv": [13, 11, 15, 15], "texture": "#apple"},
+				"east": {"uv": [12, 11, 15, 15], "texture": "#apple"},
+				"south": {"uv": [13, 11, 15, 15], "texture": "#apple"},
+				"west": {"uv": [12, 11, 15, 15], "texture": "#apple"},
+				"up": {"uv": [13, 11, 15, 14], "texture": "#apple"},
+				"down": {"uv": [13, 12, 15, 15], "texture": "#apple"}
+			}
+		},
+		{
+			"from": [7.5, 15, 8],
+			"to": [8.5, 16, 8],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"north": {"uv": [15, 0, 16, 1], "texture": "#apple"},
+				"south": {"uv": [15, 0, 16, 1], "texture": "#apple"}
+			}
+		},
+		{
+			"from": [8, 15, 7.5],
+			"to": [8, 16, 8.5],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"east": {"uv": [15, 1, 16, 2], "texture": "#apple"},
+				"west": {"uv": [15, 1, 16, 2], "texture": "#apple"}
+			}
+		}
+	]
+}

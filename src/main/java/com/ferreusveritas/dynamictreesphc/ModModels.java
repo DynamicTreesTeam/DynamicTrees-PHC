@@ -18,6 +18,8 @@ public class ModModels {
 			ModelHelper.regModel(tree);
 		}
 		ModelHelper.regModel(TreePaperBark.paperbarkCutBranch);
+		ModelHelper.regModel(ModItems.passionfruitVine);
+		ModelHelper.regModel(ModItems.passionfruitSeed);
 
 		ModTrees.phcFruitSpecies.values().stream().filter(s -> s.getSeed() != Seed.NULLSEED).forEach(s -> ModelHelper.regModel(s.getSeed()));//Register Seed Item Models
 	}

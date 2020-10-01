@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=south": { "model": "dynamictreesphc:banana_sucker" },
+        "facing=west": { "model": "dynamictreesphc:banana_sucker", "y": 90 },
+        "facing=north": { "model": "dynamictreesphc:banana_sucker", "y": 180 },
+        "facing=east": { "model": "dynamictreesphc:banana_sucker", "y": 270 }
+    }
+}

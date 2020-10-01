@@ -112,7 +112,7 @@ public class ModTrees {
 					fruit = new BlockPamFruit(new ResourceLocation(ModConstants.MODID, entry.getKey()));
 				}
 				ModBlocks.fruits.put(entry.getKey(), fruit);
-				if (ModConstants.SEEDISFRUIT.contains(entry.getKey())){
+				if (ModConstants.FRUITDROPSSEED.contains(entry.getKey())){
 					fruit.setDroppedItem(entry.getValue().getSeedStack(1));
 				} else {
 					fruit.setDroppedItem(new ItemStack(FruitRegistry.getFood(entry.getKey())));
@@ -133,6 +133,8 @@ public class ModTrees {
 
 		//Dynamic Trees already has an apple tree
 		creatorMap.remove(FruitRegistry.APPLE);
+		//Passion fruit is not a tree, its a vine
+		creatorMap.remove(FruitRegistry.PASSIONFRUIT);
 
 		//Temperate nut trees are typically hardwoods that grow slowly and usually very large.
 		creatorMap.put(FruitRegistry.WALNUT, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType) {

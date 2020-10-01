@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dynamictreesphc:blocks/almond",
+		"apple": "dynamictreesphc:blocks/almond"
+	},
+	"elements": [
+		{
+			"from": [6.4, 12, 6.4],
+			"to": [9.6, 16, 9.6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 9, 8]},
+			"faces": {
+				"north": {"uv": [4, 5, 8, 10], "texture": "#apple"},
+				"east": {"uv": [4, 5, 8, 10], "texture": "#apple"},
+				"south": {"uv": [4, 5, 8, 10], "texture": "#apple"},
+				"west": {"uv": [4, 5, 8, 10], "texture": "#apple"},
+				"up": {"uv": [4, 0, 8, 4], "texture": "#apple"},
+				"down": {"uv": [4, 11, 8, 15], "texture": "#apple"}
+			}
+		}
+	]
+}

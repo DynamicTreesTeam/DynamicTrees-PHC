@@ -23,6 +23,12 @@ public class FeatureGenFruitPalm implements IPostGenFeature, IPostGrowFeature {
     BlockFruit fruitPod;
     int allowedSize, frondHeight;
     boolean isSided;
+    Integer forceHeight = null;
+
+    public FeatureGenFruitPalm(BlockFruit fruitPod, int size, boolean isSided, boolean forceHeightDown){
+        this(fruitPod, size, isSided);
+        this.forceHeight = forceHeightDown?1:0;
+    }
 
     public FeatureGenFruitPalm(BlockFruit fruitPod, int size, boolean isSided, int frondHeight){
         this.fruitPod = fruitPod;
@@ -35,10 +41,17 @@ public class FeatureGenFruitPalm implements IPostGenFeature, IPostGrowFeature {
         this(fruitPod, size, isSided, 20);
     }
 
+    private int getRandPosition (World world){
+        if (forceHeight != null){
+            return forceHeight;
+        }
+        return world.rand.nextInt(allowedSize);
+    }
+
     @Override
     public boolean postGrow(World world, BlockPos rootPos, BlockPos treePos, Species species, int soilLife, boolean natural) {
-        if(world.rand.nextInt() % 16 == 0) {
-            addFruit(world, rootPos, getLeavesHeight(rootPos, world).down(world.rand.nextInt(allowedSize)), false);
+        if(natural && world.rand.nextInt() % 16 == 0) {
+            addFruit(world, rootPos, getLeavesHeight(rootPos, world).down(getRandPosition(world)), false);
         }
         return false;
     }
@@ -58,7 +71,7 @@ public class FeatureGenFruitPalm implements IPostGenFeature, IPostGrowFeature {
         boolean placed = false;
         for (int i=0;i<8;i++){
             if(world.rand.nextInt() % 4 == 0) {
-                addFruit(world, rootPos, getLeavesHeight(rootPos, world).down(world.rand.nextInt(allowedSize)),true);
+                addFruit(world, rootPos, getLeavesHeight(rootPos, world).down(getRandPosition(world)),true);
                 placed = true;
             }
         }
