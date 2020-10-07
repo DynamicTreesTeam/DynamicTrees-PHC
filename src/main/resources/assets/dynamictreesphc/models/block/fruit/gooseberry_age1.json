@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dynamictreesphc:blocks/gooseberry",
+		"apple": "dynamictreesphc:blocks/gooseberry"
+	},
+	"elements": [
+		{
+			"from": [7.2, 14.4, 7.2],
+			"to": [8.8, 16, 8.8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9.2, 9, 6.8]},
+			"faces": {
+				"north": {"uv": [10, 5, 15, 10], "texture": "#apple"},
+				"east": {"uv": [10, 5, 15, 10], "texture": "#apple"},
+				"south": {"uv": [10, 5, 15, 10], "texture": "#apple"},
+				"west": {"uv": [10, 5, 15, 10], "texture": "#apple"},
+				"up": {"uv": [10, 0, 15, 5], "texture": "#apple"},
+				"down": {"uv": [10, 10, 15, 15], "texture": "#apple"}
+			}
+		}
+	]
+}

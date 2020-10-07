@@ -69,7 +69,7 @@ public class ModTrees {
 		familyMap.put(SaplingType.TEMPERATE, TreeRegistry.findSpeciesSloppy("oak").getFamily());
 		familyMap.put(SaplingType.WARM, TreeRegistry.findSpeciesSloppy("jungle").getFamily());
 		familyMap.put(SaplingType.COLD, TreeRegistry.findSpeciesSloppy("spruce").getFamily());
-		
+
 		//Set up a map of species names and their creator lambdas
 		Map<String, ISpeciesCreator> creatorMap = new HashMap<>();
 		FruitRegistry.registeringFruits.forEach((species, sapling) -> {
@@ -82,7 +82,7 @@ public class ModTrees {
 		
 		//Tailor creators to fit Dynamic Trees
 		alterCreatorMap(creatorMap);
-		
+
 		//Create all of the species
 		for(Entry<String, ISpeciesCreator> creatorEntry : creatorMap.entrySet()) {
 			String fruitName = creatorEntry.getKey();
@@ -101,6 +101,11 @@ public class ModTrees {
 				Species.REGISTRY.register(species);
 			}
 		}
+
+		//Create Passionfruit seperately
+		//This isnt a passionfruit tree but a normal oak with passionfruit vines around it
+		Species passionfruit = new SpeciesPassionfruit(familyMap.get(SaplingType.WARM));
+		Species.REGISTRY.register(passionfruit);
 
 		//Create fruit blocks
 		for(Entry<String, Species> entry : phcFruitSpecies.entrySet()) {
@@ -127,6 +132,9 @@ public class ModTrees {
 		for(Entry<String, Species> entry : phcFruitSpecies.entrySet()) {
 			TreeRegistry.registerSaplingReplacer(FruitRegistry.getSapling(entry.getKey()).getDefaultState(), entry.getValue());
 		}
+
+		//we add passionfruit to the fruit species list to avoid adding fruit blocks and sapling replacers.
+		phcFruitSpecies.put(FruitRegistry.PASSIONFRUIT, passionfruit);
 	}
 	
 	private static void alterCreatorMap(Map<String, ISpeciesCreator> creatorMap) {

@@ -34,7 +34,7 @@ import java.util.*;
 
 public class BlockVinePassionfruit extends BlockVine {
 
-    private static final float baseFruitingChance = 0.02f;
+    private static final float baseFruitingChance = 0.002f;
     private static final float fruitGrowChance = 0.2f;
 
     public BlockVinePassionfruit (ResourceLocation name){
