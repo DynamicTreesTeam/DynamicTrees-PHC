@@ -31,13 +31,14 @@
 				"down": {"uv": [10, 10, 14, 14], "texture": "#apple"}
 			}
 		},
-		{   "from": [ 7, 16, 8.2 ],
-			"to": [ 9, 16, 11.8 ],
-			"rotation": { "origin": [ 8, 16, 8.2 ], "axis": "x", "angle": 22.5},
+		{
+			"from": [7, 16, 8.2],
+			"to": [9, 16, 11.8],
 			"shade": false,
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 16, 8.2]},
 			"faces": {
-				"up": { "uv": [ 1, 9, 4, 15 ], "texture": "#apple" },
-				"down": { "uv": [ 1, 9, 4, 15 ], "texture": "#apple" }
+				"up": {"uv": [1, 9, 4, 15], "texture": "#apple"},
+				"down": {"uv": [1, 15, 4, 9], "texture": "#apple"}
 			}
 		},
 		{
