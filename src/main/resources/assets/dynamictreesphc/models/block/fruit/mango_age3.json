@@ -2,7 +2,6 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dynamictreesphc:blocks/mango",
 		"apple": "dynamictreesphc:blocks/mango"
 	},
 	"elements": [
@@ -37,6 +36,27 @@
 				"east": {"uv": [15, 1, 16, 2], "texture": "#apple"},
 				"west": {"uv": [15, 1, 16, 2], "texture": "#apple"}
 			}
+		},
+		{
+			"from": [7, 16, 8.2],
+			"to": [9, 16, 11.8],
+			"shade": false,
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 16, 8.2]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 0], "texture": "#apple"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#apple"},
+				"south": {"uv": [0, 0, 0, 0], "texture": "#apple"},
+				"west": {"uv": [0, 0, 0, 0], "texture": "#apple"},
+				"up": {"uv": [1, 9, 4, 15], "texture": "#apple"},
+				"down": {"uv": [1, 15, 4, 9], "texture": "#apple"}
+			}
+		}
+	],
+	"groups": [0, 1, 2,
+		{
+			"name": "pear_age3",
+			"origin": [8, 8, 8],
+			"children": [3]
 		}
 	]
 }
