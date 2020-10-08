@@ -1,6 +1,7 @@
 package com.ferreusveritas.dynamictreesphc.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
+import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -31,10 +32,11 @@ public class BlockPamFruitPalm extends BlockPamFruit {
 
     @Override
     public boolean canBlockStay(World world, BlockPos pos, IBlockState state) {
+        boolean requiresFrondBase = fruitName.equals(FruitRegistry.COCONUT);
         EnumFacing dir = state.getValue(FACING);
         IBlockState offsetState = world.getBlockState(pos.offset(dir));
         IBlockState offsetUpState = world.getBlockState(pos.offset(dir).up());
-        return offsetState.getBlock() instanceof BlockBranch && offsetUpState.getBlock() instanceof BlockLeaves;
+        return offsetState.getBlock() instanceof BlockBranch && (!requiresFrondBase || offsetUpState.getBlock() instanceof BlockLeaves);
     }
 
     public int getMetaFromState(IBlockState state)
