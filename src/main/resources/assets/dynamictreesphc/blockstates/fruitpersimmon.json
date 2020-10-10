@@ -1,8 +1,8 @@
 {
     "variants": {
-        "age=0": { "model": "dynamictreesphc:fruit/permisson_age0" },
-        "age=1": { "model": "dynamictreesphc:fruit/permisson_age1" },
-        "age=2": { "model": "dynamictreesphc:fruit/permisson_age2" },
-        "age=3": { "model": "dynamictreesphc:fruit/permisson_age3" }
+        "age=0": { "model": "dynamictreesphc:fruit/persimmon_age0" },
+        "age=1": { "model": "dynamictreesphc:fruit/persimmon_age1" },
+        "age=2": { "model": "dynamictreesphc:fruit/persimmon_age2" },
+        "age=3": { "model": "dynamictreesphc:fruit/persimmon_age3" }
     }
 }

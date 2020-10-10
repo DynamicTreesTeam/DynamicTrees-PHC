@@ -7,23 +7,65 @@
 	},
 	"elements": [
 		{
-			"from": [7, 15, 8],
-			"to": [9, 16, 8],
+			"name": "Element",
+			"from": [7.75, 15.5, 8],
+			"to": [8.25, 16, 8],
 			"shade": false,
-			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 17, 8], "rescale": true},
 			"faces": {
-				"north": {"uv": [0, 9, 2, 9.5], "texture": "#apple"},
-				"south": {"uv": [0, 9, 2, 9.5], "texture": "#apple"}
+				"north": {"uv": [0, 9, 0.5, 9.5], "texture": "#apple"},
+				"south": {"uv": [0, 9, 0.5, 9.5], "texture": "#apple"}
 			}
 		},
 		{
-			"from": [8, 15, 7],
-			"to": [8, 16, 9],
+			"name": "Element",
+			"from": [8, 15.5, 7.75],
+			"to": [8, 16, 8.25],
 			"shade": false,
-			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 17, 8], "rescale": true},
 			"faces": {
-				"east": {"uv": [0, 9, 2, 9.5], "texture": "#apple"},
-				"west": {"uv": [0, 9, 2, 9.5], "texture": "#apple"}
+				"east": {"uv": [1.5, 9, 2, 9.5], "texture": "#apple"},
+				"west": {"uv": [1.5, 9, 2, 9.5], "texture": "#apple"}
+			}
+		},
+		{
+			"name": "PlaneY3",
+			"from": [7.5, 16, 8],
+			"to": [8.5, 16, 9],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [7.5, 16, 8]},
+			"faces": {
+				"up": {"uv": [0.5, 9.5, 1.5, 8.5], "texture": "#apple"},
+				"down": {"uv": [0.5, 8.5, 1.5, 9.5], "texture": "#apple"}
+			}
+		},
+		{
+			"name": "PlaneY3",
+			"from": [7, 16, 7.5],
+			"to": [8, 16, 8.5],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [8, 16, 7.5]},
+			"faces": {
+				"up": {"uv": [0.5, 9.5, 1.5, 8.5], "rotation": 90, "texture": "#apple"},
+				"down": {"uv": [0.5, 8.5, 1.5, 9.5], "rotation": 270, "texture": "#apple"}
+			}
+		},
+		{
+			"name": "PlaneY3",
+			"from": [7.5, 16, 7],
+			"to": [8.5, 16, 8],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8.5, 16, 8]},
+			"faces": {
+				"up": {"uv": [0.5, 9.5, 1.5, 8.5], "rotation": 180, "texture": "#apple"},
+				"down": {"uv": [0.5, 8.5, 1.5, 9.5], "rotation": 180, "texture": "#apple"}
+			}
+		},
+		{
+			"name": "PlaneY3",
+			"from": [8, 16, 7.5],
+			"to": [9, 16, 8.5],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [8, 16, 8.5]},
+			"faces": {
+				"up": {"uv": [0.5, 9.5, 1.5, 8.5], "rotation": 270, "texture": "#apple"},
+				"down": {"uv": [0.5, 8.5, 1.5, 9.5], "rotation": 90, "texture": "#apple"}
 			}
 		}
 	]

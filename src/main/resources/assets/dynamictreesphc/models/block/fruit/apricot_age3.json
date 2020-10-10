@@ -1,41 +1,7 @@
 {
-	"ambientocclusion": false,
+	"parent": "dynamictreesphc:block/fruit/generic/fruit_small_age3",
 	"textures": {
 		"particle": "dynamictreesphc:blocks/apricot",
 		"apple": "dynamictreesphc:blocks/apricot"
-	},
-	"elements": [
-		{
-			"from": [6.5, 12, 6.5],
-			"to": [9.5, 15, 9.5],
-			"faces": {
-				"north": {"uv": [10, 5, 14, 9], "texture": "#apple"},
-				"east": {"uv": [10, 5, 14, 9], "texture": "#apple"},
-				"south": {"uv": [10, 5, 14, 9], "texture": "#apple"},
-				"west": {"uv": [10, 5, 14, 9], "texture": "#apple"},
-				"up": {"uv": [10, 0, 14, 4], "texture": "#apple"},
-				"down": {"uv": [10, 10, 14, 14], "texture": "#apple"}
-			}
-		},
-		{
-			"from": [7.5, 15, 8],
-			"to": [8.5, 16, 8],
-			"shade": false,
-			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
-			"faces": {
-				"north": {"uv": [15, 0, 16, 1], "texture": "#apple"},
-				"south": {"uv": [15, 0, 16, 1], "texture": "#apple"}
-			}
-		},
-		{
-			"from": [8, 15, 7.5],
-			"to": [8, 16, 8.5],
-			"shade": false,
-			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
-			"faces": {
-				"east": {"uv": [15, 1, 16, 2], "texture": "#apple"},
-				"west": {"uv": [15, 1, 16, 2], "texture": "#apple"}
-			}
-		}
-	]
+	}
 }
