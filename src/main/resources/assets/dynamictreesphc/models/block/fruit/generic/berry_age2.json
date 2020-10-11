@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dynamictreesphc:blocks/gooseberry",
-		"apple": "dynamictreesphc:blocks/gooseberry"
+		"particle": "blocks/gooseberry",
+		"apple": "blocks/gooseberry"
 	},
 	"elements": [
 		{

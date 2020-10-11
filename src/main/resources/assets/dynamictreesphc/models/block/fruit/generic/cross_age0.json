@@ -1,8 +1,8 @@
 {
     "ambientocclusion": false,
     "textures": {
-        "particle": "dynamictreesphc:blocks/stone",
-        "apple": "dynamictreesphc:blocks/stone"
+        "particle": "blocks/stone",
+        "apple": "blocks/stone"
     },
     "elements": [
         {   "from": [ 7, 15, 8 ],

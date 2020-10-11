@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"apple": "dynamictreesphc:blocks/gooseberry"
+		"apple": "blocks/stone"
 	},
 	"elements": [
 		{
