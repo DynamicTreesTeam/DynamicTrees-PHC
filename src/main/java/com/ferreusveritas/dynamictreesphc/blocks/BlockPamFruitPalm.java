@@ -1,6 +1,7 @@
 package com.ferreusveritas.dynamictreesphc.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
+import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.properties.PropertyDirection;
@@ -17,8 +18,8 @@ public class BlockPamFruitPalm extends BlockPamFruit {
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
-    protected final float[] DATE_OFFSET = {6 /16f, 5.5f /16f, 4 /16f, 4 /16f};
-    protected final float[] PAPAYA_OFFSET = {6 /16f, 5.5f /16f, 4 /16f, 4 /16f};
+    protected final float[] DATE_OFFSET = {6 /16f, 6 /16f, 6 /16f, 6 /16f};
+    protected final float[] PAPAYA_OFFSET = {10.6f /16f, 10.2f /16f, 9.8f /16f, 10.2f /16f};
     protected final float[] COCONUT_OFFSET = {6 /16f, 5f /16f, 4 /16f, 4 /16f};
 
     public BlockPamFruitPalm(ResourceLocation name){
@@ -56,12 +57,12 @@ public class BlockPamFruitPalm extends BlockPamFruit {
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess access, BlockPos pos) {
         EnumFacing dir = state.getValue(FACING);
         switch (fruitName){
-            case "date":
-                return offsetBoundingBox(DATE[state.getValue(AGE)], dir, DATE_OFFSET[state.getValue(AGE)]);
-            case "papaya":
-                return offsetBoundingBox(PAPAYA[state.getValue(AGE)], dir, PAPAYA_OFFSET[state.getValue(AGE)]);
-            case "coconut":
-                return offsetBoundingBox(COCONUT[state.getValue(AGE)], dir, COCONUT_OFFSET[state.getValue(AGE)]);
+            case FruitRegistry.DATE:
+                return offsetBoundingBox(ModConstants.fruitBoxes.DATE[state.getValue(AGE)], dir, DATE_OFFSET[state.getValue(AGE)]);
+            case FruitRegistry.PAPAYA:
+                return offsetBoundingBox(ModConstants.fruitBoxes.PAPAYA[state.getValue(AGE)], dir, PAPAYA_OFFSET[state.getValue(AGE)]);
+            case FruitRegistry.COCONUT:
+                return offsetBoundingBox(ModConstants.fruitBoxes.COCONUT[state.getValue(AGE)], dir, COCONUT_OFFSET[state.getValue(AGE)]);
             default:
                 return offsetBoundingBox(super.getBoundingBox(state, access, pos), dir, 6/16f);
         }

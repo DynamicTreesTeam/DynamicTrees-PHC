@@ -1,7 +1,30 @@
 {
-	"parent": "dynamictreesphc:block/fruit/generic/cross_age0",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
 	"textures": {
 		"particle": "dynamictreesphc:blocks/pistachio",
 		"apple": "dynamictreesphc:blocks/pistachio"
-	}
+	},
+	"elements": [
+		{
+			"from": [8, 11.8, 6],
+			"to": [8, 16, 10],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [10, 11, 15, 16], "texture": "#apple"},
+				"west": {"uv": [10, 11, 15, 16], "texture": "#apple"}
+			}
+		},
+		{
+			"from": [8, 11.8, 6],
+			"to": [8, 16, 10],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [10, 11, 15, 16], "texture": "#apple"},
+				"west": {"uv": [10, 11, 15, 16], "texture": "#apple"}
+			}
+		}
+	]
 }

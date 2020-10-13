@@ -20,7 +20,7 @@
 			}
 		},
 		{
-			"from": [8, 13.4, 7.5],
+			"from": [8, 13.6, 7.5],
 			"to": [8, 16, 8.5],
 			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
@@ -30,7 +30,7 @@
 			}
 		},
 		{
-			"from": [7.5, 13.4, 8],
+			"from": [7.5, 13.6, 8],
 			"to": [8.5, 16, 8],
 			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},

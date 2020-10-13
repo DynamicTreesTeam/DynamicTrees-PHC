@@ -8,8 +8,8 @@
 	"elements": [
 		{
 			"name": "fruit",
-			"from": [6.5, 12, 6.5],
-			"to": [9.5, 16, 9.5],
+			"from": [6.4, 12, 6.4],
+			"to": [9.6, 16, 9.6],
 			"faces": {
 				"north": {"uv": [7, 4, 11, 9], "texture": "#fruit"},
 				"east": {"uv": [7, 4, 11, 9], "texture": "#fruit"},
@@ -21,8 +21,8 @@
 		},
 		{
 			"name": "tail1",
-			"from": [6.4, 10, 8],
-			"to": [9.6, 12, 8],
+			"from": [6.1, 9.6, 8],
+			"to": [9.9, 12, 8],
 			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 9, 8]},
 			"faces": {
@@ -32,8 +32,8 @@
 		},
 		{
 			"name": "tail2",
-			"from": [8, 10, 6.4],
-			"to": [8, 12, 9.6],
+			"from": [8, 9.6, 6.1],
+			"to": [8, 12, 9.9],
 			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 9, 8]},
 			"faces": {

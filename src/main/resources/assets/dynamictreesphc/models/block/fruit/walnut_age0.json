@@ -1,5 +1,5 @@
 {
-    "parent": "dynamictreesphc:block/fruit/generic/cross_age0",
+    "parent": "dynamictreesphc:block/fruit/generic/flower_age0",
     "textures": {
         "particle": "dynamictreesphc:blocks/walnut",
         "apple": "dynamictreesphc:blocks/walnut"

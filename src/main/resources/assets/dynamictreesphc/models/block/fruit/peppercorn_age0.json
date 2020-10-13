@@ -1,7 +1,30 @@
 {
-  "parent": "dynamictreesphc:block/fruit/generic/cross_age0",
-  "textures": {
-    "particle": "dynamictreesphc:blocks/peppercorn",
-    "apple": "dynamictreesphc:blocks/peppercorn"
-  }
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dynamictreesphc:blocks/peppercorn",
+		"apple": "dynamictreesphc:blocks/peppercorn"
+	},
+	"elements": [
+		{
+			"from": [8, 12, 7.2],
+			"to": [8, 16, 8.8],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [0, 14, 5, 16], "rotation": 90, "texture": "#apple"},
+				"west": {"uv": [0, 14, 5, 16], "rotation": 90, "texture": "#apple"}
+			}
+		},
+		{
+			"from": [8, 12, 7.2],
+			"to": [8, 16, 8.8],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [0, 14, 5, 16], "rotation": 90, "texture": "#apple"},
+				"west": {"uv": [0, 14, 5, 16], "rotation": 90, "texture": "#apple"}
+			}
+		}
+	]
 }

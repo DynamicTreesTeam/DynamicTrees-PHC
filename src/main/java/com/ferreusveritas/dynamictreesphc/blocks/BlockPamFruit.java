@@ -37,47 +37,6 @@ public class BlockPamFruit extends BlockFruit {
     public static double randomFruitFallChance = 0.005D;
     private static final float distanceFromPlayerToFall = 10;
 
-    protected final AxisAlignedBB[] CHERRY = new AxisAlignedBB[] {
-            new AxisAlignedBB(7/16.0, 1f, 7/16.0, 9/16.0, 15/16.0, 9/16.0),
-            new AxisAlignedBB(6.4/16.0, 1f, 6.4/16.0, 9.6/16.0, 13.6/16.0, 9.6/16.0),
-            new AxisAlignedBB(6/16.0, 14.4/16.0, 6/16.0, 10/16.0, 11.2/16.0, 10/16.0),
-            new AxisAlignedBB(5.2/16.0, 13.6/16.0, 5.2/16.0, 10.8/16.0, 10.4/16.0, 10.8/16.0),
-    };
-    protected final AxisAlignedBB[] DATE = new AxisAlignedBB[] {
-            new AxisAlignedBB(
-                    7/16.0, 16/16f, 7/16.0,
-                    9/16.0, 15/16.0, 9/16.0),
-            new AxisAlignedBB(
-                    5.5/16.0, 15/16f, 5.5/16.0,
-                    10.5/16.0, 10/16.0, 10.5/16.0),
-            new AxisAlignedBB(
-                    4/16.0, 15/16.0, 4/16.0,
-                    12/16.0, 7/16.0, 12/16.0),
-            new AxisAlignedBB(
-                    4/16.0, 14/16.0, 4/16.0,
-                    12/16.0, 7/16.0, 12/16.0),
-    };
-    protected final AxisAlignedBB[] PAPAYA = new AxisAlignedBB[] {
-            new AxisAlignedBB(
-                    7/16.0, 16/16f, 7/16.0,
-                    9/16.0, 15/16.0, 9/16.0),
-            new AxisAlignedBB(
-                    5.5/16.0, 15/16f, 5.5/16.0,
-                    10.5/16.0, 10/16.0, 10.5/16.0),
-            new AxisAlignedBB(
-                    4/16.0, 15/16.0, 4/16.0,
-                    12/16.0, 7/16.0, 12/16.0),
-            new AxisAlignedBB(
-                    4/16.0, 14/16.0, 4/16.0,
-                    12/16.0, 7/16.0, 12/16.0),
-    };
-    protected final AxisAlignedBB[] COCONUT = new AxisAlignedBB[] {
-            new AxisAlignedBB(7/16.0, 16/16f, 7/16.0, 9/16.0, 15/16.0, 9/16.0),
-            new AxisAlignedBB(5.5/16.0, 15/16f, 5.5/16.0, 10.5/16.0, 10/16.0, 10.5/16.0),
-            new AxisAlignedBB(4/16.0, 15/16.0, 4/16.0, 12/16.0, 7/16.0, 12/16.0),
-            new AxisAlignedBB(4/16.0, 14/16.0, 4/16.0, 12/16.0, 6/16.0, 12/16.0),
-    };
-
     public BlockPamFruit (ResourceLocation name){
         super(new ResourceLocation(name.getResourceDomain(), "fruit"+name.getResourcePath()).toString());
         this.fruitName = name.getResourcePath();
@@ -237,10 +196,60 @@ public class BlockPamFruit extends BlockFruit {
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess access, BlockPos pos) {
         switch (fruitName){
+            case FruitRegistry.ALMOND:
+            case FruitRegistry.STARFRUIT:
+            case FruitRegistry.LEMON:
+            case FruitRegistry.LIME:
+            case FruitRegistry.FIG:
+            case FruitRegistry.PAWPAW:
+                return ModConstants.fruitBoxes.FRUIT_THIN[state.getValue(AGE)];
+            case FruitRegistry.APRICOT:
+            case FruitRegistry.GUAVA:
+            case FruitRegistry.POMEGRANATE:
+            case FruitRegistry.PERSIMMON:
+                return ModConstants.fruitBoxes.FRUIT_SMALL[state.getValue(AGE)];
+            case FruitRegistry.AVOCADO:
+            case FruitRegistry.PEAR:
+                return ModConstants.fruitBoxes.FRUIT_LONG[state.getValue(AGE)];
+            case FruitRegistry.GOOSEBERRY:
+            case FruitRegistry.LYCHEE:
+            case FruitRegistry.OLIVE:
+                return ModConstants.fruitBoxes.FRUIT_BERRY[state.getValue(AGE)];
 
-            case "cherry":
-                return CHERRY[state.getValue(AGE)];
-
+            case FruitRegistry.BANANA:
+                return ModConstants.fruitBoxes.BANANA[state.getValue(AGE)];
+            case FruitRegistry.CASHEW:
+                return ModConstants.fruitBoxes.CASHEW[state.getValue(AGE)];
+            case FruitRegistry.BREADFRUIT:
+                return ModConstants.fruitBoxes.BREADFRUIT[state.getValue(AGE)];
+            case FruitRegistry.DRAGONFRUIT:
+                return ModConstants.fruitBoxes.DRAGONFRUIT[state.getValue(AGE)];
+            case FruitRegistry.DURIAN:
+                return ModConstants.fruitBoxes.DURIAN[state.getValue(AGE)];
+            case FruitRegistry.GRAPEFRUIT:
+                return ModConstants.fruitBoxes.GRAPEFRUIT[state.getValue(AGE)];
+            case FruitRegistry.HAZELNUT:
+                return ModConstants.fruitBoxes.HAZELNUT[state.getValue(AGE)];
+            case FruitRegistry.JACKFRUIT:
+                return ModConstants.fruitBoxes.JACKFRUIT[state.getValue(AGE)];
+            case FruitRegistry.PEPPERCORN:
+                return ModConstants.fruitBoxes.PEPPERCORN[state.getValue(AGE)];
+            case FruitRegistry.MANGO:
+                return ModConstants.fruitBoxes.MANGO[state.getValue(AGE)];
+            case FruitRegistry.CHERRY:
+                return ModConstants.fruitBoxes.CHERRY[state.getValue(AGE)];
+            case FruitRegistry.PISTACHIO:
+                return ModConstants.fruitBoxes.PISTACHIO[state.getValue(AGE)];
+            case FruitRegistry.RAMBUTAN:
+                return ModConstants.fruitBoxes.RAMBUTAN[state.getValue(AGE)];
+            case FruitRegistry.SOURSOP:
+                return ModConstants.fruitBoxes.SOURSOP[state.getValue(AGE)];
+            case FruitRegistry.SPIDERWEB:
+                return ModConstants.fruitBoxes.SPIDERWEB[state.getValue(AGE)];
+            case FruitRegistry.TAMARIND:
+                return ModConstants.fruitBoxes.TAMARIND[state.getValue(AGE)];
+            case FruitRegistry.VANILLABEAN:
+                return ModConstants.fruitBoxes.VANILLABEAN[state.getValue(AGE)];
             default:
                 return super.getBoundingBox(state, access, pos);
         }

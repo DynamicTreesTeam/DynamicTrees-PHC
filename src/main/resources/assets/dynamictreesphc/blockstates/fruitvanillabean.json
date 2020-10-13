@@ -6,19 +6,25 @@
         {   "when": { "age": 1 },
             "apply": [
                 { "model": "dynamictreesphc:fruit/vanillabean_age1" },
-                { "model": "dynamictreesphc:fruit/vanillabean_age1", "y": 90 }
+                { "model": "dynamictreesphc:fruit/vanillabean_age1", "y": 90 },
+                { "model": "dynamictreesphc:fruit/vanillabean_age1", "y": 180 },
+                { "model": "dynamictreesphc:fruit/vanillabean_age1", "y": 270 }
             ]
         },
         {   "when": { "age": 2 },
             "apply": [
                 { "model": "dynamictreesphc:fruit/vanillabean_age2" },
-                { "model": "dynamictreesphc:fruit/vanillabean_age2", "y": 90 }
+                { "model": "dynamictreesphc:fruit/vanillabean_age2", "y": 90 },
+                { "model": "dynamictreesphc:fruit/vanillabean_age2", "y": 180 },
+                { "model": "dynamictreesphc:fruit/vanillabean_age2", "y": 270 }
             ]
         },
         {   "when": { "age": 3 },
             "apply": [
                 { "model": "dynamictreesphc:fruit/vanillabean_age3" },
-                { "model": "dynamictreesphc:fruit/vanillabean_age3", "y": 90 }
+                { "model": "dynamictreesphc:fruit/vanillabean_age3", "y": 90 },
+                { "model": "dynamictreesphc:fruit/vanillabean_age3", "y": 180 },
+                { "model": "dynamictreesphc:fruit/vanillabean_age3", "y": 270 }
             ]
         }
     ]

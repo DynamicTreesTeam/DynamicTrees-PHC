@@ -8,8 +8,8 @@
 	"elements": [
 		{
 			"name": "fruit",
-			"from": [6.5, 11, 6.5],
-			"to": [9.5, 15, 9.5],
+			"from": [6.4, 11, 6.4],
+			"to": [9.6, 15, 9.6],
 			"faces": {
 				"north": {"uv": [11, 4, 15, 9], "texture": "#fruit"},
 				"east": {"uv": [11, 4, 15, 9], "texture": "#fruit"},
@@ -43,9 +43,9 @@
 		},
 		{
 			"name": "flap_ue",
-			"from": [9.5, 11, 6.5],
-			"to": [9.5, 14, 9.5],
-			"rotation": {"angle": 22.5, "axis": "z", "origin": [8, 14, 8]},
+			"from": [9.6, 11, 6.5],
+			"to": [9.6, 14, 9.5],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [8.1, 14, 8]},
 			"faces": {
 				"east": {"uv": [0, 0, 4, 3], "texture": "#fruit"},
 				"west": {"uv": [0, 0, 4, 3], "texture": "#fruit"}
@@ -53,9 +53,9 @@
 		},
 		{
 			"name": "flap_uw",
-			"from": [6.5, 11, 6.5],
-			"to": [6.5, 14, 9.5],
-			"rotation": {"angle": -22.5, "axis": "z", "origin": [8, 14, 8]},
+			"from": [6.4, 11, 6.5],
+			"to": [6.4, 14, 9.5],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [7.9, 14, 8]},
 			"faces": {
 				"east": {"uv": [0, 3, 4, 6], "texture": "#fruit"},
 				"west": {"uv": [0, 3, 4, 6], "texture": "#fruit"}
@@ -63,9 +63,9 @@
 		},
 		{
 			"name": "flap_us",
-			"from": [6.5, 11, 9.5],
-			"to": [9.5, 14, 9.5],
-			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 14, 8]},
+			"from": [6.5, 11, 9.6],
+			"to": [9.5, 14, 9.6],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 14, 8.1]},
 			"faces": {
 				"north": {"uv": [0, 6, 4, 9], "texture": "#fruit"},
 				"south": {"uv": [0, 6, 4, 9], "texture": "#fruit"}
@@ -73,9 +73,9 @@
 		},
 		{
 			"name": "flap_un",
-			"from": [6.5, 11, 6.5],
-			"to": [9.5, 14, 6.5],
-			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 14, 8]},
+			"from": [6.5, 11, 6.4],
+			"to": [9.5, 14, 6.4],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 14, 7.9]},
 			"faces": {
 				"north": {"uv": [0, 6, 4, 9], "texture": "#fruit"},
 				"south": {"uv": [0, 6, 4, 9], "texture": "#fruit"}
@@ -83,9 +83,9 @@
 		},
 		{
 			"name": "flap_de",
-			"from": [9.5, 9, 6.5],
-			"to": [9.5, 12, 9.5],
-			"rotation": {"angle": 22.5, "axis": "z", "origin": [8, 12, 8]},
+			"from": [9.6, 9, 6.5],
+			"to": [9.6, 12, 9.5],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [8.1, 12, 8]},
 			"faces": {
 				"east": {"uv": [0, 3, 4, 6], "texture": "#fruit"},
 				"west": {"uv": [0, 3, 4, 6], "texture": "#fruit"}
@@ -93,9 +93,9 @@
 		},
 		{
 			"name": "flap_dw",
-			"from": [6.5, 9, 6.5],
-			"to": [6.5, 12, 9.5],
-			"rotation": {"angle": -22.5, "axis": "z", "origin": [8, 12, 8]},
+			"from": [6.4, 9, 6.5],
+			"to": [6.4, 12, 9.5],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [7.9, 12, 8]},
 			"faces": {
 				"east": {"uv": [0, 0, 4, 3], "texture": "#fruit"},
 				"west": {"uv": [0, 0, 4, 3], "texture": "#fruit"}
@@ -103,9 +103,9 @@
 		},
 		{
 			"name": "flap_ds",
-			"from": [6.5, 9, 9.5],
-			"to": [9.5, 12, 9.5],
-			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 12, 8]},
+			"from": [6.5, 9, 9.6],
+			"to": [9.5, 12, 9.6],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 12, 8.1]},
 			"faces": {
 				"north": {"uv": [0, 3, 4, 6], "texture": "#fruit"},
 				"south": {"uv": [0, 3, 4, 6], "texture": "#fruit"}
@@ -113,9 +113,9 @@
 		},
 		{
 			"name": "flap_dn",
-			"from": [6.5, 9, 6.5],
-			"to": [9.5, 12, 6.5],
-			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 12, 8]},
+			"from": [6.5, 9, 6.4],
+			"to": [9.5, 12, 6.4],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 12, 7.9]},
 			"faces": {
 				"north": {"uv": [0, 0, 4, 3], "texture": "#fruit"},
 				"south": {"uv": [0, 0, 4, 3], "texture": "#fruit"}
@@ -123,8 +123,8 @@
 		},
 		{
 			"name": "tail1",
-			"from": [6.4, 8, 8],
-			"to": [9.6, 11, 8],
+			"from": [6.1, 7.8, 8],
+			"to": [9.9, 11, 8],
 			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
@@ -134,8 +134,8 @@
 		},
 		{
 			"name": "tail2",
-			"from": [8, 8, 6.4],
-			"to": [8, 11, 9.6],
+			"from": [8, 7.8, 6.1],
+			"to": [8, 11, 9.9],
 			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
