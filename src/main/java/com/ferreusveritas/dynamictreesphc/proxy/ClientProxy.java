@@ -67,6 +67,7 @@ public class ClientProxy extends CommonProxy {
 
 		List<Block> coloredBlocks = new LinkedList<>();
 		coloredBlocks.add(ModBlocks.bananaSucker);
+		coloredBlocks.add(ModBlocks.passionfruitVine);
 		coloredBlocks.add(ModBlocks.passionfruitVine0);
 		coloredBlocks.add(ModBlocks.passionfruitVine1);
 		coloredBlocks.add(ModBlocks.passionfruitVine2);

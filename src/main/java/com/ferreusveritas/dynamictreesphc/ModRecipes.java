@@ -38,6 +38,11 @@ public class ModRecipes {
 
 		}
 
+		Species peppercornSpecies = TreeRegistry.findSpecies(new ResourceLocation(ModConstants.MODID, FruitRegistry.PEPPERCORN));
+		GameRegistry.addShapelessRecipe(new ResourceLocation(ModConstants.MODID, "peppercornseedfromripefruit"), null, peppercornSpecies.getSeedStack(1), Ingredient.fromStacks(new ItemStack(ModItems.ripePeppercorn)), Ingredient.fromItem(com.ferreusveritas.dynamictrees.ModItems.dirtBucket));
+		GameRegistry.addShapelessRecipe(new ResourceLocation(ModConstants.MODID, "peppercornseedfromripefruitdirect"), null, peppercornSpecies.getSeedStack(1), Ingredient.fromStacks(new ItemStack(ModItems.ripePeppercorn)));
+
+
 		//We add passionfruit recipes separately since the whole thing is handled in a different way
 		ItemStack passionfruitSeed = new ItemStack(ModItems.passionfruitSeed);
 		ItemStack passionfruit = new ItemStack(FruitRegistry.getFood(FruitRegistry.PASSIONFRUIT));

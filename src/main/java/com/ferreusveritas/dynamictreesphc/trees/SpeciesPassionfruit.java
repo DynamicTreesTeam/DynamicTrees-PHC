@@ -13,7 +13,7 @@ public class SpeciesPassionfruit extends Species {
     public SpeciesPassionfruit (TreeFamily treeFamily){
         super(new ResourceLocation(ModConstants.MODID, FruitRegistry.PASSIONFRUIT), treeFamily);
 
-        addGenFeature(new FeatureGenVine().setVineBlock(ModBlocks.passionfruitVine0).setQuantity(16));
+        addGenFeature(new FeatureGenVine().setVineBlock(ModBlocks.passionfruitVine).setQuantity(16));
     }
 
     @Override

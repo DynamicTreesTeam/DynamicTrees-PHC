@@ -2,6 +2,7 @@ package com.ferreusveritas.dynamictreesphc.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
+import com.ferreusveritas.dynamictreesphc.ModItems;
 import com.ferreusveritas.dynamictreesphc.ModSounds;
 import com.google.common.collect.Lists;
 import com.pam.harvestcraft.blocks.FruitRegistry;
@@ -14,6 +15,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
@@ -43,11 +46,25 @@ public class BlockPamFruit extends BlockFruit {
     }
 
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        if (state.getValue(AGE) == 2 && fruitName.equals(FruitRegistry.PEPPERCORN)){
+            drops.add(getFruitDrop());
+        }
         if (state.getValue(AGE) >= 3) {
-            ItemStack toDrop = this.getFruitDrop();
-            if (fruitName.equals(FruitRegistry.BANANA) && world instanceof World) {
-                toDrop.setCount(1 + ((World)world).rand.nextInt(4));
+            ItemStack toDrop;
+            if (fruitName.equals(FruitRegistry.PEPPERCORN)){
+                toDrop = new ItemStack(ModItems.ripePeppercorn);
+            } else {
+                toDrop = this.getFruitDrop();
             }
+            if (world instanceof World){
+                if (fruitName.equals(FruitRegistry.BANANA)) {
+                    toDrop.setCount(1 + ((World)world).rand.nextInt(4));
+                }
+                if (fruitName.equals(FruitRegistry.PISTACHIO) || fruitName.equals(FruitRegistry.STARFRUIT)) {
+                    toDrop.setCount(1 + ((World)world).rand.nextInt(3));
+                }
+            }
+
             if (!toDrop.isEmpty()) {
                 drops.add(toDrop);
             }
@@ -74,11 +91,34 @@ public class BlockPamFruit extends BlockFruit {
     }
 
     @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (state.getValue(AGE) >= 3 || (state.getValue(AGE) == 2 && fruitName.equals(FruitRegistry.PEPPERCORN))) {
+            this.dropBlock(worldIn, pos, state);
+            return true;
+        }
+        return false;
+    }
+
+    private void dropBlock(World worldIn, BlockPos pos, IBlockState state) {
+        worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+        this.dropBlockAsItem(worldIn, pos, state, 0);
+    }
+
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if (ModConstants.FALLINGFRUIT.contains(fruitName) && state.getValue(AGE) == 3 && worldIn.rand.nextFloat() <= randomFruitFallChance)
             this.blockFall(worldIn, pos, state);
-        else
+        else if (!(fruitName.equals(FruitRegistry.PEPPERCORN) && state.getValue(AGE) == 2 && worldIn.rand.nextFloat() <= 0.98f)){
             super.updateTick(worldIn, pos, state, rand);
+        }
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        if (fruitName.equals(FruitRegistry.PEPPERCORN) && state.getValue(AGE) == 3){
+            return new ItemStack(ModItems.ripePeppercorn);
+        }
+        return getFruitDrop();
     }
 
     private void blockFall(World worldIn, BlockPos pos, IBlockState state) {

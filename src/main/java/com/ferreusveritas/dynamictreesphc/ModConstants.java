@@ -149,7 +149,7 @@ public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 		public static final AxisAlignedBB[] PEPPERCORN = new AxisAlignedBB[] {
 				createBox(1,5,0),
 				createBox(1,5,0),
-				createBox(1.5f,6,1.25f),
+				createBox(1.5f,8,1.25f),
 				createBox(1.5f,8,2.5f)
 		};
 		public static final AxisAlignedBB[] PISTACHIO = new AxisAlignedBB[] {

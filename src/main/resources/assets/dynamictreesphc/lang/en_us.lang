@@ -35,7 +35,7 @@ item.dynamictreesphc:pawpawseed.name=Pawpaw Seed
 item.dynamictreesphc:peachseed.name=Peach Stone
 item.dynamictreesphc:pearseed.name=Pear Pip
 item.dynamictreesphc:pecanseed.name=Germinated Pecan
-item.dynamictreesphc:peppercornseed.name=Black Pepper Seeds
+item.dynamictreesphc:peppercornseed.name=Peppercorn Seeds
 item.dynamictreesphc:persimmonseed.name=Persimmon Seeds
 item.dynamictreesphc:pistachioseed.name=Germinated Pistachio
 item.dynamictreesphc:plumseed.name=Plum Stone
@@ -101,12 +101,9 @@ species.dynamictreesphc:cinnamon.name=Cinnamon
 species.dynamictreesphc:maple.name=Maple
 species.dynamictreesphc:paperbark.name=Paperbark
 
-item.dynamictreesphc:leaves0.name=Leaves
-item.dynamictreesphc:leaves_dragonfruit.name=Dragonfruit Cactus
-item.dynamictreesphc:leaves_palm.name=Palm Leaves
-
-item.dynamictreesphc:leaves_redbud.name=Redbud Leaves
-item.dynamictreesphc:leaves_spooky.name=Spooky Leaves
+tile.dynamictreesphc:leaves0.name=Leaves
+tile.dynamictreesphc:leaves_dragonfruit.name=Dragonfruit Cactus
+tile.dynamictreesphc:leaves_palm.name=Palm Leaves
 
 tile.dynamictreesphc:cinnamonbranch.name=Cinnamon Tree
 tile.dynamictreesphc:maplebranch.name=Maple Tree
@@ -118,3 +115,6 @@ tile.dynamictreesphc:palmbranch.name=Palm Tree
 tile.dynamictreesphc:maple_spile.name=Maple Syrup Spile
 tile.dynamictreesphc:maple_spile_bucket.name=Maple Syrup Spile
 tile.dynamictreesphc:passionfruit_vine.name=Passionfruit Vines
+
+item.dynamictreesphc:peppercornripeitem.name=Ripe Peppercorn
+tooltip.dynamictreesphc:peppercornripeitem.name=Too ripe for black pepper. Pick when they are still green

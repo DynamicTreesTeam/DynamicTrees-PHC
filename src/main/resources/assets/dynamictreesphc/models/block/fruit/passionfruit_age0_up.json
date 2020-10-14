@@ -1,0 +1,80 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dynamictreesphc:blocks/passionfruit",
+		"apple": "dynamictreesphc:blocks/passionfruit"
+	},
+	"elements": [
+		{
+			"from": [6.4, 15, 7.2],
+			"to": [8, 15, 8.8],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [8, 15, 8]},
+			"faces": {
+				"up": {"uv": [1, 11, 4, 14], "rotation": 270, "texture": "#apple"},
+				"down": {"uv": [1, 11, 4, 14], "rotation": 270, "texture": "#apple"}
+			}
+		},
+		{
+			"from": [7.2, 15, 6.4],
+			"to": [8.8, 15, 8],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 15, 8]},
+			"faces": {
+				"up": {"uv": [1, 11, 4, 14], "texture": "#apple"},
+				"down": {"uv": [1, 11, 4, 14], "rotation": 180, "texture": "#apple"}
+			}
+		},
+		{
+			"from": [8, 15, 7.2],
+			"to": [9.6, 15, 8.8],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [8, 15, 8]},
+			"faces": {
+				"up": {"uv": [1, 11, 4, 14], "rotation": 90, "texture": "#apple"},
+				"down": {"uv": [1, 11, 4, 14], "rotation": 90, "texture": "#apple"}
+			}
+		},
+		{
+			"from": [7.8, 14.9, 7.8],
+			"to": [8.2, 14.9, 8.2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.8, 14.9, 7.6]},
+			"faces": {
+				"up": {"uv": [2, 15, 3, 16], "rotation": 90, "texture": "#apple"},
+				"down": {"uv": [2, 15, 3, 16], "rotation": 90, "texture": "#apple"}
+			}
+		},
+		{
+			"from": [7.4, 14.2, 8],
+			"to": [8.6, 15, 8],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 15, 8]},
+			"faces": {
+				"north": {"uv": [1, 14, 4, 16], "rotation": 180, "texture": "#apple"},
+				"south": {"uv": [1, 14, 4, 16], "rotation": 180, "texture": "#apple"}
+			}
+		},
+		{
+			"from": [7.4, 14.2, 8],
+			"to": [8.6, 15, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 15, 8]},
+			"faces": {
+				"north": {"uv": [1, 14, 4, 16], "rotation": 180, "texture": "#apple"},
+				"south": {"uv": [1, 14, 4, 16], "rotation": 180, "texture": "#apple"}
+			}
+		},
+		{
+			"from": [7.2, 15, 8],
+			"to": [8.8, 15, 9.6],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 15, 8]},
+			"faces": {
+				"up": {"uv": [1, 11, 4, 14], "rotation": 180, "texture": "#apple"},
+				"down": {"uv": [1, 11, 4, 14], "texture": "#apple"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "passionfruit_age0",
+			"origin": [8, 8, 8],
+			"children": [0, 1, 2, 3, 4, 5, 6]
+		}
+	]
+}

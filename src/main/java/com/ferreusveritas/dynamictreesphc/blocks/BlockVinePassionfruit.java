@@ -36,6 +36,7 @@ public class BlockVinePassionfruit extends BlockVine {
 
     private static final float baseFruitingChance = 0.002f;
     private static final float fruitGrowChance = 0.2f;
+    private static final int maxLength = 3;
 
     public BlockVinePassionfruit (ResourceLocation name){
         setRegistryName(name);
@@ -176,7 +177,7 @@ public class BlockVinePassionfruit extends BlockVine {
                 }
                 //SPREAD DOWN
                 else {
-                    if (pos.getY() > 1) {
+                    if (pos.getY() > 1 && !(worldIn.getBlockState(pos.up(maxLength)).getBlock() instanceof BlockVinePassionfruit)) {
                         BlockPos downPos = pos.down();
                         IBlockState downState = worldIn.getBlockState(downPos);
 
@@ -227,7 +228,7 @@ public class BlockVinePassionfruit extends BlockVine {
         Integer age = getAgeFromState(state);
         if (age == null) return;
         if ((age == 0 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextFloat() <= getFruitingChance(worldIn, pos))) ||
-                (age > 0 && age < 3 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextFloat() <= fruitGrowChance))) {
+                (age > 0 && age < 4 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextFloat() <= fruitGrowChance))) {
 
             //We look for fruit blocks around. If there is more than two we cancel the fruit growth
             int fruitFoundAround = 0;
@@ -248,14 +249,16 @@ public class BlockVinePassionfruit extends BlockVine {
 
     private Integer getAgeFromState (IBlockState state){
         Block block = state.getBlock();
-        if (block == ModBlocks.passionfruitVine0){
+        if (block == ModBlocks.passionfruitVine){
             return  0;
-        } else if (block == ModBlocks.passionfruitVine1){
+        } else if (block == ModBlocks.passionfruitVine0){
             return  1;
-        } else if (block == ModBlocks.passionfruitVine2){
+        } else if (block == ModBlocks.passionfruitVine1){
             return  2;
+        } else if (block == ModBlocks.passionfruitVine2){
+            return  3;
         } else if (block == ModBlocks.passionfruitVine3){
-            return 3;
+            return 4;
         } else {
             return null;
         }
@@ -264,14 +267,17 @@ public class BlockVinePassionfruit extends BlockVine {
     private IBlockState getStateFromAge (int age){
         switch (age){
             case 0:
-            default:
-                return ModBlocks.passionfruitVine0.getDefaultState();
+                return ModBlocks.passionfruitVine.getDefaultState();
             case 1:
-                return ModBlocks.passionfruitVine1.getDefaultState();
+                return ModBlocks.passionfruitVine0.getDefaultState();
             case 2:
-                return ModBlocks.passionfruitVine2.getDefaultState();
+                return ModBlocks.passionfruitVine1.getDefaultState();
             case 3:
+                return ModBlocks.passionfruitVine2.getDefaultState();
+            case 4:
                 return ModBlocks.passionfruitVine3.getDefaultState();
+            default:
+                throw new IllegalArgumentException();
         }
     }
 
@@ -284,7 +290,7 @@ public class BlockVinePassionfruit extends BlockVine {
     }
     private boolean spawnItemFruitIfRipe(World world, BlockPos pos, IBlockState state){
         Integer age = getAgeFromState(state);
-        if (!world.isRemote && age != null && age == 3){
+        if (!world.isRemote && age != null && age == 4){
             world.spawnEntity(new EntityItem(world, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, getFruit()));
             return true;
         }
@@ -325,7 +331,7 @@ public class BlockVinePassionfruit extends BlockVine {
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         Integer age = getAgeFromState(state);
         if (age != null && age == 0)
-            return new ItemStack(ModBlocks.passionfruitVine0);
+            return new ItemStack(ModBlocks.passionfruitVine);
         else
             return getFruit();
     }
@@ -334,9 +340,9 @@ public class BlockVinePassionfruit extends BlockVine {
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
     {
         List<ItemStack> stack = new LinkedList<>();
-        stack.add(new ItemStack(ModBlocks.passionfruitVine0));
+        stack.add(new ItemStack(ModBlocks.passionfruitVine));
         Integer age = getAgeFromState(world.getBlockState(pos));
-        if (age != null && age == 3)
+        if (age != null && age == 4)
             stack.add(getFruit());
         return stack;
     }
@@ -348,7 +354,7 @@ public class BlockVinePassionfruit extends BlockVine {
         if (!worldIn.isRemote && stack.getItem() == Items.SHEARS)
         {
             player.addStat(Objects.requireNonNull(StatList.getBlockStats(this)));
-            spawnAsEntity(worldIn, pos, new ItemStack(ModBlocks.passionfruitVine0));
+            spawnAsEntity(worldIn, pos, new ItemStack(ModBlocks.passionfruitVine));
         }
         else
         {

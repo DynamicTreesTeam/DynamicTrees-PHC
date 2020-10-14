@@ -26,7 +26,7 @@ public class ModBlocks {
 
 	public static BlockMapleSpile mapleSpile, mapleSpileWithBucket;
 	public static BlockSucker bananaSucker;
-	public static BlockVinePassionfruit passionfruitVine0, passionfruitVine1, passionfruitVine2, passionfruitVine3;
+	public static BlockVinePassionfruit passionfruitVine, passionfruitVine0, passionfruitVine1, passionfruitVine2, passionfruitVine3;
 	public static BlockDynamicSaplingPassionfruit passionfruitSapling;
 
 	public static LeavesProperties cinnamonLeavesProperties;
@@ -51,7 +51,8 @@ public class ModBlocks {
 		mapleSpileWithBucket = new BlockMapleSpileBucket(new ResourceLocation(ModConstants.MODID, "maple_spile_bucket"));
 
 		bananaSucker = new BlockSucker(new ResourceLocation(ModConstants.MODID, "banana_sucker"));
-		passionfruitVine0 = new BlockVinePassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruit_vine"));
+		passionfruitVine = new BlockVinePassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruit_vine"));
+		passionfruitVine0 = new BlockVinePassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruit_vine_age0"));
 		passionfruitVine1 = new BlockVinePassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruit_vine_age1"));
 		passionfruitVine2 = new BlockVinePassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruit_vine_age2"));
 		passionfruitVine3 = new BlockVinePassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruit_vine_age3"));
@@ -128,7 +129,7 @@ public class ModBlocks {
 		fruits.values().forEach(registry::register);
 
 		registry.registerAll(mapleSpile, mapleSpileWithBucket, bananaSucker, leavesPalm, leavesDragonfruit);
-		registry.registerAll(passionfruitVine0, passionfruitVine1, passionfruitVine2, passionfruitVine3, passionfruitSapling);
+		registry.registerAll(passionfruitVine, passionfruitVine0, passionfruitVine1, passionfruitVine2, passionfruitVine3, passionfruitSapling);
 
 		treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(ModConstants.MODID).values());
 		registry.registerAll(treeBlocks.toArray(new Block[0]));

@@ -1,6 +1,7 @@
 package com.ferreusveritas.dynamictreesphc;
 
 import com.ferreusveritas.dynamictreesphc.items.ItemDynamicSeedPassionfruit;
+import com.ferreusveritas.dynamictreesphc.items.ItemRipePeppercorn;
 import com.ferreusveritas.dynamictreesphc.trees.TreePaperBark;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.item.Item;
@@ -15,10 +16,12 @@ public class ModItems {
 
 	public static Item passionfruitVine;
 	public static ItemDynamicSeedPassionfruit passionfruitSeed;
+	public static ItemRipePeppercorn ripePeppercorn;
 
 	public static void preInit() {
-		passionfruitVine = new ItemBlock(ModBlocks.passionfruitVine0).setRegistryName(Objects.requireNonNull(ModBlocks.passionfruitVine0.getRegistryName()));
+		passionfruitVine = new ItemBlock(ModBlocks.passionfruitVine).setRegistryName(Objects.requireNonNull(ModBlocks.passionfruitVine.getRegistryName()));
 		passionfruitSeed = new ItemDynamicSeedPassionfruit(new ResourceLocation(ModConstants.MODID, "passionfruitseed"));
+		ripePeppercorn = new ItemRipePeppercorn(new ResourceLocation(ModConstants.MODID, "peppercornripeitem"));
 	}
 	
 	public static void register(IForgeRegistry<Item> registry) {
@@ -30,7 +33,7 @@ public class ModItems {
 			}
 		});
 		registry.register(new ItemBlock(TreePaperBark.paperbarkCutBranch).setRegistryName(Objects.requireNonNull(TreePaperBark.paperbarkCutBranch.getRegistryName())));
-		registry.registerAll(passionfruitSeed, passionfruitVine);
+		registry.registerAll(passionfruitSeed, passionfruitVine, ripePeppercorn);
 
 		ArrayList<Item> treeItems = new ArrayList<>();
 		ModTrees.phcTrees.forEach(tree -> tree.getRegisterableItems(treeItems));

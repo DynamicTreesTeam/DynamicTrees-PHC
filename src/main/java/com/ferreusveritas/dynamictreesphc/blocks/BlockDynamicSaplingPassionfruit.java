@@ -82,7 +82,7 @@ public class BlockDynamicSaplingPassionfruit extends Block {
                 }
             }
         }
-        world.setBlockState(pos, ModBlocks.passionfruitVine0.getDefaultState()
+        world.setBlockState(pos, ModBlocks.passionfruitVine.getDefaultState()
                 .withProperty(BlockVine.NORTH, n)
                 .withProperty(BlockVine.SOUTH, s)
                 .withProperty(BlockVine.EAST, e)
