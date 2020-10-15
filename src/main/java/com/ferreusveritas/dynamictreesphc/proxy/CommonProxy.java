@@ -8,8 +8,7 @@ import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
 
 public class CommonProxy {
-	
-	
+
 	public void preInit() {
 		ModBlocks.preInit();
 		ModItems.preInit();

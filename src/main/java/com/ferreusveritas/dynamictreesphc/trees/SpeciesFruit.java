@@ -54,28 +54,6 @@ public class SpeciesFruit extends Species {
 	public void setFruitBlock (BlockFruit fruitBlock){
 		fruitBlockState = fruitBlock.getDefaultState();
 		addGenFeature(new FeatureGenFruit(fruitBlock).setRayDistance(4).setFruitingRadius(fruitingRadius));
-	}
-
-	@Override
-	public ResourceLocation getSaplingName() {
-		String dtModId = com.ferreusveritas.dynamictrees.ModConstants.MODID;
-		
-		switch(saplingType) {
-			default:
-			case TEMPERATE: return new ResourceLocation(dtModId, "oak");
-			case COLD: return new ResourceLocation(dtModId, "spruce");
-			case WARM: return new ResourceLocation(dtModId, "jungle");
-		}
-	}
-	
-	protected void fruitTreeDefaults(String name) {
-		switch (fruitName){
-			case FruitRegistry.PEPPERCORN:
-				setBasicGrowingParameters(0.3f, 4.0f, 1, 2, 1.0f, fruitingRadius);
-			default:
-				setBasicGrowingParameters(0.3f, 8.0f, 1, 4, 1.0f, fruitingRadius);
-		}
-
 		addDropCreator(new DropCreatorSeed() {
 			@Override public List<ItemStack> getHarvestDrop(World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int soilLife, int fortune) {
 				float rarity = getHarvestRarity();
@@ -107,6 +85,22 @@ public class SpeciesFruit extends Species {
 				return dropList;
 			}
 		});
+	}
+
+	@Override
+	public ResourceLocation getSaplingName() {
+		String dtModId = com.ferreusveritas.dynamictrees.ModConstants.MODID;
+		
+		switch(saplingType) {
+			default:
+			case TEMPERATE: return new ResourceLocation(dtModId, "oak");
+			case COLD: return new ResourceLocation(dtModId, "spruce");
+			case WARM: return new ResourceLocation(dtModId, "jungle");
+		}
+	}
+	
+	protected void fruitTreeDefaults(String name) {
+				setBasicGrowingParameters(0.3f, 8.0f, 1, 4, 1.0f, fruitingRadius);
 	}
 	
 	protected SpeciesFruit setBasicGrowingParameters(float tapering, float energy, int upProbability, int lowestBranchHeight, float growthRate, int fruitingRadius) {

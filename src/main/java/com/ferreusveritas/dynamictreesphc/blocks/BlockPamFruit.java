@@ -39,6 +39,7 @@ public class BlockPamFruit extends BlockFruit {
 
     public static double randomFruitFallChance = 0.005D;
     private static final float distanceFromPlayerToFall = 10;
+    private static final double pepperRipenChance = 0.01f;
 
     public BlockPamFruit (ResourceLocation name){
         super(new ResourceLocation(name.getResourceDomain(), "fruit"+name.getResourcePath()).toString());
@@ -108,7 +109,7 @@ public class BlockPamFruit extends BlockFruit {
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if (ModConstants.FALLINGFRUIT.contains(fruitName) && state.getValue(AGE) == 3 && worldIn.rand.nextFloat() <= randomFruitFallChance)
             this.blockFall(worldIn, pos, state);
-        else if (!(fruitName.equals(FruitRegistry.PEPPERCORN) && state.getValue(AGE) == 2 && worldIn.rand.nextFloat() <= 0.98f)){
+        else if (!(fruitName.equals(FruitRegistry.PEPPERCORN) && state.getValue(AGE) == 2 && worldIn.rand.nextFloat() >= pepperRipenChance)){
             super.updateTick(worldIn, pos, state, rand);
         }
     }

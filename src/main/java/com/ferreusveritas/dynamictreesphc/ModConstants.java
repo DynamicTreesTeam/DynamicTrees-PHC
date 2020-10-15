@@ -87,7 +87,7 @@ public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 				createBox(2,8,1.25f)
 		};
 		public static final AxisAlignedBB[] DRAGONFRUIT = new AxisAlignedBB[] {
-				createBox(1,1,1, 16),
+				createBox(1,1,0, 16),
 				createBox(1,4,0, 16),
 				createBox(2f,8,0),
 				createBox(2f,9,1.25f)

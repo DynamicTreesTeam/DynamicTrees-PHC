@@ -44,40 +44,6 @@ public class SpeciesPalm extends SpeciesFruit {
 		if (fruitName.equals(FruitRegistry.BANANA)){
 			addGenFeature(new FeatureGenSuckers(ModBlocks.bananaSucker));
 		}
-
-		addDropCreator(new DropCreatorSeed() {
-			@Override public List<ItemStack> getHarvestDrop(World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int soilLife, int fortune) {
-				float rarity = getHarvestRarity();
-				rarity *= (fortune + 1) / 16f;
-				rarity *= Math.min(species.seasonalSeedDropFactor(world, leafPos) + 0.15f, 1.0);
-				if(rarity > random.nextFloat()) dropList.add(getFruit (species)); //1 in 16 chance to drop a fruit on destruction..
-				return dropList;
-			}
-
-			private ItemStack getFruit (Species species){
-				if (fruitName.equals(FruitRegistry.COCONUT)) //coconut seeds are whole coconuts while the food is an open coconut
-					return species.getSeedStack(1);
-				return new ItemStack(FruitRegistry.getFood(fruitName));
-			}
-
-			@Override public List<ItemStack> getLeavesDrop(IBlockAccess access, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, int fortune) {
-				int chance = 20; //See BlockLeaves#getSaplingDropChance(state);
-				//Hokey fortune stuff here to match Vanilla logic.
-				if (fortune > 0) {
-					chance -= 2 << fortune;
-					if (chance < 10) chance = 10;
-				}
-				float seasonFactor = 1.0f;
-				if(access instanceof World) {
-					World world = (World) access;
-					if(!world.isRemote) seasonFactor = species.seasonalSeedDropFactor(world, breakPos);
-				}
-				if(random.nextInt((int) (chance / getLeavesRarity())) == 0)
-					if(seasonFactor > random.nextFloat())
-						dropList.add(getFruit(species));
-				return dropList;
-			}
-		});
 	}
 
 	@Override
@@ -153,16 +119,44 @@ public class SpeciesPalm extends SpeciesFruit {
 		} else {
 			addGenFeature(new FeatureGenFruitPalm(fruitBlock, growHeightOptions, fruitBlock instanceof BlockPamFruitPalm));
 		}
+		addDropCreator(new DropCreatorSeed() {
+			@Override public List<ItemStack> getHarvestDrop(World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int soilLife, int fortune) {
+				float rarity = getHarvestRarity();
+				rarity *= (fortune + 1) / 16f;
+				rarity *= Math.min(species.seasonalSeedDropFactor(world, leafPos) + 0.15f, 1.0);
+				if(rarity > random.nextFloat()) dropList.add(getFruit (species)); //1 in 16 chance to drop a fruit on destruction..
+				return dropList;
+			}
 
+			private ItemStack getFruit (Species species){
+				if (fruitName.equals(FruitRegistry.COCONUT)) //coconut seeds are whole coconuts while the food is an open coconut
+					return species.getSeedStack(1);
+				return new ItemStack(FruitRegistry.getFood(fruitName));
+			}
+
+			@Override public List<ItemStack> getLeavesDrop(IBlockAccess access, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, int fortune) {
+				int chance = 20; //See BlockLeaves#getSaplingDropChance(state);
+				//Hokey fortune stuff here to match Vanilla logic.
+				if (fortune > 0) {
+					chance -= 2 << fortune;
+					if (chance < 10) chance = 10;
+				}
+				float seasonFactor = 1.0f;
+				if(access instanceof World) {
+					World world = (World) access;
+					if(!world.isRemote) seasonFactor = species.seasonalSeedDropFactor(world, breakPos);
+				}
+				if(random.nextInt((int) (chance / getLeavesRarity())) == 0)
+					if(seasonFactor > random.nextFloat())
+						dropList.add(getFruit(species));
+				return dropList;
+			}
+		});
 	}
 
 	@Override
 	protected void fruitTreeDefaults(String name) {
-		if (FruitRegistry.BANANA.equals(name)) {
-			setBasicGrowingParameters(0.8f, 5.0f, 1, 4, 0.6f, fruitingRadius);
-		} else {
-			setBasicGrowingParameters(0.4f, 8.0f, 1, 4, 0.3f, fruitingRadius);
-		}
+		setBasicGrowingParameters(0.4f, 8.0f, 1, 4, 0.3f, fruitingRadius);
 	}
 
 	@Override

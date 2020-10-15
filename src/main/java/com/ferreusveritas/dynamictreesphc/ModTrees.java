@@ -144,17 +144,33 @@ public class ModTrees {
 		//Passion fruit is not a tree, its a vine
 		creatorMap.remove(FruitRegistry.PASSIONFRUIT);
 
+		creatorMap.put(FruitRegistry.PEPPERCORN, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType) {
+			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.2f, 6.0f, 1, 3, 1.0f, 3); }
+		});
+		creatorMap.put(FruitRegistry.GOOSEBERRY, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType) {
+			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.2f, 6.0f, 1, 3, 1.0f, 3); }
+		});
+		creatorMap.put(FruitRegistry.BANANA, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesPalm(name, treeFamily, leavesProperties, fruitName, saplingType) {
+			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.8f, 5.0f, 1, 4, 0.6f, 0); }
+		});
+
 		//Temperate nut trees are typically hardwoods that grow slowly and usually very large.
 		creatorMap.put(FruitRegistry.WALNUT, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType) {
-				@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.4f, 12.0f, 1, 4, 0.7f, 8); }
+			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.4f, 12.0f, 1, 4, 0.7f, 8); }
+			@Override public boolean isThick() { return true; }
+			@Override public int maxBranchRadius() { return 24; }
 		});
 		creatorMap.put(FruitRegistry.CHESTNUT, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType) {
 			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.45f, 11.0f, 1, 4, 0.6f, 8); }
+			@Override public boolean isThick() { return true; }
+			@Override public int maxBranchRadius() { return 24; }
 		});
 		creatorMap.put(FruitRegistry.PECAN, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesFruit(name, treeFamily, leavesProperties, fruitName, saplingType) {
 			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.45f, 11.0f, 1, 4, 0.6f, 8); }
+			@Override public boolean isThick() { return true; }
+			@Override public int maxBranchRadius() { return 24; }
 		});
-		
+
 	}
 	
 	@SubscribeEvent

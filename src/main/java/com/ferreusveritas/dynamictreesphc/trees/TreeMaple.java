@@ -44,7 +44,12 @@ public class TreeMaple extends TreeFamilyPHC {
 
 			setupStandardSeedDropping();
 		}
-		
+
+		@Override
+		public boolean useDefaultWailaBody() {
+			return false;
+		}
+
 		@Override
 		public boolean isBiomePerfect(Biome biome) {
 			return BiomeDictionary.hasType(biome, Type.JUNGLE);
