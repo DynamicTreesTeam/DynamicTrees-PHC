@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -232,6 +233,39 @@ public class BlockPamFruit extends BlockFruit {
 
     @Override @SideOnly(Side.CLIENT) public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
+    }
+
+    @Override
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    {
+        if (fruitName.equals(FruitRegistry.SPIDERWEB)){
+            AxisAlignedBB blockBox = getBoundingBox(state, worldIn, pos);
+            if (blockBox == null) return;
+            for (Entity entity : worldIn.getEntitiesWithinAABB(EntityPlayer.class, blockBox.offset(pos))){
+                entity.setInWeb();
+            }
+        }
+    }
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        if (fruitName.equals(FruitRegistry.SPIDERWEB) || fruitName.equals(FruitRegistry.DATE)){
+            return NULL_AABB;
+        } else if (fruitName.equals(FruitRegistry.BANANA)){
+            switch (state.getValue(AGE)){
+                case 1:
+                    return ModConstants.fruitBoxes.BANANA[1];
+                case 2:
+                    return ModConstants.fruitBoxes.BANANA[1].offset(0,-0.5f,0);
+                case 0:
+                case 3:
+                    return NULL_AABB;
+                default:
+                    throw new IllegalArgumentException();
+            }
+        }
+        return super.getCollisionBoundingBox(state, worldIn, pos);
     }
 
     @Override

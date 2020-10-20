@@ -151,7 +151,10 @@ public class ModTrees {
 			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.2f, 6.0f, 1, 3, 1.0f, 3); }
 		});
 		creatorMap.put(FruitRegistry.BANANA, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesPalm(name, treeFamily, leavesProperties, fruitName, saplingType) {
-			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.8f, 5.0f, 1, 4, 0.6f, 0); }
+			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(0.8f, 5.0f, 1, 4, 0.6f, 5); }
+		});
+		creatorMap.put(FruitRegistry.DATE, (name, treeFamily, leavesProperties, fruitName, saplingType) -> new SpeciesPalm(name, treeFamily, leavesProperties, fruitName, saplingType) {
+			@Override protected void fruitTreeDefaults(String name) { setBasicGrowingParameters(1f, 12.0f, 1, 4, 0.3f, 7); }
 		});
 
 		//Temperate nut trees are typically hardwoods that grow slowly and usually very large.

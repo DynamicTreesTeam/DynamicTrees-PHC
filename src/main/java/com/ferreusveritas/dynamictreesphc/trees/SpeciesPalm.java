@@ -108,17 +108,26 @@ public class SpeciesPalm extends SpeciesFruit {
 		}
 	}
 
+	@Override
+	public int maxBranchRadius() {
+		return 6;
+	}
+
 	public void setFruitBlock (BlockFruit fruitBlock){
 		fruitBlockState = fruitBlock.getDefaultState();
 		int growHeightOptions = 1;
 		if (fruitName.equals(FruitRegistry.PAPAYA)){
 			growHeightOptions = 2;
 		}
+		FeatureGenFruitPalm fruitFeatureGen;
 		if (fruitName.equals(FruitRegistry.BANANA)) {
-			addGenFeature(new FeatureGenFruitPalm(fruitBlock, growHeightOptions, fruitBlock instanceof BlockPamFruitPalm, true));
+			fruitFeatureGen = new FeatureGenFruitPalm(fruitBlock, growHeightOptions, fruitBlock instanceof BlockPamFruitPalm, true);
 		} else {
-			addGenFeature(new FeatureGenFruitPalm(fruitBlock, growHeightOptions, fruitBlock instanceof BlockPamFruitPalm));
+			fruitFeatureGen = new FeatureGenFruitPalm(fruitBlock, growHeightOptions, fruitBlock instanceof BlockPamFruitPalm);
 		}
+		fruitFeatureGen.setFruitingRadius(fruitingRadius);
+		addGenFeature(fruitFeatureGen);
+
 		addDropCreator(new DropCreatorSeed() {
 			@Override public List<ItemStack> getHarvestDrop(World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int soilLife, int fortune) {
 				float rarity = getHarvestRarity();
@@ -156,7 +165,7 @@ public class SpeciesPalm extends SpeciesFruit {
 
 	@Override
 	protected void fruitTreeDefaults(String name) {
-		setBasicGrowingParameters(0.4f, 8.0f, 1, 4, 0.3f, fruitingRadius);
+		setBasicGrowingParameters(0.4f, 8.0f, 1, 4, 0.3f, 5);
 	}
 
 	@Override

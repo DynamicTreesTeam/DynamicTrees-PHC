@@ -1,5 +1,6 @@
 package com.ferreusveritas.dynamictreesphc.blocks;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.pam.harvestcraft.blocks.FruitRegistry;
@@ -37,7 +38,11 @@ public class BlockPamFruitPalm extends BlockPamFruit {
         EnumFacing dir = state.getValue(FACING);
         IBlockState offsetState = world.getBlockState(pos.offset(dir));
         IBlockState offsetUpState = world.getBlockState(pos.offset(dir).up());
-        return offsetState.getBlock() instanceof BlockBranch && (!requiresFrondBase || offsetUpState.getBlock() instanceof BlockLeaves);
+        if (offsetState.getBlock() instanceof BlockBranch){
+            return TreeHelper.getRadius(world, pos.offset(dir)) <= 3 && (!requiresFrondBase || offsetUpState.getBlock() instanceof BlockLeaves);
+        }
+        return false;
+
     }
 
     public int getMetaFromState(IBlockState state)

@@ -2,6 +2,7 @@ package com.ferreusveritas.dynamictreesphc.dropcreators;
 
 import com.ferreusveritas.dynamictrees.api.IPostGenFeature;
 import com.ferreusveritas.dynamictrees.api.IPostGrowFeature;
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
@@ -24,6 +25,7 @@ public class FeatureGenFruitPalm implements IPostGenFeature, IPostGrowFeature {
     int allowedSize, frondHeight;
     boolean isSided;
     Integer forceHeight = null;
+    protected int fruitingRadius = 6;
 
     public FeatureGenFruitPalm(BlockFruit fruitPod, int size, boolean isSided, boolean forceHeightDown){
         this(fruitPod, size, isSided);
@@ -41,6 +43,10 @@ public class FeatureGenFruitPalm implements IPostGenFeature, IPostGrowFeature {
         this(fruitPod, size, isSided, 20);
     }
 
+    public void setFruitingRadius(int fruitingRadius) {
+        this.fruitingRadius = fruitingRadius;
+    }
+
     private int getRandPosition (World world){
         if (forceHeight != null){
             return forceHeight;
@@ -50,7 +56,7 @@ public class FeatureGenFruitPalm implements IPostGenFeature, IPostGrowFeature {
 
     @Override
     public boolean postGrow(World world, BlockPos rootPos, BlockPos treePos, Species species, int soilLife, boolean natural) {
-        if(natural && world.rand.nextInt() % 16 == 0) {
+        if((TreeHelper.getRadius(world, rootPos.up()) >= fruitingRadius) && natural && world.rand.nextInt() % 16 == 0) {
             addFruit(world, rootPos, getLeavesHeight(rootPos, world).down(getRandPosition(world)), false);
         }
         return false;

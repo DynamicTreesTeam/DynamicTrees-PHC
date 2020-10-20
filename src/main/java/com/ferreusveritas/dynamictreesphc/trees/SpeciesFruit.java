@@ -64,6 +64,9 @@ public class SpeciesFruit extends Species {
 			}
 
 			private ItemStack getFruit (Species species){
+				if (fruitName.equals(FruitRegistry.SPIDERWEB)){
+					return species.getSeedStack(1);
+				}
 				return new ItemStack(FruitRegistry.getFood(fruitName));
 			}
 
