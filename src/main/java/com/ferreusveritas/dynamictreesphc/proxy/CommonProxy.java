@@ -26,7 +26,7 @@ public class CommonProxy {
 		HarvestCraft.fruitTreeConfigManager.enableFruitTreeGeneration = false;
 
 		//Change fruit block behavior to remove fruit completely on harvest
-		BlockPamFruit.fruitRemoval = true;
+		//BlockPamFruit.fruitRemoval = true;
 	}
 	
 }

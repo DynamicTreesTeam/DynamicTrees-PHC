@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dynamictreesphc:blocks/passionfruit",
+		"apple": "dynamictreesphc:blocks/passionfruit"
+	},
+	"elements": [
+		{
+			"from": [7.8, 10.2, 13.1],
+			"to": [9.8, 12.2, 15.1],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.8, 4.2, 14.1]},
+			"faces": {
+				"north": {"uv": [1, 4, 4, 7], "texture": "#apple"},
+				"east": {"uv": [1, 4, 4, 7], "texture": "#apple"},
+				"south": {"uv": [1, 4, 4, 7], "texture": "#apple"},
+				"west": {"uv": [1, 4, 4, 7], "texture": "#apple"},
+				"up": {"uv": [1, 0, 4, 3], "texture": "#apple"},
+				"down": {"uv": [1, 8, 4, 11], "texture": "#apple"}
+			}
+		}
+	]
+}
