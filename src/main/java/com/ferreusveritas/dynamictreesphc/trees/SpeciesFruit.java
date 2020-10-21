@@ -27,6 +27,7 @@ public class SpeciesFruit extends Species {
 	public final SaplingType saplingType;
 	public IBlockState fruitBlockState;
 	protected int fruitingRadius = 5;
+	private boolean isSeasonal = true;
 
 	public SpeciesFruit(ResourceLocation name, TreeFamily treeFamily, ILeavesProperties leavesProperties, String fruitName, SaplingType saplingType) {
 		super(name, treeFamily, leavesProperties);
@@ -36,6 +37,13 @@ public class SpeciesFruit extends Species {
 		fruitTreeDefaults(fruitName);
 
 		setRequiresTileEntity(true);
+
+		Float fruitingOffset = ModConstants.fruitOffset.get(fruitName);
+		if (fruitingOffset == null){
+			isSeasonal = false;
+		} else {
+			setFlowerSeasonHold(fruitingOffset - 0.5f, fruitingOffset + 0.5f);
+		}
 
 		switch(saplingType) {
 			default:
@@ -51,6 +59,11 @@ public class SpeciesFruit extends Species {
 				break;
 		}
 		generateSeed();
+	}
+
+	@Override
+	public boolean testFlowerSeasonHold(World world, BlockPos pos, float seasonValue) {
+		return isSeasonal && SeasonHelper.isSeasonBetween(seasonValue, flowerSeasonHoldMin, flowerSeasonHoldMax);
 	}
 
 	public void setFruitBlock (BlockFruit fruitBlock){

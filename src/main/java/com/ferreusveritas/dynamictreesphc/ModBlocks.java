@@ -77,17 +77,26 @@ public class ModBlocks {
 				return ColorizerFoliage.getFoliageColorBirch();
 			}
 		};
-		datePalmLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm"));
-		papayaLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm"));
+		datePalmLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm")){
+			@Override public boolean appearanceChangesWithHydro() { return true; }
+		};
+		papayaLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm")){
+			@Override public boolean appearanceChangesWithHydro() { return true; }
+		};
 		dragonfruitLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm")){
 			// since dragonfruit is a cactus it shouldnt change color, so with stick with birch which doesnt change with biome
 			@Override
 			public int foliageColorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos) {
 				return ColorizerFoliage.getFoliageColorBirch();
 			}
+			@Override public boolean appearanceChangesWithHydro() { return true; }
 		};
-		bananaLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm"));
-		coconutLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm"));
+		bananaLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm")){
+			@Override public boolean appearanceChangesWithHydro() { return true; }
+		};
+		coconutLeavesProperties = new LeavesProperties(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE), TreeRegistry.findCellKit("palm")){
+			@Override public boolean appearanceChangesWithHydro() { return true; }
+		};
 
 		//For this mod it is vital that these are never reordered.  If a leaves properties is removed from the
 		//mod then there should be a LeavesProperties.NULLPROPERTIES used as a placeholder.

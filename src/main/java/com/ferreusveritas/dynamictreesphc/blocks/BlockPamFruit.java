@@ -112,11 +112,32 @@ public class BlockPamFruit extends BlockFruit {
     }
 
     @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (ModConstants.FALLINGFRUIT.contains(fruitName) && state.getValue(AGE) == 3 && worldIn.rand.nextFloat() <= randomFruitFallChance)
-            this.blockFall(worldIn, pos, state);
-        else if (!(fruitName.equals(FruitRegistry.PEPPERCORN) && state.getValue(AGE) == 2 && worldIn.rand.nextFloat() >= getPepperRipenChance(worldIn, pos))){
-            super.updateTick(worldIn, pos, state, rand);
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        if (ModConstants.FALLINGFRUIT.contains(fruitName) && state.getValue(AGE) == 3 && world.rand.nextFloat() <= randomFruitFallChance)
+            this.blockFall(world, pos, state);
+        else if (!(fruitName.equals(FruitRegistry.PEPPERCORN) && state.getValue(AGE) == 2 && world.rand.nextFloat() >= getPepperRipenChance(world, pos))){
+            if (!this.canBlockStay(world, pos, state)) {
+                this.dropBlock(world, pos, state);
+            }
+            else {
+                int age = state.getValue(AGE);
+                Float season = SeasonHelper.getSeasonValue(world);
+
+                if(season != null) { //Non-Null means we are season capable
+                    if(getSpecies().seasonalFruitProductionFactor(world, pos) < 0.2f) {
+                        outOfSeasonAction(world, pos);//Destroy the block or similar action
+                        return;
+                    }
+                    if(age == 0 && getSpecies().testFlowerSeasonHold(world, pos, season)) {
+                        return;//Keep fruit at the flower stage
+                    }
+                }
+
+                if (age < 3 && rand.nextFloat() < getGrowthChance(world, pos)) {
+                    world.setBlockState(pos, state.withProperty(AGE, age + 1), 2);
+                    net.minecraftforge.common.ForgeHooks.onCropsGrowPost(world, pos, state, world.getBlockState(pos));
+                }
+            }
         }
     }
 

@@ -98,9 +98,11 @@ public class ModTrees {
 				ResourceLocation resLoc = new ResourceLocation(ModConstants.MODID, fruitName);
 				ILeavesProperties leavesProperties = (ModConstants.PALMS.contains(fruitName)) ? ModBlocks.palmLeavesProperties.get(fruitName) : family.getCommonSpecies().getLeavesProperties();
 				Species species = creator.createSpecies(resLoc, family, leavesProperties, fruitName, saplingType);
-				if (family.getCommonSpecies() == Species.NULLSPECIES) family.setCommonSpecies(species);
-				phcFruitSpecies.put(fruitName, species);
-				Species.REGISTRY.register(species);
+				if (species.isValid()) {
+					if (family.getCommonSpecies() == Species.NULLSPECIES) family.setCommonSpecies(species);
+					phcFruitSpecies.put(fruitName, species);
+					Species.REGISTRY.register(species);
+				}
 			}
 		}
 
@@ -125,6 +127,7 @@ public class ModTrees {
 					fruit.setDroppedItem(new ItemStack(FruitRegistry.getFood(entry.getKey())));
 				}
 				Species species = entry.getValue();
+				fruit.setSpecies(species);
 				if (species instanceof SpeciesFruit){
 					((SpeciesFruit)species).setFruitBlock(fruit);
 				}
