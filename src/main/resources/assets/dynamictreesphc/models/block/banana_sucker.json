@@ -1,6 +1,5 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "block/block",
 	"textures": {
 		"particle": "dynamictreesphc:blocks/bananapalmfrond",
 		"leaves": "dynamictreesphc:blocks/bananapalmfrond",

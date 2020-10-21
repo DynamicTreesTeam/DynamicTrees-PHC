@@ -57,7 +57,9 @@ public class FeatureGenFruitPalm implements IPostGenFeature, IPostGrowFeature {
     @Override
     public boolean postGrow(World world, BlockPos rootPos, BlockPos treePos, Species species, int soilLife, boolean natural) {
         if((TreeHelper.getRadius(world, rootPos.up()) >= fruitingRadius) && natural && world.rand.nextInt() % 16 == 0) {
-            addFruit(world, rootPos, getLeavesHeight(rootPos, world).down(getRandPosition(world)), false);
+            if(species.seasonalFruitProductionFactor(world, rootPos) > world.rand.nextFloat()) {
+                addFruit(world, rootPos, getLeavesHeight(rootPos, world).down(getRandPosition(world)), false);
+            }
         }
         return false;
     }
@@ -75,7 +77,9 @@ public class FeatureGenFruitPalm implements IPostGenFeature, IPostGrowFeature {
     @Override
     public boolean postGeneration(World world, BlockPos rootPos, Species species, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
         boolean placed = false;
-        for (int i=0;i<8;i++){
+        int qty = 8;
+        qty *= species.seasonalFruitProductionFactor(world, rootPos);
+        for (int i=0;i<qty;i++){
             if(world.rand.nextInt() % 4 == 0) {
                 addFruit(world, rootPos, getLeavesHeight(rootPos, world).down(getRandPosition(world)),true);
                 placed = true;

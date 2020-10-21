@@ -2,10 +2,12 @@ package com.ferreusveritas.dynamictreesphc.trees;
 
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
+import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorSeed;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenFruit;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling.SaplingType;
 import net.minecraft.block.state.IBlockState;
@@ -101,7 +103,14 @@ public class SpeciesFruit extends Species {
 			case WARM: return new ResourceLocation(dtModId, "jungle");
 		}
 	}
-	
+
+	@Override
+	public float seasonalFruitProductionFactor(World world, BlockPos pos) {
+		Float offset = ModConstants.fruitOffset.get(fruitName);
+		if (offset == null) return 1;
+		return SeasonHelper.globalSeasonalFruitProductionFactor(world, pos, offset);
+	}
+
 	protected void fruitTreeDefaults(String name) {
 				setBasicGrowingParameters(0.3f, 8.0f, 1, 4, 1.0f, fruitingRadius);
 	}

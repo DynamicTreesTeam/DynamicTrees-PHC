@@ -3,9 +3,7 @@ package com.ferreusveritas.dynamictreesphc;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.util.math.AxisAlignedBB;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 	
@@ -201,5 +199,52 @@ public class ModConstants extends com.ferreusveritas.dynamictrees.ModConstants {
 		}
 
 	}
+
+	//A null offset means the fruit grows the same way all year round.
+	public static Map<String, Float> fruitOffset = new HashMap<String, Float>() {{
+		put(FruitRegistry.ALMOND, 0.5f); //summer-autumn
+		put(FruitRegistry.APRICOT, 0f); //summer
+		put(FruitRegistry.AVOCADO, 0f); //summer
+		put(FruitRegistry.BANANA, null); //all year round
+		put(FruitRegistry.CASHEW, 2f); //winter
+		put(FruitRegistry.CHERRY, 0f); //summer
+		put(FruitRegistry.CHESTNUT, 0.5f); //summer-autumn
+		put(FruitRegistry.COCONUT, null); //all year round
+		put(FruitRegistry.DATE, 1.5f); //autumn-winter
+		put(FruitRegistry.DRAGONFRUIT, 0f); //summer
+		put(FruitRegistry.DURIAN, 0f); //summer
+		put(FruitRegistry.FIG, 0.5f); //summer-autumn
+		put(FruitRegistry.GOOSEBERRY, 0f); //summer
+		put(FruitRegistry.GRAPEFRUIT, 3f); //spring
+		put(FruitRegistry.LEMON, 2.5f); //winter-spring
+		put(FruitRegistry.LIME, 0f); //summer
+		put(FruitRegistry.MANGO, 0f); //summer
+		put(FruitRegistry.NUTMEG, 0f); //summer
+		put(FruitRegistry.OLIVE, 1f); //autumn
+		put(FruitRegistry.ORANGE, 2.5f); //winter-spring
+		put(FruitRegistry.PAPAYA, null); //all year round
+		put(FruitRegistry.PEACH, 0f); //summer
+		put(FruitRegistry.PEAR, 0f); //summer
+		put(FruitRegistry.PECAN, 1f); //autumn
+		put(FruitRegistry.PEPPERCORN, 0f); //summer
+		put(FruitRegistry.PERSIMMON, 1.5f); //autumn-winter
+		put(FruitRegistry.PISTACHIO, 0f); //summer
+		put(FruitRegistry.PLUM, 0f); //summer
+		put(FruitRegistry.POMEGRANATE, 1.5f); //autumn-winter
+		put(FruitRegistry.STARFRUIT, 1f); //autumn
+		put(FruitRegistry.VANILLABEAN, 2f); //winter
+		put(FruitRegistry.WALNUT, 0.5f); //summer-autumn
+		put(FruitRegistry.SPIDERWEB, null); //all year round, i guess?
+		put(FruitRegistry.HAZELNUT, 1f); //autumn
+		put(FruitRegistry.PAWPAW, 0f); //summer
+		put(FruitRegistry.SOURSOP, 1f); //autumn
+		put(FruitRegistry.BREADFRUIT, 3f); //spring
+		put(FruitRegistry.GUAVA, 3f); //spring
+		put(FruitRegistry.JACKFRUIT, 0.5f); //summer-autumn
+		put(FruitRegistry.LYCHEE, 0f); //summer
+		put(FruitRegistry.PASSIONFRUIT, 0f); //summer
+		put(FruitRegistry.RAMBUTAN, 0.5f); //summer-autumn
+		put(FruitRegistry.TAMARIND, 3.5f); //spring-summer
+	}};
 
 }

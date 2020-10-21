@@ -1,6 +1,7 @@
 package com.ferreusveritas.dynamictreesphc.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
+import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.ModItems;
 import com.ferreusveritas.dynamictreesphc.ModSounds;
@@ -45,6 +46,10 @@ public class BlockPamFruit extends BlockFruit {
     public BlockPamFruit (ResourceLocation name){
         super(new ResourceLocation(name.getResourceDomain(), "fruit"+name.getResourcePath()).toString());
         this.fruitName = name.getResourcePath();
+    }
+
+    private double getPepperRipenChance (World world, BlockPos pos){
+        return pepperRipenChance * SeasonHelper.globalSeasonalFruitProductionFactor(world, pos, ModConstants.fruitOffset.get(FruitRegistry.PEPPERCORN));
     }
 
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
@@ -110,7 +115,7 @@ public class BlockPamFruit extends BlockFruit {
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if (ModConstants.FALLINGFRUIT.contains(fruitName) && state.getValue(AGE) == 3 && worldIn.rand.nextFloat() <= randomFruitFallChance)
             this.blockFall(worldIn, pos, state);
-        else if (!(fruitName.equals(FruitRegistry.PEPPERCORN) && state.getValue(AGE) == 2 && worldIn.rand.nextFloat() >= pepperRipenChance)){
+        else if (!(fruitName.equals(FruitRegistry.PEPPERCORN) && state.getValue(AGE) == 2 && worldIn.rand.nextFloat() >= getPepperRipenChance(worldIn, pos))){
             super.updateTick(worldIn, pos, state, rand);
         }
     }

@@ -4,6 +4,7 @@ import com.ferreusveritas.dynamictrees.ModTabs;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
+import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockVine;
@@ -47,7 +48,7 @@ public class BlockVinePassionfruit extends BlockVine {
     }
 
     private float getFruitingChance (World world, BlockPos pos){
-        float fruitFactor = SeasonHelper.globalSeasonalFruitProductionFactor(world, pos);
+        float fruitFactor = SeasonHelper.globalSeasonalFruitProductionFactor(world, pos, ModConstants.fruitOffset.get(FruitRegistry.PASSIONFRUIT));
         return baseFruitingChance * Math.max((fruitFactor + 0.25f), 1);
     }
 

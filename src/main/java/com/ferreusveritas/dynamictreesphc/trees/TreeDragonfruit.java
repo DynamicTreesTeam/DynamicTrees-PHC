@@ -32,7 +32,9 @@ public class TreeDragonfruit extends TreePalm {
 
         public void setFruitBlock (BlockFruit fruitBlock){
             fruitBlockState = fruitBlock.getDefaultState();
-            addGenFeature(new FeatureGenFruitPalm(fruitBlock, 2, fruitBlock instanceof BlockPamFruitPalm));
+            FeatureGenFruitPalm featureGen = new FeatureGenFruitPalm(fruitBlock, 2, fruitBlock instanceof BlockPamFruitPalm);
+            featureGen.setFruitingRadius(fruitingRadius);
+            addGenFeature(featureGen);
         }
 
         @Override
@@ -57,7 +59,7 @@ public class TreeDragonfruit extends TreePalm {
 
         @Override
         protected void fruitTreeDefaults(String name) {
-            setBasicGrowingParameters(1.0f, 2.0f, 1, 4, 0.2f, fruitingRadius);
+            setBasicGrowingParameters(1.0f, 2.0f, 1, 4, 0.2f, 2);
         }
 
         @Override
