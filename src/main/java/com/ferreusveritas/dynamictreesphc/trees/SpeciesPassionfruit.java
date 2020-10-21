@@ -21,4 +21,9 @@ public class SpeciesPassionfruit extends Species {
         joCodeStore.addCodesFromFile(this, "assets/" + getRegistryName().getResourceDomain() + "/trees/fruit.txt");
     }
 
+    @Override
+    public ResourceLocation getSaplingName() {
+        return new ResourceLocation(com.ferreusveritas.dynamictrees.ModConstants.MODID, "jungle");
+    }
+
 }

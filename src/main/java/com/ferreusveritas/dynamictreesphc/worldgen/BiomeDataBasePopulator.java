@@ -8,6 +8,7 @@ import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase;
 import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase.Operation;
 import com.ferreusveritas.dynamictreesphc.ModTrees;
 import com.pam.harvestcraft.HarvestCraft;
+import com.pam.harvestcraft.blocks.FruitRegistry;
 import com.pam.harvestcraft.config.TreeGenerationConfiguration;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
@@ -27,7 +28,7 @@ public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 		for(TreeGenerationConfiguration treeConfig : HarvestCraft.fruitTreeConfigManager.treeConfigurations) {
 			if(treeConfig.getEnableGeneration()) {
 				String fruitName = treeConfig.getFruit();
-				Species species = ModTrees.phcFruitSpecies.get(fruitName);
+				Species species = fruitName.equals(FruitRegistry.PASSIONFRUIT) ? ModTrees.passionfruit : ModTrees.phcFruitSpecies.get(fruitName);
 				if(species != null) {
 					for(Biome biome : treeConfig.getBiomesAllowed()) {
 						if(dbase.shouldCancelVanillaTreeGen(biome)) {//Only populate biomes with Dynamic Trees that have been cancelled

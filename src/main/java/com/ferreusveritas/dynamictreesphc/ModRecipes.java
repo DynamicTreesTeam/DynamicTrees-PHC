@@ -32,7 +32,7 @@ public class ModRecipes {
 		//Add apple sapling recipe separately as the PHC apple tree didnt get a dynamic version
 		Species appleSpecies = TreeRegistry.findSpecies(new ResourceLocation(com.ferreusveritas.dynamictrees.ModConstants.MODID, "apple"));
 		ItemStack appleSapling = new ItemStack(Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("harvestcraft", "apple_sapling"))));
-		com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(appleSapling, appleSpecies.getSeedStack(1), false, "seedfromsapling");
+		com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(appleSapling, appleSpecies.getSeedStack(1), false, "seedfromsapling", new ResourceLocation(ModConstants.MODID, FruitRegistry.APPLE));
 
 		//Add the fruit recipes for the ripe peppercorn
 		Species peppercornSpecies = TreeRegistry.findSpecies(new ResourceLocation(ModConstants.MODID, FruitRegistry.PEPPERCORN));
@@ -61,10 +61,10 @@ public class ModRecipes {
 		ItemStack seedStack = species.getSeedStack(1);
 		String fruit = species.getRegistryName().getResourcePath();
 
-		//if the seed is not extractable from the fruit, or there is no fruit, the normal seed <-> sapling recipes are created.
-		if (ModConstants.FRUITISNOTSEED.contains(fruit) || ModConstants.NOFRUIT.contains(fruit)){
+		//if the seed is not extractable from the fruit, or the species is not fruity, the normal seed <-> sapling recipes are created.
+		if (ModConstants.FRUITISNOTSEED.contains(fruit) || !(species instanceof SpeciesFruit)){
 			com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(saplingStack, seedStack, true, "seedfromsapling");
-		} else if(species instanceof SpeciesFruit){
+		} else {
 			Item fruitItem = ((SpeciesFruit)species).getFruitBlock().getFruitDrop().getItem();
 			ItemStack fruitStack = new ItemStack(fruitItem);
 			com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipesWithFruit(saplingStack, seedStack, fruitStack, true, "seedfromsapling", species.getRegistryName(), ModConstants.NUTS.contains(fruit));

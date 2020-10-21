@@ -34,6 +34,8 @@ public class ModTrees {
 	public static Map<String, Species> phcFruitSpecies = new HashMap<>();
 
 	public static TreeFamily palmTrees, dragonfruitTree, cinnamonTree, mapleTree, paperBarkTree;
+
+	public static Species passionfruit;
 	
 	public static void init() {
 		fruitTreeGen = HarvestCraft.fruitTreeConfigManager.enableFruitTreeGeneration;
@@ -104,7 +106,7 @@ public class ModTrees {
 
 		//Create Passionfruit seperately
 		//This isnt a passionfruit tree but a normal oak with passionfruit vines around it
-		Species passionfruit = new SpeciesPassionfruit(familyMap.get(SaplingType.WARM));
+		passionfruit = new SpeciesPassionfruit(familyMap.get(SaplingType.WARM));
 		Species.REGISTRY.register(passionfruit);
 
 		//Create fruit blocks
@@ -132,9 +134,6 @@ public class ModTrees {
 		for(Entry<String, Species> entry : phcFruitSpecies.entrySet()) {
 			TreeRegistry.registerSaplingReplacer(FruitRegistry.getSapling(entry.getKey()).getDefaultState(), entry.getValue());
 		}
-
-		//we add passionfruit to the fruit species list to avoid adding fruit blocks and sapling replacers.
-		phcFruitSpecies.put(FruitRegistry.PASSIONFRUIT, passionfruit);
 	}
 	
 	private static void alterCreatorMap(Map<String, ISpeciesCreator> creatorMap) {

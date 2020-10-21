@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dynamictreesphc:blocks/stone",
-		"apple": "dynamictreesphc:blocks/stone"
+		"particle": "blocks/stone",
+		"apple": "blocks/stone"
 	},
 	"elements": [
 		{

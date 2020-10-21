@@ -22,13 +22,18 @@ public class TreeCinnamon extends TreeFamilyPHC {
 		public TreeCinnamonSpecies(TreeFamily treeFamily) {
 			super(treeFamily.getName(), treeFamily, ModBlocks.cinnamonLeavesProperties);
 			
-			setBasicGrowingParameters(0.1f, 14.0f, 12, getLowestBranchHeight(), 1.0f);
+			setBasicGrowingParameters(0.1f, 14.0f, 12, getLowestBranchHeight(), 1.8f);
 
 			generateSeed();
 
 			setupStandardSeedDropping();
 		}
-		
+
+		@Override
+		public boolean useDefaultWailaBody() {
+			return false;
+		}
+
 		@Override
 		public boolean isBiomePerfect(Biome biome) {
 			return BiomeDictionary.hasType(biome, Type.JUNGLE);
@@ -36,7 +41,7 @@ public class TreeCinnamon extends TreeFamilyPHC {
 
 		@Override
 		public int maxBranchRadius() {
-			return 6;
+			return 4;
 		}
 	}
 
@@ -58,6 +63,6 @@ public class TreeCinnamon extends TreeFamilyPHC {
 		return new BlockBranchPamSpecial(
 				getName()+"branch",
 				speciesName,
-				1.5f);
+				2.5f);
 	}
 }
