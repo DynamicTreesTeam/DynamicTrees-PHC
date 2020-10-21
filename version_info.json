@@ -1,10 +1,11 @@
 {
 	"homepage": "https://www.curseforge.com/minecraft/mc-mods/dtphc",
 	"1.12.2": {
-		"1.12.2-2.0.0": ""
+		"1.12.2-2.0.1": "+ Added seasonal fruit offsets (each fruit will grow in its own season if serene season is installed)\n+ Added update checker\n- Minor fixes and patches",
+		"1.12.2-2.0.0": "+ Custom 3D fruit blocks for all fruit trees\n+ Custom seed textures for all seed items\n+ Made Date, Coconut, Papaya, Banana and Dragonfruit be palm-like\n+ Dragonfruit behaves more like a cactus, damaging on contact\n+ Added Banana tree suckers around banana trees, can be harvested and replanted\n+ Added maple spile block for harvesting maple syrup\n+ Paperbark trunk can be stripped with an axe to obtain paper\n+ Adjusted growth parameters of many trees\n+ Added passionfruit vine\n+ Some fruit blocks may now fall, causing damage\n+ Added seasonal changes to fruits (requires serene seasons)\n- Renamed spiderweb tree to Infested Oak\n- Updated to latest Dynamic Trees version\n- Adjusted recipes for realism\n- Many, many, many other fixes and changes"
 	},
 	"promos": {
-		"1.12.2-latest": "1.12.2-2.0.0",
-		"1.12.2-recommended": "1.12.2-2.0.0"
+		"1.12.2-latest": "1.12.2-2.0.1",
+		"1.12.2-recommended": "1.12.2-2.0.1"
 	}
 }
