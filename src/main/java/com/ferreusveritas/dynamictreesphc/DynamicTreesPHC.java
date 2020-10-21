@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = ModConstants.MODID, name=ModConstants.NAME, version=ModConstants.VERSION, dependencies=ModConstants.DEPENDENCIES)
+@Mod(modid = ModConstants.MODID, name=ModConstants.NAME, version=ModConstants.VERSION, dependencies=ModConstants.DEPENDENCIES, updateJSON = "https://github.com/ferreusveritas/DynamicTrees-PHC/blob/master/version_info.json?raw=true")
 public class DynamicTreesPHC {
 	
 	@Mod.Instance(ModConstants.MODID)
