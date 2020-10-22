@@ -54,7 +54,12 @@ public class TreeMaple extends TreeFamilyPHC {
 		public boolean isBiomePerfect(Biome biome) {
 			return BiomeDictionary.hasType(biome, Type.JUNGLE);
 		}
-		
+
+		@Override
+		public int getSeasonalTooltipFlags(int dimension) {
+			return 9; //Winter & Spring tags
+		}
+
 	}
 		
 	public TreeMaple() {
