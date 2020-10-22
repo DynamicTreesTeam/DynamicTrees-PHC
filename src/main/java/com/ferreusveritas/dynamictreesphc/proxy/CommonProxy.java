@@ -4,12 +4,14 @@ import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModItems;
 import com.ferreusveritas.dynamictreesphc.ModSounds;
 import com.ferreusveritas.dynamictreesphc.ModTrees;
+import com.ferreusveritas.dynamictreesphc.event.TooltipEventHandler;
 import com.pam.harvestcraft.HarvestCraft;
-import com.pam.harvestcraft.blocks.growables.BlockPamFruit;
+import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy {
 
 	public void preInit() {
+		MinecraftForge.EVENT_BUS.register(new TooltipEventHandler());
 		ModBlocks.preInit();
 		ModItems.preInit();
 		ModTrees.preInit();
