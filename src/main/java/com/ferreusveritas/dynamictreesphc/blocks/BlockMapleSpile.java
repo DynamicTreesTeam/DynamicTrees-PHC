@@ -1,10 +1,12 @@
 package com.ferreusveritas.dynamictreesphc.blocks;
 
+import java.util.Random;
+
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
-import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.pam.harvestcraft.blocks.FruitRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -17,21 +19,22 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class BlockMapleSpile extends BlockHorizontal {
 
     public static final PropertyBool FILLED = PropertyBool.create("filled");
 
-    private static final double baseSyrupChance = 0.05D;
-    private static final double outOfSeasonSyrupChance = 0.001D;
     private static final double chanceToBreak = 0.02D;
 
     protected static final AxisAlignedBB SPILE_EAST_AABB = new AxisAlignedBB(
@@ -61,15 +64,6 @@ public class BlockMapleSpile extends BlockHorizontal {
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(FILLED, false));
     }
 
-    //Update syrup extract rate depending on seasons
-    public double getSyrupChance (World world){
-        Float season = SeasonHelper.getSeasonValue(world);
-        if (season == null || SeasonHelper.isSeasonBetween(season, SeasonHelper.WINTER+0.5f, SeasonHelper.SPRING+0.5f)){
-            return Math.max(Math.min(baseSyrupChance, 1),0);
-        }
-        else return Math.max(Math.min(outOfSeasonSyrupChance, 1),0);
-    }
-
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, FILLED, FACING);
@@ -89,10 +83,6 @@ public class BlockMapleSpile extends BlockHorizontal {
     {
         if (!this.canBlockStay(worldIn, pos, state)) {
             this.dropBlock(worldIn, pos, state);
-        } else {
-            if (worldIn.rand.nextFloat() <= getSyrupChance(worldIn)){
-                worldIn.setBlockState(pos, state.withProperty(FILLED, true));
-            }
         }
     }
 

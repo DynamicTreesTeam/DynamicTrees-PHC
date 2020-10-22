@@ -7,8 +7,10 @@ import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamSpecial;
+import com.ferreusveritas.dynamictreesphc.dropcreators.FeatureGenSyrup;
 import com.ferreusveritas.dynamictreesphc.items.ItemDynamicSeedMaple;
 import com.pam.harvestcraft.blocks.FruitRegistry;
+
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,6 +45,9 @@ public class TreeMaple extends TreeFamilyPHC {
 			setSeedStack(new ItemStack(new ItemDynamicSeedMaple()));
 
 			setupStandardSeedDropping();
+			
+			//Add species features
+			addGenFeature(new FeatureGenSyrup(0.05f, 0.001f));
 		}
 
 		@Override

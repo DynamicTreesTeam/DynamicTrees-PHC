@@ -1,8 +1,10 @@
 package com.ferreusveritas.dynamictreesphc.blocks;
 
+import java.util.Random;
+
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
-import com.ferreusveritas.dynamictreesphc.ModItems;
 import com.pam.harvestcraft.blocks.FruitRegistry;
+
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -11,20 +13,20 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-import java.util.Random;
-
 public class BlockMapleSpileBucket extends BlockMapleSpile {
 
-    private static final int maxFilling = 3;
+    public static final int maxFilling = 3;
     public static final PropertyInteger FILLING = PropertyInteger.create("filling", 0, maxFilling);
 
     protected static final AxisAlignedBB SPILEBUCKET_EAST_AABB = new AxisAlignedBB(
@@ -70,14 +72,10 @@ public class BlockMapleSpileBucket extends BlockMapleSpile {
     {
         if (!this.canBlockStay(worldIn, pos, state)) {
             this.dropBlock(worldIn, pos, state);
-        } else {
-            int filling = worldIn.getBlockState(pos).getValue(FILLING);
-            if (worldIn.rand.nextFloat() <= getSyrupChance(worldIn) && filling < maxFilling){
-                worldIn.setBlockState(pos, state.withProperty(FILLING, filling + 1));
-            }
         }
     }
 
+    
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (state.getProperties().containsKey(FILLING)){
