@@ -4,6 +4,7 @@ import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
+import com.ferreusveritas.dynamictreesphc.ModConfigs;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamSpecial;
 import com.pam.harvestcraft.blocks.FruitRegistry;
@@ -63,6 +64,6 @@ public class TreeCinnamon extends TreeFamilyPHC {
 		return new BlockBranchPamSpecial(
 				getName()+"branch",
 				speciesName,
-				2.5f);
+				ModConfigs.treeCinnamonYieldPerLog);
 	}
 }

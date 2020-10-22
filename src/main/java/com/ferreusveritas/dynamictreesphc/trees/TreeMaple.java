@@ -5,6 +5,7 @@ import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
+import com.ferreusveritas.dynamictreesphc.ModConfigs;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamSpecial;
 import com.ferreusveritas.dynamictreesphc.dropcreators.FeatureGenSyrup;
@@ -85,7 +86,7 @@ public class TreeMaple extends TreeFamilyPHC {
 		return new BlockBranchPamSpecial(
 				getName()+"branch",
 				speciesName,
-				0.2f){
+				ModConfigs.treeMapleYieldPerLog){
 			@Override
 			public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 				if (playerIn.getHeldItem(hand).getItem() == Items.IRON_INGOT &&

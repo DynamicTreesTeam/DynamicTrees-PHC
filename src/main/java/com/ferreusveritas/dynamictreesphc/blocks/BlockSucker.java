@@ -81,8 +81,9 @@ public class BlockSucker extends BlockHorizontal {
     protected ItemStack getDroppedItem(){
         if (droppedStack == null){
             Species species = TreeRegistry.findSpecies(new ResourceLocation(ModConstants.MODID, FruitRegistry.BANANA));
-            return species.getSeedStack(1);
-        } else return droppedStack;
+            droppedStack = species.getSeedStack(1);
+        }
+        return droppedStack;
     }
 
     protected void dropBlock(World worldIn, BlockPos pos, IBlockState state)

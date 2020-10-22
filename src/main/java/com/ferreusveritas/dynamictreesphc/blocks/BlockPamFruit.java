@@ -2,6 +2,7 @@ package com.ferreusveritas.dynamictreesphc.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
+import com.ferreusveritas.dynamictreesphc.ModConfigs;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.ModItems;
 import com.ferreusveritas.dynamictreesphc.ModSounds;
@@ -39,8 +40,8 @@ public class BlockPamFruit extends BlockFruit {
 
     protected final String fruitName;
 
-    public static double randomFruitFallChance = 0.005D;
-    private static final float distanceFromPlayerToFall = 10;
+    public static double randomFruitFallChance = ModConfigs.fallingFruitFallChance;
+    private static final float distanceFromPlayerToFall = ModConfigs.fallingFruitDistanceFromPlayer;
     private static final double pepperRipenChance = 0.01f;
 
     public BlockPamFruit (ResourceLocation name){
@@ -129,7 +130,9 @@ public class BlockPamFruit extends BlockFruit {
     }
 
     private void blockFall(World worldIn, BlockPos pos, IBlockState state) {
-        if (worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), distanceFromPlayerToFall, false) == null){
+        if (distanceFromPlayerToFall == 0) return; //if distance is 0 block falling is disabled.
+        //if distance is -1 there is no distance check
+        if (distanceFromPlayerToFall != -1 && worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), distanceFromPlayerToFall, false) == null){
             return;
         }
         if ((worldIn.isAirBlock(pos.down()) || BlockFalling.canFallThrough(worldIn.getBlockState(pos.down()))) && pos.getY() >= 0)

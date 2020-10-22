@@ -4,6 +4,7 @@ import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
+import com.ferreusveritas.dynamictreesphc.ModConfigs;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamPaper;
 import com.pam.harvestcraft.blocks.FruitRegistry;
@@ -64,7 +65,7 @@ public class TreePaperBark extends TreeFamilyPHC {
 		paperbarkCutBranch = new BlockBranchPamPaper(
 				getName()+"cutbranch",
 				speciesName,
-				2f,
+				ModConfigs.treePaperbarkYieldPerLog,
 				true
 		);
 		paperbarkCutBranch.setFamily(this);
@@ -77,7 +78,7 @@ public class TreePaperBark extends TreeFamilyPHC {
 		paperbarkBranch = new BlockBranchPamPaper(
 				getName()+"branch",
 				speciesName,
-				2f,
+				ModConfigs.treePaperbarkYieldPerLog,
 				false
 		);
 		return paperbarkBranch;
