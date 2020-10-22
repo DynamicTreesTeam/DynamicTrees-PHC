@@ -1,16 +1,19 @@
 package com.ferreusveritas.dynamictreesphc.proxy;
 
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
+import com.ferreusveritas.dynamictreesphc.ModConfigs;
 import com.ferreusveritas.dynamictreesphc.ModItems;
 import com.ferreusveritas.dynamictreesphc.ModSounds;
 import com.ferreusveritas.dynamictreesphc.ModTrees;
 import com.ferreusveritas.dynamictreesphc.event.TooltipEventHandler;
 import com.pam.harvestcraft.HarvestCraft;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {
 
-	public void preInit() {
+	public void preInit(FMLPreInitializationEvent event) {
+		ModConfigs.preInit(event);
 		MinecraftForge.EVENT_BUS.register(new TooltipEventHandler());
 		ModBlocks.preInit();
 		ModItems.preInit();

@@ -6,6 +6,7 @@ import com.ferreusveritas.dynamictrees.api.worldgen.IBiomeDataBasePopulator;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase;
 import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase.Operation;
+import com.ferreusveritas.dynamictreesphc.ModConfigs;
 import com.ferreusveritas.dynamictreesphc.ModTrees;
 import com.pam.harvestcraft.HarvestCraft;
 import com.pam.harvestcraft.blocks.FruitRegistry;
@@ -19,7 +20,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
-
+	
 	Map<Biome, RandomSpeciesSelector> biomeMap = new HashMap<>();
 	
 	@Override
@@ -40,14 +41,12 @@ public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 			}
 		}
 		
-		float harvestCraftOccurance = 0.02f;
-		
 		for(Entry<Biome, RandomSpeciesSelector> entry : biomeMap.entrySet()) {
 			if(!BiomeDictionary.hasType(entry.getKey() , Type.SPOOKY)) { //Little fruit trees mess up the roof of the roofed forest
-				dbase.setSpeciesSelector(entry.getKey(), (pos, dirt, random) -> random.nextFloat() < harvestCraftOccurance ? entry.getValue().getSpecies(pos, dirt, random): new SpeciesSelection(), Operation.SPLICE_BEFORE);
+				dbase.setSpeciesSelector(entry.getKey(), (pos, dirt, random) -> random.nextFloat() < ModConfigs.fruitTreeOccurance ? entry.getValue().getSpecies(pos, dirt, random): new SpeciesSelection(), Operation.SPLICE_BEFORE);
 			}
 		}
-
+		
 	}
 	
 }

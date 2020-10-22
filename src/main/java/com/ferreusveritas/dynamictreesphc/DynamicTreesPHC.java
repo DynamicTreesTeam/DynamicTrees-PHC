@@ -26,7 +26,7 @@ public class DynamicTreesPHC {
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		proxy.preInit();
+		proxy.preInit(event);
 	}
 	
 	@Mod.EventHandler

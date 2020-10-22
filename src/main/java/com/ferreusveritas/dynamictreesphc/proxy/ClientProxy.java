@@ -1,5 +1,8 @@
 package com.ferreusveritas.dynamictreesphc.proxy;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
@@ -10,30 +13,22 @@ import com.ferreusveritas.dynamictreesphc.ModItems;
 import com.ferreusveritas.dynamictreesphc.items.ItemDynamicSeedMaple;
 import com.ferreusveritas.dynamictreesphc.models.ModelLoaderBlockPalmFronds;
 import com.ferreusveritas.dynamictreesphc.renderer.RenderMapleSeed;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ColorizerFoliage;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-
-import javax.annotation.Nullable;
-import java.util.LinkedList;
-import java.util.List;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy {
 	
 	@Override
-	public void preInit() {
-		super.preInit();
+	public void preInit(FMLPreInitializationEvent event) {
+		super.preInit(event);
 		registerEntityRenderers();
 
 		ModelLoaderRegistry.registerLoader(new ModelLoaderBlockPalmFronds("dynamicpalmfrondsphcsmall",0));
