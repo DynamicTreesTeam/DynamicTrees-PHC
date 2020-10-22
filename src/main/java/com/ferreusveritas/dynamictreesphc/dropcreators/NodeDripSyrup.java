@@ -1,5 +1,6 @@
 package com.ferreusveritas.dynamictreesphc.dropcreators;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.network.INodeInspector;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockMapleSpile;
@@ -19,8 +20,8 @@ public class NodeDripSyrup implements INodeInspector {
 	@Override
 	public boolean run(IBlockState blockState, World world, BlockPos pos, EnumFacing fromDir) {
 		
-		if(!finished) {
-			if(fromDir != EnumFacing.DOWN) {//If we turn then we're no longer in the main trunk where the buckets are
+		if(!finished && TreeHelper.isBranch(blockState)) { //Only process branch blocks
+			if(fromDir != EnumFacing.DOWN && fromDir != null) {//If we turn then we're no longer in the main trunk where the buckets are. Null direction means we're in the origin node
 				finished = true;
 				return false;
 			}
