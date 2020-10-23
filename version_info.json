@@ -1,5 +1,5 @@
 {
-	"homepage": "https://www.curseforge.com/minecraft/mc-mods/dtphc",
+	"homepage": "https://www.curseforge.com/minecraft/mc-mods/dtphc/files",
 	"1.12.2": {
 		"1.12.2-2.0.3": "+ Added config file with options for fruit gen, and tree configuration\n- Made Maple Syrup be limited by tree",
 		"1.12.2-2.0.2": "- Minor tooltip fixes",
@@ -8,6 +8,6 @@
 	},
 	"promos": {
 		"1.12.2-latest": "1.12.2-2.0.3",
-		"1.12.2-recommended": "1.12.2-2.0.2"
+		"1.12.2-recommended": "1.12.2-2.0.3"
 	}
 }
