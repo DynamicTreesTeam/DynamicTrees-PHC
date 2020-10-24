@@ -1,5 +1,7 @@
 package com.ferreusveritas.dynamictreesphc.compat;
 
+import java.util.List;
+
 import com.ferreusveritas.dynamictrees.ModConfigs;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
@@ -10,6 +12,7 @@ import com.ferreusveritas.dynamictrees.compat.WailaBranchHandler;
 import com.ferreusveritas.dynamictrees.systems.nodemappers.NodeNetVolume;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockBranchPamSpecial;
+
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.SpecialChars;
@@ -22,9 +25,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class WailaBranchHandlerPHC extends WailaBranchHandler {
 
@@ -138,7 +138,7 @@ public class WailaBranchHandlerPHC extends WailaBranchHandler {
 
         if(block instanceof BlockBranch) {
             BlockBranch branch = (BlockBranch) state.getBlock();
-            Species species = TreeHelper.getExactSpecies(state, world, pos);
+            Species species = TreeHelper.getExactSpecies(world, pos);
             if(species == Species.NULLSPECIES) {
                 species = branch.getFamily().getCommonSpecies();
             }
