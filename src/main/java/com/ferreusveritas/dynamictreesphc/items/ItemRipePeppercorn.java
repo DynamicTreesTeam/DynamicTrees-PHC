@@ -1,18 +1,15 @@
 package com.ferreusveritas.dynamictreesphc.items;
 
-import com.ferreusveritas.dynamictrees.ModTabs;
-import com.ferreusveritas.dynamictrees.trees.Species;
-import com.ferreusveritas.dynamictreesphc.ModConstants;
+import java.util.List;
+
 import com.pam.harvestcraft.HarvestCraft;
-import mcp.mobius.waila.config.FormattingConfig;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class ItemRipePeppercorn extends Item {
 

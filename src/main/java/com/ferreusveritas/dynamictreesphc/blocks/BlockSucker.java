@@ -1,13 +1,13 @@
 package com.ferreusveritas.dynamictreesphc.blocks;
 
-import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import javax.annotation.Nullable;
+
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
-import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.pam.harvestcraft.blocks.FruitRegistry;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
@@ -16,16 +16,17 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class BlockSucker extends BlockHorizontal {
 

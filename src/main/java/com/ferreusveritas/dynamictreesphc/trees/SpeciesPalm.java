@@ -1,5 +1,8 @@
 package com.ferreusveritas.dynamictreesphc.trees;
 
+import java.util.List;
+import java.util.Random;
+
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.network.MapSignal;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
@@ -14,27 +17,20 @@ import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
-import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruitPalm;
 import com.ferreusveritas.dynamictreesphc.dropcreators.FeatureGenFruitPalm;
 import com.ferreusveritas.dynamictreesphc.dropcreators.FeatureGenSuckers;
 import com.pam.harvestcraft.blocks.FruitRegistry;
 import com.pam.harvestcraft.blocks.growables.BlockPamSapling.SaplingType;
-import net.minecraft.block.SoundType;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
 
 public class SpeciesPalm extends SpeciesFruit {
 

@@ -1,21 +1,18 @@
 package com.ferreusveritas.dynamictreesphc.dropcreators;
 
+import java.util.List;
+
 import com.ferreusveritas.dynamictrees.api.IPostGenFeature;
 import com.ferreusveritas.dynamictrees.api.IPostGrowFeature;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
-import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruitPalm;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockSucker;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-
-import java.util.List;
 
 
 public class FeatureGenSuckers implements IPostGenFeature, IPostGrowFeature {

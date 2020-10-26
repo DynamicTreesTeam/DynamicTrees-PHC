@@ -1,26 +1,22 @@
 package com.ferreusveritas.dynamictreesphc.compat;
 
-import com.ferreusveritas.dynamictrees.compat.WailaBranchHandler;
-import com.ferreusveritas.dynamictrees.trees.Species;
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockMapleSpile;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockMapleSpileBucket;
 import com.pam.harvestcraft.blocks.FruitRegistry;
+
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.SpecialChars;
 import mcp.mobius.waila.config.FormattingConfig;
-import mcp.mobius.waila.utils.ModIdentification;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-
-import javax.annotation.Nonnull;
-import java.util.List;
 
 public class WailaSpileHandler implements IWailaDataProvider {
 

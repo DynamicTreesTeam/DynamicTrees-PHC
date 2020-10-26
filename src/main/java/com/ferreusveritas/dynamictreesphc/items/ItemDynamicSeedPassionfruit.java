@@ -1,12 +1,9 @@
 package com.ferreusveritas.dynamictreesphc.items;
 
-import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.ModTabs;
-import com.ferreusveritas.dynamictrees.api.TreeRegistry;
-import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockDynamicSaplingPassionfruit;
-import com.ferreusveritas.dynamictreesphc.blocks.BlockVinePassionfruit;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

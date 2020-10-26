@@ -1,5 +1,7 @@
 package com.ferreusveritas.dynamictreesphc.trees;
 
+import java.util.HashMap;
+
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.util.BranchDestructionData;
@@ -7,19 +9,16 @@ import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import com.ferreusveritas.dynamictreesphc.ModBlocks;
 import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockDynamicLeavesPalm;
+
 import net.minecraft.block.BlockOldLeaf;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.property.IExtendedBlockState;
-
-import java.util.HashMap;
-import java.util.List;
 
 public class TreePalm extends TreeFamilyPHC {
 

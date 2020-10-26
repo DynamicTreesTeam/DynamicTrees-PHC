@@ -1,11 +1,13 @@
 package com.ferreusveritas.dynamictreesphc;
 
+import java.util.Objects;
+
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
-import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.items.DendroPotion;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictreesphc.trees.SpeciesFruit;
 import com.pam.harvestcraft.blocks.FruitRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,10 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
-
-import java.util.Objects;
 
 public class ModRecipes {
 	

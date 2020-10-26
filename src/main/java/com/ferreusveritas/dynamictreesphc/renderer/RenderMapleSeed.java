@@ -1,7 +1,7 @@
 package com.ferreusveritas.dynamictreesphc.renderer;
 
-import com.ferreusveritas.dynamictreesphc.items.ItemDynamicSeedMaple;
 import com.ferreusveritas.dynamictreesphc.items.ItemDynamicSeedMaple.EntityItemMapleSeed;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;

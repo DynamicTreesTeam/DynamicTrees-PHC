@@ -1,8 +1,10 @@
 package com.ferreusveritas.dynamictreesphc.blocks;
 
+import java.util.Random;
+
 import com.ferreusveritas.dynamictrees.seasons.SeasonHelper;
-import com.ferreusveritas.dynamictreesphc.ModConstants;
 import com.ferreusveritas.dynamictreesphc.trees.TreePaperBark;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -14,8 +16,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockBranchPamPaper extends BlockBranchPamSpecial {
 
