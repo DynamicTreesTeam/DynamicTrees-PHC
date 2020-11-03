@@ -28,8 +28,8 @@ public class BlockBranchPamPaper extends BlockBranchPamSpecial {
         setTickRandomly(tick);
     }
 
-    public double getBarkRegrowChance(World world) {
-        Float season = SeasonHelper.getSeasonValue(world);
+    public double getBarkRegrowChance(World world, BlockPos pos) {
+        Float season = SeasonHelper.getSeasonValue(world, pos);
         if (season == null || SeasonHelper.isSeasonBetween(season, SeasonHelper.AUTUMN, SeasonHelper.WINTER)){ //bark grows faster in autumn
             return Math.max(Math.min(barkRegrowChance, 1),0);
         }
@@ -42,7 +42,7 @@ public class BlockBranchPamPaper extends BlockBranchPamSpecial {
 
     @Override
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        if (state.getBlock() == TreePaperBark.paperbarkCutBranch && worldIn.rand.nextFloat() <= getBarkRegrowChance(worldIn)){
+        if (state.getBlock() == TreePaperBark.paperbarkCutBranch && worldIn.rand.nextFloat() <= getBarkRegrowChance(worldIn, pos)){
             worldIn.setBlockState(pos, TreePaperBark.paperbarkBranch.getDefaultState().withProperty(RADIUS, state.getValue(RADIUS)));
         }
         super.randomTick(worldIn, pos, state, random);
