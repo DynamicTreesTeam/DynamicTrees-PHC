@@ -22,15 +22,15 @@ public class FeatureGenSyrup implements IPostGrowFeature {
 	
 	@Override
 	public boolean postGrow(World world, BlockPos rootPos, BlockPos treePos, Species species, int soilLife, boolean natural) {
-		if(natural && (TreeHelper.getRadius(world, treePos) >= 7) && (world.rand.nextFloat() <= getSyrupChance(world))) {
+		if(natural && (TreeHelper.getRadius(world, treePos) >= 7) && (world.rand.nextFloat() <= getSyrupChance(world, rootPos))) {
 			dripSyrup(world, rootPos);
 		}
 		return false;
 	}
 	
 	//Update syrup extract rate depending on seasons
-	public double getSyrupChance (World world){
-		Float season = SeasonHelper.getSeasonValue(world);
+	public double getSyrupChance (World world, BlockPos pos){
+		Float season = SeasonHelper.getSeasonValue(world, pos);
 		return MathHelper.clamp(season == null || SeasonHelper.isSeasonBetween(season, SeasonHelper.WINTER + 0.5f, SeasonHelper.SPRING + 0.5f) ? baseSyrupChance : outOfSeasonSyrupChance, 0.0f, 1.0f);
 	}
 	
