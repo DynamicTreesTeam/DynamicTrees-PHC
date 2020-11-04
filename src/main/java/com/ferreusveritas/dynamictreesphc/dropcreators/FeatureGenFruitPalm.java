@@ -9,6 +9,7 @@ import com.ferreusveritas.dynamictrees.blocks.BlockFruit;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
+import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruit;
 import com.ferreusveritas.dynamictreesphc.blocks.BlockPamFruitPalm;
 
 import net.minecraft.block.BlockLeaves;
@@ -80,7 +81,7 @@ public class FeatureGenFruitPalm implements IPostGenFeature, IPostGrowFeature {
         int qty = 8;
         qty *= species.seasonalFruitProductionFactor(world, rootPos);
         for (int i=0;i<qty;i++){
-            if(world.rand.nextInt() % 4 == 0) {
+            if(world.rand.nextInt(4) == 0) {
                 addFruit(world, rootPos, getLeavesHeight(rootPos, world).down(getRandPosition(world)),true);
                 placed = true;
             }
@@ -96,12 +97,12 @@ public class FeatureGenFruitPalm implements IPostGenFeature, IPostGrowFeature {
             EnumFacing placeDir = EnumFacing.HORIZONTALS[world.rand.nextInt(4)];
             leavesPos = leavesPos.down(); //we move the pos down so the fruit can stick to the trunk
             if (world.isAirBlock(leavesPos.offset(placeDir))){
-                world.setBlockState(leavesPos.offset(placeDir), fruitPod.getDefaultState().withProperty(BlockPamFruitPalm.FACING, placeDir.getOpposite()).withProperty(BlockPamFruitPalm.AGE, worldGen?(world.rand.nextInt(3)):0));
+                world.setBlockState(leavesPos.offset(placeDir), fruitPod.getDefaultState().withProperty(BlockPamFruitPalm.FACING, placeDir.getOpposite()).withProperty(BlockPamFruitPalm.AGE, worldGen?(1+world.rand.nextInt(3)):0));
             }
         } else {
             CoordUtils.Surround placeDir = CoordUtils.Surround.values()[world.rand.nextInt(8)];
             if (world.isAirBlock(leavesPos.add(placeDir.getOffset()))){
-                world.setBlockState(leavesPos.add(placeDir.getOffset()), fruitPod.getDefaultState());
+                world.setBlockState(leavesPos.add(placeDir.getOffset()), fruitPod.getDefaultState().withProperty(BlockPamFruit.AGE, worldGen?(1+world.rand.nextInt(3)):0));
             }
         }
     }

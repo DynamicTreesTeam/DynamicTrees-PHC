@@ -102,6 +102,7 @@ public class SpeciesPalm extends SpeciesFruit {
 		for (BlockPos endPoint : endPoints) {
 			TreeHelper.ageVolume(world, endPoint, 1, 2, 3, safeBounds);
 		}
+		super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
 	}
 
 	@Override
