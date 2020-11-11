@@ -172,13 +172,15 @@ public class BlockPamFruit extends BlockFruit {
                                     if (!this.onGround) {
                                         if (this.fallTime > 100 && (blockpos1.getY() < 1 || blockpos1.getY() > 256) || this.fallTime > 600) {
                                             if (this.shouldDropItem && this.world.getGameRules().getBoolean("doEntityDrops")) {
-                                                this.entityDropItem(new ItemStack(block, 1, block.damageDropped(state)), 0.0F);
+                                                ItemStack fruit = ((BlockPamFruit)block).droppedFruit;
+                                                fruit.setCount(1);
+                                                this.entityDropItem(fruit, 0.0F);
                                             }
                                             this.setDead();
                                         }
                                     } else {
-                                        if (this.world.isAirBlock(new BlockPos(this.posX, this.posY - 0.009999999776482582D, this.posZ))) //Forge: Don't indent below.
-                                            if (BlockFalling.canFallThrough(this.world.getBlockState(new BlockPos(this.posX, this.posY - 0.009999999776482582D, this.posZ)))) {
+                                        if (this.world.isAirBlock(new BlockPos(this.posX, this.posY - 0.01D, this.posZ))) //Forge: Don't indent below.
+                                            if (BlockFalling.canFallThrough(this.world.getBlockState(new BlockPos(this.posX, this.posY - 0.01D, this.posZ)))) {
                                                 this.onGround = false;
                                                 return;
                                             }
@@ -186,7 +188,9 @@ public class BlockPamFruit extends BlockFruit {
                                         this.motionZ *= 0.67D;
                                         this.motionY *= -0.5D;
 
-                                        this.entityDropItem(((BlockPamFruit)block).droppedFruit, 0.0F);
+                                        ItemStack fruit = ((BlockPamFruit)block).droppedFruit;
+                                        fruit.setCount(1);
+                                        this.entityDropItem(fruit, 0.0F);
                                         this.setDead();
                                         return;
                                     }
