@@ -22,8 +22,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModRecipes {
 	
 	public static void register(IForgeRegistry<IRecipe> registry) {
-		//Create dirt bucket exchange recipes
-		ModTrees.phcFruitSpecies.values().forEach(ModRecipes::speciesRecipes);
+		//Create dirt bucket exchange recipes except for infested oak
+		ModTrees.phcFruitSpecies.values().stream()
+				.filter(species -> species.getRegistryName().equals(new ResourceLocation(ModConstants.MODID, "spiderweb")))
+				.forEach(ModRecipes::speciesRecipes);
 		//Cinnamon Maple and Paperbark arent included in phcFruitSpecies so we add them separately
 		for (String name : new String[]{FruitRegistry.CINNAMON, FruitRegistry.MAPLE, FruitRegistry.PAPERBARK})
 			speciesRecipes(TreeRegistry.findSpecies(new ResourceLocation(ModConstants.MODID, name)));
