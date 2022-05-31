@@ -25,10 +25,8 @@ public class ItemDynamicSeedPassionfruit extends Item {
     }
 
     public boolean doPlanting(World world, BlockPos pos, EntityPlayer planter, ItemStack seedStack) {
-        if(plantSapling(world, pos)) {//Do the planting
-            return true;
-        }
-        return false;
+        //Do the planting
+        return plantSapling(world, pos);
     }
 
     public boolean plantSapling(World world, BlockPos pos) {

@@ -24,7 +24,7 @@ public class ModRecipes {
 	public static void register(IForgeRegistry<IRecipe> registry) {
 		//Create dirt bucket exchange recipes except for infested oak
 		ModTrees.phcFruitSpecies.values().stream()
-				.filter(species -> species.getRegistryName().equals(new ResourceLocation(ModConstants.MODID, "spiderweb")))
+				.filter(species -> !(new ResourceLocation(ModConstants.MODID, "spiderweb").equals(species.getRegistryName())))
 				.forEach(ModRecipes::speciesRecipes);
 		//Cinnamon Maple and Paperbark arent included in phcFruitSpecies so we add them separately
 		for (String name : new String[]{FruitRegistry.CINNAMON, FruitRegistry.MAPLE, FruitRegistry.PAPERBARK})
@@ -38,7 +38,13 @@ public class ModRecipes {
 		//Add the fruit recipes for the ripe peppercorn
 		Species peppercornSpecies = TreeRegistry.findSpecies(new ResourceLocation(ModConstants.MODID, FruitRegistry.PEPPERCORN));
 		ItemStack peppercornSapling = new ItemStack(Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("harvestcraft", "peppercorn_sapling"))));
-		com.ferreusveritas.dynamictrees.ModRecipes.createFruitOnlyExchangeRecipes(peppercornSapling, peppercornSpecies.getSeedStack(1), new ItemStack(ModItems.ripePeppercorn), true, new ResourceLocation(ModConstants.MODID, FruitRegistry.PEPPERCORN+"ripe"), false);
+		com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipesWithFruit(peppercornSapling, peppercornSpecies.getSeedStack(1), new ItemStack(ModItems.ripePeppercorn), true, "ripe_seed", false);
+
+		//Add recipe for spiderweeb seeds without the string item
+		Species spiderwebSpecies = TreeRegistry.findSpecies(new ResourceLocation(ModConstants.MODID, FruitRegistry.SPIDERWEB));
+		ItemStack spiderwebSapling = new ItemStack(Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("harvestcraft", "spiderweb_sapling"))));
+		com.ferreusveritas.dynamictrees.ModRecipes.createDirtBucketExchangeRecipes(spiderwebSapling, spiderwebSpecies.getSeedStack(1), true);
+
 
 		//Add passionfruit recipes separately since the whole thing is handled in a different way
 		ItemStack passionfruitSeed = new ItemStack(ModItems.passionfruitSeed);

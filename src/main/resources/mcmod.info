@@ -6,7 +6,7 @@
 		"version": "${version}",
 		"mcversion": "${mcversion}",
 		"url": "https://www.curseforge.com/minecraft/mc-mods/dtphc",
-		"updateUrl": "https://github.com/ferreusveritas/DynamicTrees-PHC/blob/master/version_info.json?raw=true",
+		"updateUrl": "https://github.com/DynamicTreesTeam/DynamicTreesVersionInfo/blob/master/Add-ons/PHC.json?raw=true",
 		"authorList": ["ferreusveritas", "Max Hyper"],
 		"credits": "MatrexsVigil, Xemnes",
 		"logoFile": "",
